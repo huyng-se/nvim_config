@@ -12,6 +12,19 @@ return {
             local map = vim.keymap.set
             local opts = { buffer = bufnr, silent = true }
             
+            -- Enable inlay hints (safe for Neovim >= 0.10)
+            if vim.lsp.inlay_hint then
+              vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+            elseif vim.lsp.buf.inlay_hint then
+              -- Fallback for older Neovim 0.10.x versions
+              vim.lsp.buf.inlay_hint(bufnr, true)
+            else
+              vim.notify(
+                "Inlay hints require Neovim >= 0.10. Please upgrade to use this feature.",
+                vim.log.levels.WARN
+              )
+            end
+            
             -- Keymaps for Rust development
             map("n", "K", function() 
               vim.cmd.RustLsp { 'hover', 'actions' } 
@@ -32,27 +45,107 @@ return {
             map("n", "<leader>f", function() 
               vim.lsp.buf.format() 
             end, vim.tbl_extend('force', opts, { desc = 'Rust: Format' }))
+            
+            -- Toggle inlay hints
+            map("n", "<leader>ih", function()
+              if vim.lsp.inlay_hint then
+                local current = vim.lsp.inlay_hint.is_enabled({ bufnr = bufnr })
+                vim.lsp.inlay_hint.enable(not current, { bufnr = bufnr })
+                vim.notify(
+                  "Inlay hints " .. (current and "disabled" or "enabled"),
+                  vim.log.levels.INFO
+                )
+              elseif vim.lsp.buf.inlay_hint then
+                -- Fallback for older Neovim 0.10.x versions
+                vim.lsp.buf.inlay_hint(bufnr, nil) -- Toggle
+                vim.notify("Inlay hints toggled", vim.log.levels.INFO)
+              else
+                vim.notify(
+                  "Inlay hints require Neovim >= 0.10",
+                  vim.log.levels.WARN
+                )
+              end
+            end, vim.tbl_extend('force', opts, { desc = 'Rust: Toggle inlay hints' }))
           end,
           
           default_settings = {
             ['rust-analyzer'] = {
               check = {
-                command = "clippy",
+                command = "clippy",  -- Use clippy for linting
                 features = "all",
               },
               cargo = {
                 allFeatures = true,
+                buildScripts = {
+                  enable = true,
+                },
               },
+              procMacro = {
+                enable = true,
+              },
+              -- Comprehensive inlay hints configuration
               inlayHints = {
-                bindingModeHints = { enable = true },
-                typeHints = { enable = true },
-                chainingHints = { enable = true },
-                parameterHints = { enable = true },
+                bindingModeHints = {
+                  enable = true,
+                },
+                chainingHints = {
+                  enable = true,
+                },
+                closingBraceHints = {
+                  enable = true,
+                  minLines = 25,
+                },
+                closureReturnTypeHints = {
+                  enable = "always",
+                },
+                lifetimeElisionHints = {
+                  enable = "skip_trivial",
+                  useParameterNames = true,
+                },
+                parameterHints = {
+                  enable = true,
+                },
+                reborrowHints = {
+                  enable = "always",
+                },
+                renderColons = true,
+                typeHints = {
+                  enable = true,
+                  hideClosureInitialization = false,
+                  hideNamedConstructor = false,
+                },
               },
             },
           },
         },
       }
+      
+      -- Create :RustInlayToggle command
+      vim.api.nvim_create_user_command('RustInlayToggle', function()
+        local bufnr = vim.api.nvim_get_current_buf()
+        if vim.bo[bufnr].filetype ~= 'rust' then
+          vim.notify("RustInlayToggle only works in Rust buffers", vim.log.levels.WARN)
+          return
+        end
+        
+        if vim.lsp.inlay_hint then
+          local current = vim.lsp.inlay_hint.is_enabled({ bufnr = bufnr })
+          vim.lsp.inlay_hint.enable(not current, { bufnr = bufnr })
+          vim.notify(
+            "Inlay hints " .. (current and "disabled" or "enabled"),
+            vim.log.levels.INFO
+          )
+        elseif vim.lsp.buf.inlay_hint then
+          -- Fallback for older Neovim 0.10.x versions
+          vim.lsp.buf.inlay_hint(bufnr, nil) -- Toggle
+          vim.notify("Inlay hints toggled", vim.log.levels.INFO)
+        else
+          vim.notify(
+            "Inlay hints require Neovim >= 0.10. Please upgrade to use this feature.",
+            vim.log.levels.WARN
+          )
+        end
+      end, { desc = 'Toggle Rust inlay hints' })
     end,
   },
   

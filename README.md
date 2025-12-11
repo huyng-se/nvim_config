@@ -153,7 +153,14 @@ Lazy.nvim sẽ tự động cài đặt tất cả plugins và LSP servers (qua 
 | `<leader>de` | Normal | Step out (bước ra) |
 | `<leader>dr` | Normal | Restart debugger |
 
-### 🦀 Rust Specific (trong Cargo.toml)
+### 🦀 Rust Specific
+
+| Phím | Chế độ | Mô tả |
+|------|--------|-------|
+| `<leader>ih` | Normal | Bật/tắt inlay hints (Rust files) |
+| `:RustInlayToggle` | Command | Toggle inlay hints (Rust) |
+
+**Trong Cargo.toml:**
 
 | Phím | Chế độ | Mô tả |
 |------|--------|-------|
