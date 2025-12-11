@@ -41,7 +41,7 @@ opt.foldnestmax = 1
 -- Performance
 opt.synmaxcol = 500                   -- Limit syntax highlighting (changed from 3000)
 opt.lazyredraw = true                 -- Don't redraw during macros
-opt.updatetime = 300                  -- Update diagnostics faster (default is 4000ms)
+opt.updatetime = 200                  -- Update diagnostics faster (default is 4000ms)
 
 -- Backup and undo
 opt.backup = false                    -- No backup file
