@@ -14,6 +14,7 @@
 
 ### Coding & LSP
 - **williamboman/mason.nvim** - LSP/DAP/Linter installer
+- **williamboman/mason-lspconfig.nvim** - Mason and lspconfig integration
 - **neovim/nvim-lspconfig** - Native LSP configuration
 - **hrsh7th/nvim-cmp** - Completion engine
 - **L3MON4D3/LuaSnip** - Snippet engine

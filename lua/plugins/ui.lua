@@ -37,8 +37,8 @@ return {
             -- Enable font for status bar
             vim.g.airline_powerline_fonts = 1
             
-            -- Theme - use dark theme that matches Darcula
-            vim.g.airline_theme = 'dark'
+            -- Theme - use deus theme that better matches Darcula
+            vim.g.airline_theme = 'deus'
             
             -- Enable Tab bar
             vim.g['airline#extensions#tabline#enabled'] = 1
