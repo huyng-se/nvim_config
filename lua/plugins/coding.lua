@@ -156,6 +156,7 @@ return {
                 sources = cmp.config.sources({
                     { name = 'nvim_lsp' },
                     { name = 'luasnip' },
+                    { name = 'crates' },
                 }, {
                     { name = 'buffer' },
                     { name = 'path' },
@@ -196,6 +197,7 @@ return {
                             luasnip = "[Snippet]",
                             buffer = "[Buffer]",
                             path = "[Path]",
+                            crates = "[Crate]",
                         })[entry.source.name]
                         return vim_item
                     end
@@ -330,6 +332,7 @@ return {
     {
         'windwp/nvim-autopairs',
         event = "InsertEnter",
+        dependencies = { 'hrsh7th/nvim-cmp' },
         config = function()
             local npairs = require('nvim-autopairs')
             npairs.setup({
@@ -340,10 +343,12 @@ return {
                 },
             })
             
-            -- Integration with nvim-cmp
-            local cmp_autopairs = require('nvim-autopairs.completion.cmp')
-            local cmp = require('cmp')
-            cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
+            -- Integration with nvim-cmp (safe check)
+            local cmp_status_ok, cmp = pcall(require, 'cmp')
+            if cmp_status_ok then
+                local cmp_autopairs = require('nvim-autopairs.completion.cmp')
+                cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
+            end
         end,
     },
 
