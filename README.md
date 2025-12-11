@@ -169,24 +169,29 @@ scoop install lazygit
 
 ```
 nvim_config/
-├── init.lua                # Entry point
-├── ginit.lua               # GUI settings (neovim-qt)
-├── lua/
-│   ├── config/
-│   │   ├── options.lua    # Cài đặt Vim
-│   │   ├── keymaps.lua    # Phím tắt
-│   │   └── autocmds.lua   # Autocommands
-│   └── plugins/
-│       ├── init.lua       # Lazy.nvim setup
-│       ├── ui.lua         # Theme, bufferline, airline
-│       ├── editor.lua     # File explorer, fuzzy finder
-│       ├── coding.lua     # LSP, completion, snippets
-│       ├── treesitter.lua # Syntax highlighting
-│       ├── git.lua        # Git integration
-│       ├── terminal.lua   # Floaterm
-│       ├── debug.lua      # Vimspector
-│       └── rustacean.lua  # Rust development (inlay hints)
-└── README.md
+├── README.md              # Overview (file này)
+├── INSTALLATION.md        # Hướng dẫn cài đặt chi tiết
+├── KEYMAPS.md            # Tất cả phím tắt
+├── COPILOT.md            # Hướng dẫn GitHub Copilot
+├── LAZYGIT.md            # Hướng dẫn LazyGit
+├── PLUGINS.md            # Danh sách plugins chi tiết
+├── init.lua              # Entry point
+├── ginit.lua             # GUI settings (neovim-qt)
+└── lua/
+    ├── config/
+    │   ├── options.lua    # Cài đặt Vim
+    │   ├── keymaps.lua    # Phím tắt
+    │   └── autocmds.lua   # Autocommands
+    └── plugins/
+        ├── init.lua       # Lazy.nvim setup
+        ├── ui.lua         # Theme, bufferline, airline
+        ├── editor.lua     # File explorer, fuzzy finder
+        ├── coding.lua     # LSP, completion, snippets
+        ├── treesitter.lua # Syntax highlighting
+        ├── git.lua        # Git integration
+        ├── terminal.lua   # Floaterm
+        ├── debug.lua      # Vimspector
+        └── rustacean.lua  # Rust development
 ```
 
 ## 🔧 Troubleshooting
