@@ -8,19 +8,6 @@ return {
         priority = 1000,
         config = function()
             vim.cmd.colorscheme('darcula')
-            
-            -- Overwrite some color highlights (from original config)
-            local color_extend_group = vim.api.nvim_create_augroup("ColorExtend", { clear = true })
-            vim.api.nvim_create_autocmd("ColorScheme", {
-                group = color_extend_group,
-                pattern = "*",
-                callback = function()
-                    -- Note: onedark#extend_highlight may not work with darcula theme
-                    -- This was in original config but might need adjustment
-                    pcall(vim.fn['onedark#extend_highlight'], "Comment", { fg = { gui = "#728083" } })
-                    pcall(vim.fn['onedark#extend_highlight'], "LineNr", { fg = { gui = "#728083" } })
-                end
-            })
         end,
     },
 
@@ -50,8 +37,8 @@ return {
             -- Enable font for status bar
             vim.g.airline_powerline_fonts = 1
             
-            -- Theme
-            vim.g.airline_theme = 'onedark'
+            -- Theme - use dark theme that matches Darcula
+            vim.g.airline_theme = 'dark'
             
             -- Enable Tab bar
             vim.g['airline#extensions#tabline#enabled'] = 1
