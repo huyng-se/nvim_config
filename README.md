@@ -24,9 +24,19 @@ A modern, modular Neovim configuration using lazy.nvim with native LSP support.
 
 ### LSP Servers
 
-Install the language servers you need:
+This configuration includes **Mason** for easy LSP server installation. The following servers will be automatically installed on first launch:
+- `lua_ls` - Lua language server
+- `clangd` - C/C++ language server
+- `cmake` - CMake language server  
+- `pyright` - Python language server
 
-#### C/C++
+**Note:** Rust language server is automatically managed by rustaceanvim.
+
+#### Manual Installation (Optional)
+
+If you prefer to install LSP servers manually or Mason installation fails:
+
+##### C/C++
 ```bash
 # clangd (recommended over ccls)
 # On Ubuntu/Debian:
@@ -39,7 +49,7 @@ brew install llvm
 # Download from LLVM releases
 ```
 
-#### Python
+##### Python
 ```bash
 # Using pip
 pip install pyright
@@ -48,7 +58,7 @@ pip install pyright
 npm install -g pyright
 ```
 
-#### CMake
+##### CMake
 ```bash
 # Using pip
 pip install cmake-language-server
@@ -57,15 +67,23 @@ pip install cmake-language-server
 npm install -g cmake-language-server
 ```
 
-#### Lua (for Neovim config)
+##### Lua (for Neovim config)
 ```bash
-# Using Mason (will be installed automatically)
+# Using Mason (recommended)
+:Mason
+# Then search for lua_ls and press 'i' to install
+
 # Or manually:
 brew install lua-language-server  # macOS
 ```
 
-#### Rust
-Rust language server is automatically managed by rustaceanvim.
+#### Mason Commands
+
+To manage LSP servers through Mason:
+- `:Mason` - Open Mason UI
+- `:MasonInstall <server>` - Install a language server
+- `:MasonUninstall <server>` - Uninstall a language server
+- `:MasonUpdate` - Update all installed servers
 
 ## Installation
 
@@ -238,6 +256,8 @@ nvim_config/
 - **junegunn/fzf.vim** - Fuzzy finder
 
 ### Coding
+- **williamboman/mason.nvim** - LSP/DAP/Linter installer
+- **williamboman/mason-lspconfig.nvim** - Mason and lspconfig integration
 - **neovim/nvim-lspconfig** - Native LSP configuration
 - **hrsh7th/nvim-cmp** - Completion engine
 - **L3MON4D3/LuaSnip** - Snippet engine
@@ -277,8 +297,9 @@ This configuration migrates from:
 - 🚀 **~50% faster startup time** through lazy loading
 - 💾 **~30% less memory usage** with native LSP
 - 🔧 **No Node.js dependency** for LSP
+- 📦 **Easy LSP installation** with Mason
 - 🎨 **Better syntax highlighting** with Treesitter
-- 📦 **Modular structure** for easy maintenance
+- 🗂️ **Modular structure** for easy maintenance
 
 ## Troubleshooting
 

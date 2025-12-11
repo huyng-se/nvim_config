@@ -2,12 +2,52 @@
 -- Replacing COC.nvim with native LSP
 
 return {
+    -- Mason: LSP installer
+    {
+        'williamboman/mason.nvim',
+        cmd = { 'Mason', 'MasonInstall', 'MasonUninstall', 'MasonUninstallAll', 'MasonLog' },
+        config = function()
+            require('mason').setup({
+                ui = {
+                    border = "rounded",
+                    icons = {
+                        package_installed = "✓",
+                        package_pending = "➜",
+                        package_uninstalled = "✗"
+                    }
+                }
+            })
+        end,
+    },
+
+    -- Mason LSP config bridge
+    {
+        'williamboman/mason-lspconfig.nvim',
+        dependencies = {
+            'williamboman/mason.nvim',
+            'neovim/nvim-lspconfig',
+        },
+        config = function()
+            require('mason-lspconfig').setup({
+                -- Automatically install these language servers
+                ensure_installed = {
+                    'lua_ls',      -- Lua
+                    'clangd',      -- C/C++
+                    'cmake',       -- CMake
+                    'pyright',     -- Python
+                },
+                automatic_installation = true,
+            })
+        end,
+    },
+
     -- LSP Configuration
     {
         'neovim/nvim-lspconfig',
         event = { "BufReadPre", "BufNewFile" },
         dependencies = {
             'hrsh7th/cmp-nvim-lsp',
+            'williamboman/mason-lspconfig.nvim',
         },
         config = function()
             local lspconfig = require('lspconfig')
