@@ -1,249 +1,6 @@
 # Modern Neovim Configuration
 
-A modern, modular Neovim configuration using lazy.nvim with native LSP support.
-
-## Features
-
-- 🚀 **Fast startup** - Lazy loading plugins for optimal performance
-- 🔧 **Native LSP** - Using nvim-lspconfig instead of COC.nvim for better performance
-- 🎨 **Modern UI** - Darcula theme, bufferline, and airline statusline
-- 🌳 **Treesitter** - Advanced syntax highlighting and code understanding
-- 📁 **File Navigation** - NERDTree and FZF for efficient file management
-- 🔍 **Fuzzy Finding** - Fast file and text search with FZF
-- 🐙 **Git Integration** - Gitsigns, fugitive, and mergetool support
-- 🦀 **Rust Development** - Full Rust support with rustaceanvim and crates.nvim
-- 🐛 **Debugging** - Vimspector integration
-- 💻 **Terminal** - Floating terminal with floaterm
-
-## Requirements
-
-- **Neovim >= 0.11.0** (required for `vim.lsp.config` API)
-- **Git** (for lazy.nvim and plugins)
-- **Node.js** (optional, for some language servers)
-- **A Nerd Font** (for icons, recommended: JetBrainsMono Nerd Font)
-
-### LSP Servers
-
-This configuration includes **Mason** for easy LSP server installation. The following servers will be automatically installed on first launch:
-- `lua_ls` - Lua language server
-- `clangd` - C/C++ language server
-- `cmake` - CMake language server  
-- `pyright` - Python language server
-
-**Note:** Rust language server is automatically managed by rustaceanvim.
-
-#### Manual Installation (Optional)
-
-If you prefer to install LSP servers manually or Mason installation fails:
-
-##### C/C++
-```bash
-# clangd (recommended over ccls)
-# On Ubuntu/Debian:
-sudo apt install clangd
-
-# On macOS:
-brew install llvm
-
-# On Windows:
-# Download from LLVM releases
-```
-
-##### Python
-```bash
-# Using pip
-pip install pyright
-
-# Or using npm
-npm install -g pyright
-```
-
-##### CMake
-```bash
-# Using pip
-pip install cmake-language-server
-
-# Or using npm
-npm install -g cmake-language-server
-```
-
-##### Lua (for Neovim config)
-```bash
-# Using Mason (recommended)
-:Mason
-# Then search for lua_ls and press 'i' to install
-
-# Or manually:
-brew install lua-language-server  # macOS
-```
-
-#### Mason Commands
-
-To manage LSP servers through Mason:
-- `:Mason` - Open Mason UI
-- `:MasonInstall <server>` - Install a language server
-- `:MasonUninstall <server>` - Uninstall a language server
-- `:MasonUpdate` - Update all installed servers
-
-## Installation
-
-1. **Backup your current config** (if any):
-```bash
-mv ~/.config/nvim ~/.config/nvim.backup
-mv ~/.local/share/nvim ~/.local/share/nvim.backup
-```
-
-2. **Clone this repository**:
-```bash
-git clone https://github.com/huyng-se/nvim_config.git ~/.config/nvim
-```
-
-3. **Start Neovim**:
-```bash
-nvim
-```
-
-Lazy.nvim will automatically install all plugins on first launch.
-
-4. **Install Treesitter parsers** (will be done automatically):
-```vim
-:TSInstall lua rust cpp c python json html css javascript typescript cmake
-```
-
-## Directory Structure
-
-```
-nvim_config/
-├── init.lua                 # Entry point - bootstraps lazy.nvim
-├── ginit.lua                # GUI settings (neovim-qt)
-├── lua/
-│   ├── config/
-│   │   ├── options.lua     # Vim options & settings
-│   │   ├── keymaps.lua     # Key mappings
-│   │   └── autocmds.lua    # Autocommands
-│   └── plugins/
-│       ├── init.lua        # Lazy.nvim setup
-│       ├── ui.lua          # Theme, bufferline, airline
-│       ├── editor.lua      # File explorer, fuzzy finder
-│       ├── coding.lua      # LSP, completion, snippets
-│       ├── treesitter.lua  # Syntax highlighting
-│       ├── git.lua         # Git integration
-│       ├── terminal.lua    # Floaterm
-│       └── debug.lua       # Vimspector
-└── README.md
-```
-
-## Key Mappings
-
-### General
-
-| Key | Mode | Description |
-|-----|------|-------------|
-| `Space` | Normal/Visual | Leader key |
-| `Shift+H` | Normal | Previous buffer |
-| `Shift+L` | Normal | Next buffer |
-| `<leader>bd` | Normal | Close buffer without closing window |
-| `Esc` | Normal | Clear search highlight |
-| `<` / `>` | Visual | Indent left/right (stays in visual mode) |
-
-### Window Management
-
-| Key | Mode | Description |
-|-----|------|-------------|
-| `Alt+Left` | Normal | Decrease vertical split |
-| `Alt+Right` | Normal | Increase vertical split |
-| `Alt+Up` | Normal | Decrease horizontal split |
-| `Alt+Down` | Normal | Increase horizontal split |
-
-### File Explorer & Search
-
-| Key | Mode | Description |
-|-----|------|-------------|
-| `F5` | Normal | Toggle NERDTree |
-| `F6` | Normal | FZF Files |
-| `F7` | Normal | FZF Ripgrep |
-
-### LSP (Code Navigation)
-
-| Key | Mode | Description |
-|-----|------|-------------|
-| `gd` | Normal | Go to definition |
-| `gy` | Normal | Go to type definition |
-| `gi` | Normal | Go to implementation |
-| `gr` | Normal | Show references |
-| `K` | Normal | Hover documentation |
-| `<leader>rn` | Normal | Rename symbol |
-| `<leader>f` | Normal | Format code |
-| `<leader>a` | Normal/Visual | Code action |
-| `[g` | Normal | Previous diagnostic |
-| `]g` | Normal | Next diagnostic |
-
-### Completion
-
-| Key | Mode | Description |
-|-----|------|-------------|
-| `Tab` | Insert | Next completion item / Expand snippet |
-| `Shift+Tab` | Insert | Previous completion item |
-| `Enter` | Insert | Confirm completion |
-| `Ctrl+Space` | Insert | Trigger completion |
-| `Ctrl+F` / `Ctrl+B` | Insert | Scroll docs |
-
-### Git
-
-| Key | Mode | Description |
-|-----|------|-------------|
-| `]c` | Normal | Next git hunk |
-| `[c` | Normal | Previous git hunk |
-| `<leader>gp` | Normal | Preview git hunk |
-| `<leader>gb` | Normal | Git blame line |
-| `<leader>gs` | Normal | Git status (fugitive) |
-| `<leader>mt` | Normal | Toggle Git Mergetool |
-
-### Terminal
-
-| Key | Mode | Description |
-|-----|------|-------------|
-| `<leader>to` | Normal/Terminal | Open new terminal |
-| `<leader>tt` | Normal/Terminal | Toggle terminal |
-| `<leader>tn` | Normal/Terminal | Next terminal |
-| `<leader>tp` | Normal/Terminal | Previous terminal |
-| `<leader>tk` | Normal/Terminal | Kill terminal |
-| `<leader>gl` | Normal | Git log in terminal |
-
-### Debug (Vimspector)
-
-| Key | Mode | Description |
-|-----|------|-------------|
-| `<leader>dl` | Normal | Launch debugger |
-| `<leader>ds` | Normal | Stop debugger |
-| `<leader>dc` | Normal | Continue |
-| `<leader>dt` | Normal | Toggle breakpoint |
-| `<leader>dT` | Normal | Clear breakpoints |
-| `<leader>di` | Normal | Step into |
-| `<leader>do` | Normal | Step over |
-| `<leader>de` | Normal | Step out |
-| `<leader>dr` | Normal | Restart |
-
-### Rust Specific (Cargo.toml)
-
-| Key | Mode | Description |
-|-----|------|-------------|
-| `<leader>ct` | Normal | Toggle crates info |
-| `<leader>cr` | Normal | Reload crates |
-| `<leader>cv` | Normal | Show crate features |
-| `<leader>cu` | Normal | Update crate |
-| `<leader>ca` | Normal | Update all crates |
-| `K` | Normal | Show crate popup (in Cargo.toml) |
-
-### Comments
-
-| Key | Mode | Description |
-|-----|------|-------------|
-| `<leader>cc` | Normal | Toggle line comment |
-| `<leader>bc` | Normal | Toggle block comment |
-| `<leader>c` | Normal/Visual | Comment operator |
-
-## Plugin List
+## ✨ Plugins chính
 
 ### UI & Theme
 - **doums/darcula** - Dark color scheme
@@ -255,9 +12,8 @@ nvim_config/
 - **preservim/nerdtree** - File explorer
 - **junegunn/fzf.vim** - Fuzzy finder
 
-### Coding
+### Coding & LSP
 - **williamboman/mason.nvim** - LSP/DAP/Linter installer
-- **williamboman/mason-lspconfig.nvim** - Mason and lspconfig integration
 - **neovim/nvim-lspconfig** - Native LSP configuration
 - **hrsh7th/nvim-cmp** - Completion engine
 - **L3MON4D3/LuaSnip** - Snippet engine
@@ -265,8 +21,6 @@ nvim_config/
 - **numToStr/Comment.nvim** - Commenting
 - **mrcjkb/rustaceanvim** - Rust development
 - **saecki/crates.nvim** - Cargo.toml management
-- **mattn/emmet-vim** - HTML/CSS expansion
-- **alvan/vim-closetag** - Auto close HTML tags
 
 ### Syntax Highlighting
 - **nvim-treesitter/nvim-treesitter** - Advanced syntax highlighting
@@ -274,114 +28,213 @@ nvim_config/
 ### Git
 - **lewis6991/gitsigns.nvim** - Git signs in sign column
 - **tpope/vim-fugitive** - Git commands
-- **tpope/vim-rhubarb** - GitHub integration
 - **samoshkin/vim-mergetool** - Merge conflict resolution
 
-### Terminal
+### Terminal & Debug
 - **voldikss/vim-floaterm** - Floating terminal
-
-### Debug
 - **puremourning/vimspector** - Debug adapter protocol
 
-## Migration from Old Config
+## 📋 Yêu cầu
 
-This configuration migrates from:
-- ✅ **vim-plug** → **lazy.nvim** (faster, pure Lua)
-- ✅ **COC.nvim** → **nvim-lspconfig + nvim-cmp** (native, no Node.js dependency)
-- ✅ **vim-polyglot** → **nvim-treesitter** (more accurate, better maintained)
-- ✅ **vim-gitgutter** → **gitsigns.nvim** (pure Lua, better performance)
-- ✅ **auto-pairs** → **nvim-autopairs** (modern, Treesitter integration)
-- ✅ **nerdcommenter** → **Comment.nvim** (simpler, pure Lua)
-- ✅ **lspconfig.setup()** → **vim.lsp.config** (Neovim 0.11+ native API)
+- **Neovim >= 0.11.0**
+- **Git**
+- **Node.js** (tùy chọn)
+- **Nerd Font** (khuyến nghị: JetBrainsMono)
 
-### Key Improvements
-- 🚀 **~50% faster startup time** through lazy loading
-- 💾 **~30% less memory usage** with native LSP
-- 🔧 **No Node.js dependency** for LSP
-- 📦 **Easy LSP installation** with Mason
-- 🎨 **Better syntax highlighting** with Treesitter
-- 🗂️ **Modular structure** for easy maintenance
-- ⚡ **Native LSP API** using `vim.lsp.config` (Neovim 0.11+)
+## 🚀 Cài đặt
 
-## Troubleshooting
-
-### Plugins not installing
-```vim
-:Lazy sync
-```
-
-### LSP not working
-1. Check if language server is installed:
 ```bash
-which clangd  # For C/C++
-which pyright # For Python
+# Backup config cũ
+mv ~/.config/nvim ~/.config/nvim.backup
+mv ~/.local/share/nvim ~/.local/share/nvim.backup
+
+# Clone repo
+git clone https://github.com/huyng-se/nvim_config.git ~/.config/nvim
+
+# Khởi động Neovim
+nvim
 ```
 
-2. Check LSP status:
+Lazy.nvim sẽ tự động cài đặt tất cả plugins và LSP servers (qua Mason) khi khởi động lần đầu.
+
+## ⌨️ Cheat Sheet - Phím tắt
+
+**Leader key:** `Space`
+
+### 🎯 Chung (General)
+
+| Phím | Chế độ | Mô tả |
+|------|--------|-------|
+| `Space` | Normal/Visual | Leader key |
+| `Shift+H` | Normal | Buffer trước |
+| `Shift+L` | Normal | Buffer sau |
+| `<leader>bd` | Normal | Đóng buffer (không đóng window) |
+| `Esc` | Normal | Xóa highlight tìm kiếm |
+| `<` | Visual | Indent trái (giữ visual mode) |
+| `>` | Visual | Indent phải (giữ visual mode) |
+
+### 🪟 Quản lý cửa sổ (Window Management)
+
+| Phím | Chế độ | Mô tả |
+|------|--------|-------|
+| `Alt+Left` | Normal | Thu nhỏ split dọc |
+| `Alt+Right` | Normal | Mở rộng split dọc |
+| `Alt+Up` | Normal | Thu nhỏ split ngang |
+| `Alt+Down` | Normal | Mở rộng split ngang |
+
+### 📁 File Explorer & Tìm kiếm
+
+| Phím | Chế độ | Mô tả |
+|------|--------|-------|
+| `F5` | Normal | Bật/tắt NERDTree |
+| `F6` | Normal | FZF Files (tìm file) |
+| `F7` | Normal | FZF Ripgrep (tìm trong nội dung) |
+
+### 🔧 LSP - Code Navigation
+
+| Phím | Chế độ | Mô tả |
+|------|--------|-------|
+| `gd` | Normal | Go to definition (đi tới định nghĩa) |
+| `gy` | Normal | Go to type definition |
+| `gi` | Normal | Go to implementation |
+| `gr` | Normal | Show references (hiện tham chiếu) |
+| `K` | Normal | Hover documentation (xem tài liệu) |
+| `<leader>rn` | Normal | Rename symbol (đổi tên) |
+| `<leader>f` | Normal | Format code (định dạng code) |
+| `<leader>a` | Normal/Visual | Code action |
+| `[g` | Normal | Diagnostic trước |
+| `]g` | Normal | Diagnostic sau |
+
+### 💡 Completion - Tự động hoàn thành
+
+| Phím | Chế độ | Mô tả |
+|------|--------|-------|
+| `Tab` | Insert | Item tiếp theo / Mở rộng snippet |
+| `Shift+Tab` | Insert | Item trước |
+| `Enter` | Insert | Xác nhận completion |
+| `Ctrl+Space` | Insert | Kích hoạt completion |
+| `Ctrl+F` | Insert | Cuộn xuống docs |
+| `Ctrl+B` | Insert | Cuộn lên docs |
+
+### 🐙 Git Integration
+
+| Phím | Chế độ | Mô tả |
+|------|--------|-------|
+| `]c` | Normal | Git hunk kế tiếp |
+| `[c` | Normal | Git hunk trước |
+| `<leader>gp` | Normal | Preview git hunk |
+| `<leader>gb` | Normal | Git blame (xem ai sửa dòng) |
+| `<leader>gs` | Normal | Git status (fugitive) |
+| `<leader>mt` | Normal | Bật/tắt Git Mergetool |
+| `<leader>gl` | Normal | Git log trong terminal |
+
+### 💻 Terminal - Floating Terminal
+
+| Phím | Chế độ | Mô tả |
+|------|--------|-------|
+| `<leader>to` | Normal/Terminal | Mở terminal mới |
+| `<leader>tt` | Normal/Terminal | Bật/tắt terminal |
+| `<leader>tn` | Normal/Terminal | Terminal tiếp theo |
+| `<leader>tp` | Normal/Terminal | Terminal trước |
+| `<leader>tk` | Normal/Terminal | Kill terminal |
+
+### 🐛 Debug - Vimspector
+
+| Phím | Chế độ | Mô tả |
+|------|--------|-------|
+| `<leader>dl` | Normal | Khởi động debugger |
+| `<leader>ds` | Normal | Dừng debugger |
+| `<leader>dc` | Normal | Continue (tiếp tục) |
+| `<leader>dt` | Normal | Toggle breakpoint (đặt/bỏ điểm dừng) |
+| `<leader>dT` | Normal | Xóa tất cả breakpoints |
+| `<leader>di` | Normal | Step into (bước vào hàm) |
+| `<leader>do` | Normal | Step over (bước qua) |
+| `<leader>de` | Normal | Step out (bước ra) |
+| `<leader>dr` | Normal | Restart debugger |
+
+### 🦀 Rust Specific (trong Cargo.toml)
+
+| Phím | Chế độ | Mô tả |
+|------|--------|-------|
+| `<leader>ct` | Normal | Bật/tắt thông tin crates |
+| `<leader>cr` | Normal | Reload crates |
+| `<leader>cv` | Normal | Hiện crate features |
+| `<leader>cu` | Normal | Update crate |
+| `<leader>ca` | Normal | Update tất cả crates |
+| `K` | Normal | Hiện crate popup |
+
+### 💬 Comments - Chú thích
+
+| Phím | Chế độ | Mô tả |
+|------|--------|-------|
+| `<leader>cc` | Normal | Bật/tắt line comment |
+| `<leader>bc` | Normal | Bật/tắt block comment |
+| `<leader>c` | Normal/Visual | Comment operator |
+
+## 📁 Cấu trúc thư mục
+
+```
+nvim_config/
+├── init.lua                # Entry point
+├── ginit.lua               # GUI settings (neovim-qt)
+├── lua/
+│   ├── config/
+│   │   ├── options.lua    # Cài đặt Vim
+│   │   ├── keymaps.lua    # Phím tắt
+│   │   └── autocmds.lua   # Autocommands
+│   └── plugins/
+│       ├── init.lua       # Lazy.nvim setup
+│       ├── ui.lua         # Theme, bufferline, airline
+│       ├── editor.lua     # File explorer, fuzzy finder
+│       ├── coding.lua     # LSP, completion, snippets
+│       ├── treesitter.lua # Syntax highlighting
+│       ├── git.lua        # Git integration
+│       ├── terminal.lua   # Floaterm
+│       └── debug.lua      # Vimspector
+└── README.md
+```
+
+## 🔧 Troubleshooting
+
+### Quản lý Plugins
 ```vim
-:LspInfo
+:Lazy sync           " Đồng bộ plugins
+:Lazy update         " Cập nhật plugins
 ```
 
-### Treesitter issues
+### Quản lý LSP Servers
 ```vim
-:TSUpdate
-:TSInstall <language>
+:Mason               " Mở Mason UI
+:MasonInstall <server>   " Cài server
+:LspInfo             " Kiểm tra trạng thái LSP
 ```
 
-### Clear cache and reinstall
+### Treesitter
+```vim
+:TSUpdate            " Cập nhật parsers
+:TSInstall <language>    " Cài parser
+```
+
+### Xóa cache và cài lại
 ```bash
 rm -rf ~/.local/share/nvim
 rm -rf ~/.cache/nvim
 nvim
 ```
 
-## Customization
+## 🎨 Tùy chỉnh
 
-### Adding new plugins
-Edit the appropriate file in `lua/plugins/`:
+### Thêm plugins mới
+Chỉnh sửa file phù hợp trong `lua/plugins/`:
 - UI plugins → `lua/plugins/ui.lua`
 - Editor plugins → `lua/plugins/editor.lua`
 - Coding plugins → `lua/plugins/coding.lua`
-- etc.
 
-### Changing key mappings
-Edit `lua/config/keymaps.lua`
+### Thay đổi phím tắt
+Chỉnh sửa `lua/config/keymaps.lua`
 
-### Adjusting options
-Edit `lua/config/options.lua`
-
-### Adding LSP servers
-Edit `lua/plugins/coding.lua` and add to the LSP configuration section:
-
-1. Define the server configuration using `vim.lsp.config`:
-```lua
--- Define server configuration
-vim.lsp.config.your_server = {
-    cmd = { 'your-language-server' },
-    filetypes = { 'your-filetype' },
-    root_dir = vim.fs.root(0, { '.git', 'your-root-file' }),
-    capabilities = capabilities,
-    -- Add any custom settings here
-}
-```
-
-2. Add the server to Mason's `ensure_installed` list:
-```lua
-require('mason-lspconfig').setup({
-    ensure_installed = {
-        'lua_ls',
-        'clangd',
-        'your_server',  -- Add your server here
-    },
-    ...
-})
-```
-
-The server will be automatically enabled by Mason's handlers using `vim.lsp.enable()`. Keymaps will be attached via the `LspAttach` autocmd.
-
-## Contributing
-
-Feel free to submit issues or pull requests for improvements!
+### Thay đổi cài đặt
+Chỉnh sửa `lua/config/options.lua`
 
 ## License
 
