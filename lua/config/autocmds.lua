@@ -62,8 +62,8 @@ vim.api.nvim_create_autocmd("BufDelete", {
         -- Check if the buffer is displayed in any window
         local windows = vim.fn.win_findbuf(buf)
         
-        -- If buffer is in windows and there are multiple windows, close the window
-        if #windows > 0 and vim.fn.winnr('$') > 1 then
+        -- If there are multiple windows, close windows displaying this buffer
+        if vim.fn.winnr('$') > 1 then
             for _, win in ipairs(windows) do
                 -- Validate window still exists
                 if vim.api.nvim_win_is_valid(win) then
