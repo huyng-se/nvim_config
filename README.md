@@ -15,7 +15,7 @@ Cấu hình Neovim hiện đại với LSP, Completion, GitHub Copilot, và Lazy
 - 🎨 **Modern UI** - Darcula theme, bufferline, airline
 - 📁 **File Explorer** - NERDTree với Git integration
 - 🔍 **Fuzzy Finder** - FZF với ripgrep support
-- 🔧 **Native LSP** - Mason, nvim-lspconfig với vim.lsp.config API
+- 🔧 **Native LSP** - Mason, nvim-lspconfig với Neovim 0.11+ APIs
 - 💡 **Smart Completion** - nvim-cmp với multiple sources
 - 🤖 **GitHub Copilot** - AI pair programming
 - 🐙 **Git Integration** - Gitsigns, Fugitive, LazyGit, Mergetool

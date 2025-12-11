@@ -239,7 +239,7 @@ Tài liệu đầy đủ về tất cả plugins trong cấu hình Neovim này.
 - 🚀 Native LSP support
 - ⚡ Fast và lightweight
 - 🔧 Extensive server configs
-- **Note:** Config này sử dụng `vim.lsp.config` API (Neovim 0.11+)
+- **Note:** Config này sử dụng Neovim 0.11+ `vim.lsp.config` API cho server setup và nvim-lspconfig cho utility functions
 
 **LSP Keymaps:**
 - `gd` - Go to definition
