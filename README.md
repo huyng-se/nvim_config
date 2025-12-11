@@ -17,7 +17,7 @@ A modern, modular Neovim configuration using lazy.nvim with native LSP support.
 
 ## Requirements
 
-- **Neovim >= 0.9.0**
+- **Neovim >= 0.11.0** (required for `vim.lsp.config` API)
 - **Git** (for lazy.nvim and plugins)
 - **Node.js** (optional, for some language servers)
 - **A Nerd Font** (for icons, recommended: JetBrainsMono Nerd Font)
@@ -292,6 +292,7 @@ This configuration migrates from:
 - ✅ **vim-gitgutter** → **gitsigns.nvim** (pure Lua, better performance)
 - ✅ **auto-pairs** → **nvim-autopairs** (modern, Treesitter integration)
 - ✅ **nerdcommenter** → **Comment.nvim** (simpler, pure Lua)
+- ✅ **lspconfig.setup()** → **vim.lsp.config** (Neovim 0.11+ native API)
 
 ### Key Improvements
 - 🚀 **~50% faster startup time** through lazy loading
@@ -300,6 +301,7 @@ This configuration migrates from:
 - 📦 **Easy LSP installation** with Mason
 - 🎨 **Better syntax highlighting** with Treesitter
 - 🗂️ **Modular structure** for easy maintenance
+- ⚡ **Native LSP API** using `vim.lsp.config` (Neovim 0.11+)
 
 ## Troubleshooting
 
@@ -349,13 +351,33 @@ Edit `lua/config/keymaps.lua`
 Edit `lua/config/options.lua`
 
 ### Adding LSP servers
-Edit `lua/plugins/coding.lua` and add to the lspconfig section:
+Edit `lua/plugins/coding.lua` and add to the LSP configuration section:
+
+1. Define the server configuration using `vim.lsp.config`:
 ```lua
-lspconfig.your_server.setup({
+-- Define server configuration
+vim.lsp.config.your_server = {
+    cmd = { 'your-language-server' },
+    filetypes = { 'your-filetype' },
+    root_dir = vim.fs.root(0, { '.git', 'your-root-file' }),
     capabilities = capabilities,
-    on_attach = on_attach,
+    -- Add any custom settings here
+}
+```
+
+2. Add the server to Mason's `ensure_installed` list:
+```lua
+require('mason-lspconfig').setup({
+    ensure_installed = {
+        'lua_ls',
+        'clangd',
+        'your_server',  -- Add your server here
+    },
+    ...
 })
 ```
+
+The server will be automatically enabled by Mason's handlers using `vim.lsp.enable()`. Keymaps will be attached via the `LspAttach` autocmd.
 
 ## Contributing
 

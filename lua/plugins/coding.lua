@@ -1,5 +1,6 @@
 -- Coding plugins: LSP, completion, snippets
 -- Replacing COC.nvim with native LSP
+-- Using vim.lsp.config API (Neovim 0.11+) instead of deprecated lspconfig.setup()
 
 return {
     -- Mason: LSP installer
