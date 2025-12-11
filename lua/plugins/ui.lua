@@ -11,6 +11,16 @@ return {
         end,
     },
 
+    -- Buffer delete without closing window
+    {
+        'famiu/bufdelete.nvim',
+        event = "VeryLazy",
+        keys = {
+            { '<leader>bd', '<cmd>Bdelete<CR>', desc = 'Delete buffer (keep window)', silent = true },
+            { '<leader>bw', '<cmd>Bwipeout<CR>', desc = 'Wipeout buffer (keep window)', silent = true },
+        },
+    },
+
     -- Buffer line
     {
         'akinsho/bufferline.nvim',
@@ -23,6 +33,10 @@ return {
                         style = 'none',
                     },
                     diagnostics = "nvim_lsp",  -- Changed from "coc" to "nvim_lsp"
+                    separator_style = "slant",  -- Better visual separation between buffers
+                    show_buffer_close_icons = true,  -- Easy buffer closing
+                    show_close_icon = false,  -- Reduce clutter
+                    always_show_bufferline = true,  -- Always show bufferline
                 }
             })
         end,
@@ -40,18 +54,8 @@ return {
             -- Theme - use deus theme that better matches Darcula
             vim.g.airline_theme = 'deus'
             
-            -- Enable Tab bar
-            vim.g['airline#extensions#tabline#enabled'] = 1
-            
-            -- Enable Tab separator
-            vim.g['airline#extensions#tabline#left_sep'] = ' '
-            vim.g['airline#extensions#tabline#left_alt_sep'] = '|'
-            
-            -- Formatter
-            vim.g['airline#extensions#tabline#formatter'] = 'default'
-            
-            -- Set Tab name as file name
-            vim.g['airline#extensions#tabline#fnamemod'] = ':t'
+            -- Disable Tab bar (using bufferline instead)
+            vim.g['airline#extensions#tabline#enabled'] = 0
             
             -- Remove warning whitespace
             vim.g['airline#extensions#whitespace#enabled'] = 0

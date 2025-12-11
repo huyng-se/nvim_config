@@ -9,7 +9,13 @@ map({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 -- Buffer navigation
 map('n', '<S-l>', ':bnext<CR>', { silent = true, desc = 'Next buffer' })
 map('n', '<S-h>', ':bprev<CR>', { silent = true, desc = 'Previous buffer' })
-map('n', '<leader>bd', ':bp | sp | bn | bd<CR>', { silent = true, desc = 'Close buffer without closing window' })
+-- Buffer deletion is handled by bufdelete.nvim plugin (see lua/plugins/ui.lua)
+
+-- Window navigation with Ctrl+hjkl
+map('n', '<C-h>', '<C-w>h', { silent = true, desc = 'Move to left window' })
+map('n', '<C-j>', '<C-w>j', { silent = true, desc = 'Move to down window' })
+map('n', '<C-k>', '<C-w>k', { silent = true, desc = 'Move to up window' })
+map('n', '<C-l>', '<C-w>l', { silent = true, desc = 'Move to right window' })
 
 -- Resize panes (increased step from 1 to 2 for faster resizing)
 map('n', '<M-Right>', ':vertical resize +2<CR>', { silent = true, desc = 'Increase vertical split' })
