@@ -208,13 +208,13 @@ Tài liệu đầy đủ về tất cả phím tắt trong cấu hình Neovim n�
 | `Alt+]` | Insert | Suggestion tiếp theo |
 | `Alt+[` | Insert | Suggestion trước |
 | `Ctrl+]` | Insert | Dismiss suggestion (bỏ qua) |
-| `Alt+Enter` | Insert | Mở Copilot panel |
+| `Alt+P` | Insert | Mở Copilot panel |
 
 ### Copilot Panel
 
 | Phím | Chế độ | Mô tả |
 |------|--------|-------|
-| `Alt+Enter` | Insert | Mở Copilot panel (multiple suggestions) |
+| `Alt+P` | Insert | Mở Copilot panel (multiple suggestions) |
 | `]]` | Panel | Jump đến suggestion tiếp theo |
 | `[[` | Panel | Jump đến suggestion trước |
 | `Enter` | Panel | Chấp nhận suggestion trong panel |
@@ -450,7 +450,7 @@ Tài liệu đầy đủ về tất cả phím tắt trong cấu hình Neovim n�
 1. Viết comment mô tả chức năng: "// Function to calculate fibonacci"
 2. Copilot suggest code
 3. `Alt+L` để accept
-4. Hoặc `Alt+Enter` để xem multiple suggestions
+4. Hoặc `Alt+P` để xem multiple suggestions
 ```
 
 #### 5. Refactoring với LSP

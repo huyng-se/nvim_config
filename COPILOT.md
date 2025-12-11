@@ -141,7 +141,7 @@ Khi code, Copilot sẽ tự động suggest code màu xám (ghost text).
 | `Alt+]` | Insert | **Next** suggestion (suggestion tiếp theo) |
 | `Alt+[` | Insert | **Previous** suggestion (suggestion trước) |
 | `Ctrl+]` | Insert | **Dismiss** suggestion (bỏ qua/ẩn) |
-| `Alt+Enter` | Insert | **Mở Copilot Panel** (xem nhiều suggestions) |
+| `Alt+P` | Insert | **Mở Copilot Panel** (xem nhiều suggestions) |
 
 **Tips:**
 - Suggestions xuất hiện tự động khi bạn dừng gõ
@@ -150,11 +150,11 @@ Khi code, Copilot sẽ tự động suggest code màu xám (ghost text).
 
 ### Copilot Panel (Multiple Suggestions)
 
-Nhấn `Alt+Enter` trong Insert mode để mở panel với nhiều suggestions.
+Nhấn `Alt+P` trong Insert mode để mở panel với nhiều suggestions.
 
 | Phím | Mô tả |
 |------|-------|
-| `Alt+Enter` | Mở Copilot panel từ Insert mode |
+| `Alt+P` | Mở Copilot panel từ Insert mode |
 | `]]` | Jump đến suggestion tiếp theo |
 | `[[` | Jump đến suggestion trước |
 | `Enter` | Accept suggestion đang chọn |
@@ -213,7 +213,7 @@ function validateEmail(email) {
 // Bước 1: Viết comment
 // Sort vector of integers in descending order
 
-// Bước 2: Alt+Enter để mở panel
+// Bước 2: Alt+P để mở panel
 // Bước 3: Xem 10 suggestions khác nhau:
 // - Option 1: Using sort_by
 // - Option 2: Using sort_unstable_by
@@ -463,7 +463,7 @@ Copilot suggestions cũng xuất hiện trong nvim-cmp completion menu.
 - Comment mỗi function rõ ràng
 - Copilot generate từng phần tốt hơn
 
-✅ **Use Copilot panel** (`Alt+Enter`) để xem alternatives
+✅ **Use Copilot panel** (`Alt+P`) để xem alternatives
 - Compare different approaches
 - Học code patterns mới
 
@@ -528,7 +528,7 @@ Copilot suggestions cũng xuất hiện trong nvim-cmp completion menu.
 ### Panel
 
 ```vim
-:Copilot panel        " Mở Copilot panel (hoặc Alt+Enter)
+:Copilot panel        " Mở Copilot panel (hoặc Alt+P)
 ```
 
 ### Diagnostics
@@ -558,7 +558,7 @@ Copilot suggestions cũng xuất hiện trong nvim-cmp completion menu.
                     jump_next = ']]',
                     accept = '<CR>',
                     refresh = 'gr',
-                    open = '<M-CR>'  -- Alt+Enter
+                    open = '<M-p>'  -- Alt+P (P for Panel)
                 },
                 layout = {
                     position = 'bottom', -- 'top' | 'left' | 'right' | 'bottom'
@@ -727,12 +727,12 @@ suggestion = {
 
 ### Panel không mở
 
-**Lỗi:** Alt+Enter không mở panel
+**Lỗi:** Alt+P không mở panel
 
 **Solutions:**
 ```vim
 " 1. Check keymap conflict
-:verbose map <M-CR>
+:verbose map <M-p>
 
 " 2. Try command directly
 :Copilot panel
@@ -744,7 +744,7 @@ suggestion = {
 
 ```lua
 keymap = {
-    open = '<C-CR>'  -- Thay Alt+Enter bằng Ctrl+Enter
+    open = '<C-p>'  -- Thay Alt+P bằng Ctrl+P nếu cần
 }
 ```
 
@@ -766,7 +766,7 @@ keymap = {
 
 3. **Try multiple suggestions**
    - `Alt+]` để xem suggestions khác
-   - `Alt+Enter` để mở panel
+   - `Alt+P` để mở panel
 
 4. **Break down complex tasks**
    - Nhỏ hơn, specific hơn

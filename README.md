@@ -150,7 +150,7 @@ scoop install lazygit
 | | `Ctrl+Space` | Trigger completion |
 | **Copilot** | `Alt+L` | Accept suggestion |
 | | `Alt+]` / `Alt+[` | Next/Prev suggestion |
-| | `Alt+Enter` | Open panel |
+| | `Alt+P` | Open panel |
 | **Git** | `<leader>gg` | LazyGit |
 | | `<leader>gs` | Git status (Fugitive) |
 | | `<leader>gp` | Preview hunk |
