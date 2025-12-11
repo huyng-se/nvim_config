@@ -1,5 +1,29 @@
 # Modern Neovim Configuration
 
+Cấu hình Neovim hiện đại với LSP, Completion, GitHub Copilot, và LazyGit integration.
+
+## 📚 Documentation
+
+- **[INSTALLATION.md](INSTALLATION.md)** - Hướng dẫn cài đặt chi tiết cho tất cả OS
+- **[KEYMAPS.md](KEYMAPS.md)** - Tất cả phím tắt và workflows
+- **[COPILOT.md](COPILOT.md)** - Hướng dẫn đầy đủ GitHub Copilot
+- **[LAZYGIT.md](LAZYGIT.md)** - Hướng dẫn đầy đủ LazyGit
+- **[PLUGINS.md](PLUGINS.md)** - Danh sách plugins chi tiết
+
+## ✨ Features
+
+- 🎨 **Modern UI** - Darcula theme, bufferline, airline
+- 📁 **File Explorer** - NERDTree với Git integration
+- 🔍 **Fuzzy Finder** - FZF với ripgrep support
+- 🔧 **Native LSP** - Mason, nvim-lspconfig với vim.lsp.config API
+- 💡 **Smart Completion** - nvim-cmp với multiple sources
+- 🤖 **GitHub Copilot** - AI pair programming
+- 🐙 **Git Integration** - Gitsigns, Fugitive, LazyGit, Mergetool
+- 💻 **Floating Terminal** - Floaterm
+- 🐛 **Debugging** - Vimspector DAP
+- 🦀 **Rust Support** - Rustaceanvim với inlay hints
+- 🌈 **Treesitter** - Advanced syntax highlighting
+
 ## ✨ Plugins chính
 
 ### UI & Theme
@@ -100,160 +124,46 @@ scoop install lazygit
 4. Làm theo hướng dẫn để xác thực với GitHub
 5. Sau khi xác thực thành công, Copilot sẽ tự động bật
 
-## ⌨️ Cheat Sheet - Phím tắt
+**Xem hướng dẫn đầy đủ:** [COPILOT.md](COPILOT.md)
+
+## ⌨️ Phím tắt cơ bản
 
 **Leader key:** `Space`
 
-### 🎯 Chung (General)
+### Quick Reference
 
-| Phím | Chế độ | Mô tả |
-|------|--------|-------|
-| `Space` | Normal/Visual | Leader key |
-| `Shift+H` | Normal | Buffer trước |
-| `Shift+L` | Normal | Buffer sau |
-| `<leader>bd` | Normal | Đóng buffer (không đóng window) |
-| `Esc` | Normal | Xóa highlight tìm kiếm |
-| `<` | Visual | Indent trái (giữ visual mode) |
-| `>` | Visual | Indent phải (giữ visual mode) |
+| Category | Phím tắt | Mô tả |
+|----------|----------|-------|
+| **File Explorer** | `F5` | NERDTree |
+| | `F6` | FZF Files |
+| | `F7` | FZF Ripgrep |
+| **Buffer** | `Shift+L` / `Shift+H` | Next/Previous buffer |
+| | `<leader>bd` | Close buffer |
+| **LSP** | `gd` | Go to definition |
+| | `K` | Hover documentation |
+| | `<leader>rn` | Rename |
+| | `<leader>f` | Format code |
+| | `<leader>a` | Code action |
+| | `[g` / `]g` | Previous/Next diagnostic |
+| **Completion** | `Tab` / `Shift+Tab` | Navigate items |
+| | `Enter` | Confirm |
+| | `Ctrl+Space` | Trigger completion |
+| **Copilot** | `Alt+L` | Accept suggestion |
+| | `Alt+]` / `Alt+[` | Next/Prev suggestion |
+| | `Alt+Enter` | Open panel |
+| **Git** | `<leader>gg` | LazyGit |
+| | `<leader>gs` | Git status (Fugitive) |
+| | `<leader>gp` | Preview hunk |
+| | `<leader>gb` | Git blame |
+| | `]c` / `[c` | Next/Prev hunk |
+| **Terminal** | `<leader>tt` | Toggle terminal |
+| | `<leader>to` | New terminal |
+| **Debug** | `<leader>dl` | Launch debugger |
+| | `<leader>dt` | Toggle breakpoint |
+| | `<leader>dc` | Continue |
+| **Rust** | `<leader>ih` | Toggle inlay hints |
 
-### 🪟 Quản lý cửa sổ (Window Management)
-
-| Phím | Chế độ | Mô tả |
-|------|--------|-------|
-| `Alt+Left` | Normal | Thu nhỏ split dọc |
-| `Alt+Right` | Normal | Mở rộng split dọc |
-| `Alt+Up` | Normal | Thu nhỏ split ngang |
-| `Alt+Down` | Normal | Mở rộng split ngang |
-
-### 📁 File Explorer & Tìm kiếm
-
-| Phím | Chế độ | Mô tả |
-|------|--------|-------|
-| `F5` | Normal | Bật/tắt NERDTree |
-| `F6` | Normal | FZF Files (tìm file) |
-| `F7` | Normal | FZF Ripgrep (tìm trong nội dung) |
-
-### 🔧 LSP - Code Navigation
-
-| Phím | Chế độ | Mô tả |
-|------|--------|-------|
-| `gd` | Normal | Go to definition (đi tới định nghĩa) |
-| `gy` | Normal | Go to type definition |
-| `gi` | Normal | Go to implementation |
-| `gr` | Normal | Show references (hiện tham chiếu) |
-| `K` | Normal | Hover documentation (xem tài liệu) |
-| `<leader>rn` | Normal | Rename symbol (đổi tên) |
-| `<leader>f` | Normal | Format code (định dạng code) |
-| `<leader>a` | Normal/Visual | Code action |
-| `[g` | Normal | Diagnostic trước |
-| `]g` | Normal | Diagnostic sau |
-
-### 💡 Completion - Tự động hoàn thành
-
-| Phím | Chế độ | Mô tả |
-|------|--------|-------|
-| `Tab` | Insert | Item tiếp theo / Mở rộng snippet |
-| `Shift+Tab` | Insert | Item trước |
-| `Enter` | Insert | Xác nhận completion |
-| `Ctrl+Space` | Insert | Kích hoạt completion |
-| `Ctrl+F` | Insert | Cuộn xuống docs |
-| `Ctrl+B` | Insert | Cuộn lên docs |
-
-### 🤖 GitHub Copilot
-
-**Yêu cầu:** GitHub Copilot subscription và xác thực lần đầu với `:Copilot auth`
-
-| Phím | Chế độ | Mô tả |
-|------|--------|-------|
-| `Alt+L` | Insert | Chấp nhận suggestion của Copilot |
-| `Alt+]` | Insert | Suggestion tiếp theo |
-| `Alt+[` | Insert | Suggestion trước |
-| `Ctrl+]` | Insert | Dismiss suggestion (bỏ qua) |
-| `Alt+Enter` | Insert | Mở Copilot panel |
-| `]]` | Panel | Jump đến suggestion tiếp theo |
-| `[[` | Panel | Jump đến suggestion trước |
-| `Enter` | Panel | Chấp nhận suggestion trong panel |
-| `gr` | Panel | Refresh suggestions |
-
-**Lệnh:**
-- `:Copilot auth` - Xác thực GitHub Copilot lần đầu
-- `:Copilot enable` - Bật Copilot
-- `:Copilot disable` - Tắt Copilot
-- `:Copilot status` - Kiểm tra trạng thái Copilot
-
-### 🐙 Git Integration
-
-| Phím | Chế độ | Mô tả |
-|------|--------|-------|
-| `]c` | Normal | Git hunk kế tiếp |
-| `[c` | Normal | Git hunk trước |
-| `<leader>gp` | Normal | Preview git hunk |
-| `<leader>gb` | Normal | Git blame (xem ai sửa dòng) |
-| `<leader>gs` | Normal | Git status (fugitive) |
-| `<leader>gg` | Normal | Mở LazyGit (terminal UI) |
-| `<leader>lg` | Normal | Mở LazyGit (terminal UI) |
-| `<leader>mt` | Normal | Bật/tắt Git Mergetool |
-| `<leader>gl` | Normal | Git log trong terminal |
-
-### 💻 Terminal - Floating Terminal
-
-| Phím | Chế độ | Mô tả |
-|------|--------|-------|
-| `<leader>to` | Normal/Terminal | Mở terminal mới |
-| `<leader>tt` | Normal/Terminal | Bật/tắt terminal |
-| `<leader>tn` | Normal/Terminal | Terminal tiếp theo |
-| `<leader>tp` | Normal/Terminal | Terminal trước |
-| `<leader>tk` | Normal/Terminal | Kill terminal |
-
-### 🐛 Debug - Vimspector
-
-| Phím | Chế độ | Mô tả |
-|------|--------|-------|
-| `<leader>dl` | Normal | Khởi động debugger |
-| `<leader>ds` | Normal | Dừng debugger |
-| `<leader>dc` | Normal | Continue (tiếp tục) |
-| `<leader>dt` | Normal | Toggle breakpoint (đặt/bỏ điểm dừng) |
-| `<leader>dT` | Normal | Xóa tất cả breakpoints |
-| `<leader>di` | Normal | Step into (bước vào hàm) |
-| `<leader>do` | Normal | Step over (bước qua) |
-| `<leader>de` | Normal | Step out (bước ra) |
-| `<leader>dr` | Normal | Restart debugger |
-
-### 🦀 Rust Specific
-
-#### File Rust (.rs)
-
-| Phím | Chế độ | Mô tả |
-|------|--------|-------|
-| `<leader>ih` | Normal | Bật/tắt inlay hints (type, parameter hints) |
-
-**Lệnh:**
-- `:RustInlayHintsToggle` - Bật/tắt inlay hints
-
-**Inlay Hints được bật tự động** khi mở file Rust, hiển thị:
-- Type hints (kiểu dữ liệu)
-- Parameter hints (tên tham số)
-- Chaining hints (chuỗi method)
-- Lifetime elision hints
-
-#### File Cargo.toml
-
-| Phím | Chế độ | Mô tả |
-|------|--------|-------|
-| `<leader>ct` | Normal | Bật/tắt thông tin crates |
-| `<leader>cr` | Normal | Reload crates |
-| `<leader>cv` | Normal | Hiện crate features |
-| `<leader>cu` | Normal | Update crate |
-| `<leader>ca` | Normal | Update tất cả crates |
-| `K` | Normal | Hiện crate popup |
-
-### 💬 Comments - Chú thích
-
-| Phím | Chế độ | Mô tả |
-|------|--------|-------|
-| `<leader>cc` | Normal | Bật/tắt line comment |
-| `<leader>bc` | Normal | Bật/tắt block comment |
-| `<leader>c` | Normal/Visual | Comment operator |
+**Xem tất cả phím tắt:** [KEYMAPS.md](KEYMAPS.md)
 
 ## 📁 Cấu trúc thư mục
 
