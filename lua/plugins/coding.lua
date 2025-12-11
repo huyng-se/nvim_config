@@ -65,7 +65,7 @@ return {
                     "--function-arg-placeholders",
                 },
                 filetypes = { 'c', 'cpp', 'objc', 'objcpp', 'cuda' },
-                root_dir = vim.fs.root(0, { '.clangd', '.clang-tidy', '.clang-format', 'compile_commands.json', 'compile_flags.txt', 'configure.ac', '.git' }),
+                root_markers = { '.clangd', '.clang-tidy', '.clang-format', 'compile_commands.json', 'compile_flags.txt', 'configure.ac', '.git' },
                 capabilities = capabilities,
             }
             
@@ -73,7 +73,7 @@ return {
             vim.lsp.config.cmake = {
                 cmd = { 'cmake-language-server' },
                 filetypes = { 'cmake' },
-                root_dir = vim.fs.root(0, { 'CMakePresets.json', 'CTestConfig.cmake', '.git', 'build', 'cmake' }),
+                root_markers = { 'CMakePresets.json', 'CTestConfig.cmake', '.git', 'build', 'cmake' },
                 capabilities = capabilities,
             }
             
@@ -81,7 +81,7 @@ return {
             vim.lsp.config.pyright = {
                 cmd = { 'pyright-langserver', '--stdio' },
                 filetypes = { 'python' },
-                root_dir = vim.fs.root(0, { 'pyproject.toml', 'setup.py', 'setup.cfg', 'requirements.txt', 'Pipfile', 'pyrightconfig.json', '.git' }),
+                root_markers = { 'pyproject.toml', 'setup.py', 'setup.cfg', 'requirements.txt', 'Pipfile', 'pyrightconfig.json', '.git' },
                 capabilities = capabilities,
             }
             
@@ -89,7 +89,7 @@ return {
             vim.lsp.config.lua_ls = {
                 cmd = { 'lua-language-server' },
                 filetypes = { 'lua' },
-                root_dir = vim.fs.root(0, { '.luarc.json', '.luarc.jsonc', '.luacheckrc', '.stylua.toml', 'stylua.toml', 'selene.toml', 'selene.yml', '.git' }),
+                root_markers = { '.luarc.json', '.luarc.jsonc', '.luacheckrc', '.stylua.toml', 'stylua.toml', 'selene.toml', 'selene.yml', '.git' },
                 capabilities = capabilities,
                 settings = {
                     Lua = {
@@ -161,7 +161,8 @@ return {
         end,
     },
 
-    -- LSP Configuration (keep dependency for compatibility)
+    -- LSP Configuration (keep plugin loaded for backward compatibility and utility functions)
+    -- Note: We use vim.lsp.config API directly instead of lspconfig.setup()
     {
         'neovim/nvim-lspconfig',
         event = { "BufReadPre", "BufNewFile" },
