@@ -57,16 +57,6 @@ return {
             -- Disable Tab bar (using bufferline instead)
             vim.g['airline#extensions#tabline#enabled'] = 0
             
-            -- Enable Tab separator
-            vim.g['airline#extensions#tabline#left_sep'] = ' '
-            vim.g['airline#extensions#tabline#left_alt_sep'] = '|'
-            
-            -- Formatter
-            vim.g['airline#extensions#tabline#formatter'] = 'default'
-            
-            -- Set Tab name as file name
-            vim.g['airline#extensions#tabline#fnamemod'] = ':t'
-            
             -- Remove warning whitespace
             vim.g['airline#extensions#whitespace#enabled'] = 0
             
