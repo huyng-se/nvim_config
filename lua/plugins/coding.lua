@@ -51,6 +51,11 @@ return {
                 -- Diagnostic navigation
                 map('n', '[g', vim.diagnostic.goto_prev, vim.tbl_extend('force', opts, { desc = 'Previous diagnostic' }))
                 map('n', ']g', vim.diagnostic.goto_next, vim.tbl_extend('force', opts, { desc = 'Next diagnostic' }))
+                
+                -- Show diagnostic in insert mode
+                map('i', '<C-s>', function()
+                    vim.diagnostic.open_float(nil, { focus = false, scope = 'cursor' })
+                end, vim.tbl_extend('force', opts, { desc = 'Show diagnostic' }))
             end
             
             -- Define LSP server configurations using vim.lsp.config (Neovim 0.11+)
@@ -143,12 +148,14 @@ return {
             vim.diagnostic.config({
                 virtual_text = true,
                 signs = true,
-                update_in_insert = false,
+                update_in_insert = true,
                 underline = true,
                 severity_sort = true,
                 float = {
                     border = 'rounded',
                     source = 'always',
+                    header = '',
+                    prefix = '',
                 },
             })
             
