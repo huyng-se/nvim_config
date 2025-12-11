@@ -121,8 +121,8 @@ return {
             'nvim-lua/plenary.nvim',
         },
         keys = {
-            { '<leader>gg', '<cmd>LazyGit<CR>', desc = 'LazyGit' },
-            { '<leader>lg', '<cmd>LazyGit<CR>', desc = 'LazyGit' },
+            { '<leader>gg', '<cmd>LazyGit<CR>', desc = 'LazyGit (Git UI)' },
+            { '<leader>lg', '<cmd>LazyGit<CR>', desc = 'LazyGit (alternative)' },
         },
         config = function()
             -- LazyGit opens in a floating window by default

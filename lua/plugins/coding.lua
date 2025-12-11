@@ -231,8 +231,8 @@ return {
                     end, { 'i', 's' }),
                 }),
                 sources = cmp.config.sources({
-                    { name = 'copilot' },  -- GitHub Copilot suggestions
                     { name = 'nvim_lsp' },
+                    { name = 'copilot' },  -- GitHub Copilot suggestions (after LSP)
                     { name = 'luasnip' },
                     { name = 'crates' },
                 }, {
