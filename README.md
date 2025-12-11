@@ -153,7 +153,24 @@ Lazy.nvim sẽ tự động cài đặt tất cả plugins và LSP servers (qua 
 | `<leader>de` | Normal | Step out (bước ra) |
 | `<leader>dr` | Normal | Restart debugger |
 
-### 🦀 Rust Specific (trong Cargo.toml)
+### 🦀 Rust Specific
+
+#### File Rust (.rs)
+
+| Phím | Chế độ | Mô tả |
+|------|--------|-------|
+| `<leader>ih` | Normal | Bật/tắt inlay hints (type, parameter hints) |
+
+**Lệnh:**
+- `:RustInlayHintsToggle` - Bật/tắt inlay hints
+
+**Inlay Hints được bật tự động** khi mở file Rust, hiển thị:
+- Type hints (kiểu dữ liệu)
+- Parameter hints (tên tham số)
+- Chaining hints (chuỗi method)
+- Lifetime elision hints
+
+#### File Cargo.toml
 
 | Phím | Chế độ | Mô tả |
 |------|--------|-------|
@@ -191,7 +208,8 @@ nvim_config/
 │       ├── treesitter.lua # Syntax highlighting
 │       ├── git.lua        # Git integration
 │       ├── terminal.lua   # Floaterm
-│       └── debug.lua      # Vimspector
+│       ├── debug.lua      # Vimspector
+│       └── rustacean.lua  # Rust development (inlay hints)
 └── README.md
 ```
 
