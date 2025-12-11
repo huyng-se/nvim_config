@@ -388,7 +388,7 @@ return {
                         jump_next = ']]',
                         accept = '<CR>',
                         refresh = 'gr',
-                        open = '<M-CR>'  -- Alt+Enter to open panel
+                        open = '<M-p>'  -- Alt+P to open panel (P for Panel)
                     },
                     layout = {
                         position = 'bottom', -- 'top', 'left', 'right', 'bottom'

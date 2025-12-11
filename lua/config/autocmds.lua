@@ -44,3 +44,31 @@ vim.api.nvim_create_autocmd("TextYankPost", {
     end,
     desc = "Highlight yanked text briefly"
 })
+
+-- Auto-close split window when buffer is deleted
+-- This prevents empty split windows from remaining after buffer deletion
+vim.api.nvim_create_autocmd("BufDelete", {
+    pattern = "*",
+    callback = function(args)
+        -- Get the buffer being deleted
+        local buf = args.buf
+        
+        -- Check if the buffer is displayed in any window
+        local windows = vim.fn.win_findbuf(buf)
+        
+        -- If buffer is in windows and there are multiple windows, close the window
+        if #windows > 0 and vim.fn.winnr('$') > 1 then
+            for _, win in ipairs(windows) do
+                -- Check if this is a normal window (not special like NERDTree)
+                local win_buf = vim.api.nvim_win_get_buf(win)
+                local buftype = vim.api.nvim_buf_get_option(win_buf, 'buftype')
+                
+                -- Only close normal file windows
+                if buftype == '' then
+                    vim.api.nvim_win_close(win, false)
+                end
+            end
+        end
+    end,
+    desc = "Auto-close split window when buffer is deleted"
+})
