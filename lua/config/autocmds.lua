@@ -53,6 +53,12 @@ vim.api.nvim_create_autocmd("BufDelete", {
         -- Get the buffer being deleted
         local buf = args.buf
         
+        -- Check if this is a normal file buffer (not special like NERDTree)
+        local buftype = vim.bo[buf].buftype
+        if buftype ~= '' then
+            return  -- Don't close windows for special buffers
+        end
+        
         -- Check if the buffer is displayed in any window
         local windows = vim.fn.win_findbuf(buf)
         
@@ -61,14 +67,7 @@ vim.api.nvim_create_autocmd("BufDelete", {
             for _, win in ipairs(windows) do
                 -- Validate window still exists
                 if vim.api.nvim_win_is_valid(win) then
-                    -- Check if this is a normal window (not special like NERDTree)
-                    local win_buf = vim.api.nvim_win_get_buf(win)
-                    local buftype = vim.bo[win_buf].buftype
-                    
-                    -- Only close normal file windows
-                    if buftype == '' then
-                        vim.api.nvim_win_close(win, false)
-                    end
+                    vim.api.nvim_win_close(win, false)
                 end
             end
         end
