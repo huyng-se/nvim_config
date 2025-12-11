@@ -73,9 +73,7 @@ return {
     -- Fuzzy finder - FZF (keeping original choice)
     {
         'junegunn/fzf',
-        build = function()
-            vim.fn['fzf#install']()
-        end,
+        build = './install --all',
     },
 
     {
