@@ -20,7 +20,8 @@
 - **L3MON4D3/LuaSnip** - Snippet engine
 - **windwp/nvim-autopairs** - Auto close pairs
 - **numToStr/Comment.nvim** - Commenting
-- **mrcjkb/rustaceanvim** - Rust development
+- **mrcjkb/rustaceanvim** - Rust development with native inlay hints
+- **rust-lang/rust.vim** - Rust syntax and formatting
 - **saecki/crates.nvim** - Cargo.toml management
 
 ### Syntax Highlighting
@@ -153,7 +154,16 @@ Lazy.nvim sẽ tự động cài đặt tất cả plugins và LSP servers (qua 
 | `<leader>de` | Normal | Step out (bước ra) |
 | `<leader>dr` | Normal | Restart debugger |
 
-### 🦀 Rust Specific (trong Cargo.toml)
+### 🦀 Rust Specific
+
+**Rust files (.rs):**
+
+| Phím | Chế độ | Mô tả |
+|------|--------|-------|
+| `<leader>ih` | Normal | Bật/tắt inlay hints (type hints) |
+| `:RustInlayToggle` | Command | Bật/tắt inlay hints |
+
+**Cargo.toml:**
 
 | Phím | Chế độ | Mô tả |
 |------|--------|-------|
@@ -191,9 +201,39 @@ nvim_config/
 │       ├── treesitter.lua # Syntax highlighting
 │       ├── git.lua        # Git integration
 │       ├── terminal.lua   # Floaterm
-│       └── debug.lua      # Vimspector
+│       ├── debug.lua      # Vimspector
+│       └── rustacean.lua  # Rust development
 └── README.md
 ```
+
+## 🦀 Rust Development Features
+
+Config này hỗ trợ phát triển Rust với các tính năng:
+
+### Inlay Hints (Type Hints)
+- **Tự động bật** khi mở file Rust (Neovim >= 0.10)
+- Hiển thị type hints cho biến, tham số, closure, return types
+- Toggle bằng `<leader>ih` hoặc `:RustInlayToggle`
+
+### Rust Analyzer
+- Sử dụng Clippy để kiểm tra code
+- Hỗ trợ tất cả features của Cargo
+- Inlay hints toàn diện:
+  - Binding mode hints
+  - Chaining hints (method chains)
+  - Closure return type hints
+  - Lifetime elision hints
+  - Parameter hints
+  - Type hints với colons
+
+### Auto-formatting
+- Tự động format với rustfmt khi lưu file
+- Hiển thị lỗi format trong QuickFix
+
+### Cargo.toml Management
+- Hiển thị phiên bản crates trực tiếp trong file
+- Update/Upgrade crates trực tiếp từ Neovim
+- Xem features của crate
 
 ## 🔧 Troubleshooting
 
@@ -208,6 +248,12 @@ nvim_config/
 :Mason               " Mở Mason UI
 :MasonInstall <server>   " Cài server
 :LspInfo             " Kiểm tra trạng thái LSP
+```
+
+**Lưu ý cho Rust**: rust-analyzer được quản lý bởi rustaceanvim, không cần cài qua Mason. Cài rustup và rust-analyzer từ hệ thống:
+```bash
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+rustup component add rust-analyzer
 ```
 
 ### Treesitter
