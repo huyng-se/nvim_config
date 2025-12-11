@@ -59,13 +59,16 @@ vim.api.nvim_create_autocmd("BufDelete", {
         -- If buffer is in windows and there are multiple windows, close the window
         if #windows > 0 and vim.fn.winnr('$') > 1 then
             for _, win in ipairs(windows) do
-                -- Check if this is a normal window (not special like NERDTree)
-                local win_buf = vim.api.nvim_win_get_buf(win)
-                local buftype = vim.api.nvim_buf_get_option(win_buf, 'buftype')
-                
-                -- Only close normal file windows
-                if buftype == '' then
-                    vim.api.nvim_win_close(win, false)
+                -- Validate window still exists
+                if vim.api.nvim_win_is_valid(win) then
+                    -- Check if this is a normal window (not special like NERDTree)
+                    local win_buf = vim.api.nvim_win_get_buf(win)
+                    local buftype = vim.bo[win_buf].buftype
+                    
+                    -- Only close normal file windows
+                    if buftype == '' then
+                        vim.api.nvim_win_close(win, false)
+                    end
                 end
             end
         end
