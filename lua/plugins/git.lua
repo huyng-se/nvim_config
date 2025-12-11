@@ -105,4 +105,35 @@ return {
             vim.g.mergetool_prefer_revision = 'local'
         end,
     },
+
+    -- Lazygit integration - Terminal UI for Git
+    -- Note: Requires lazygit binary to be installed (https://github.com/jesseduffield/lazygit)
+    {
+        'kdheepak/lazygit.nvim',
+        cmd = {
+            'LazyGit',
+            'LazyGitConfig',
+            'LazyGitCurrentFile',
+            'LazyGitFilter',
+            'LazyGitFilterCurrentFile',
+        },
+        dependencies = {
+            'nvim-lua/plenary.nvim',
+        },
+        keys = {
+            { '<leader>gg', '<cmd>LazyGit<CR>', desc = 'LazyGit (Git UI)' },
+            { '<leader>lg', '<cmd>LazyGit<CR>', desc = 'LazyGit (alternative)' },
+        },
+        config = function()
+            -- LazyGit opens in a floating window by default
+            -- Set floating window size
+            vim.g.lazygit_floating_window_winblend = 0 -- Transparency of floating window
+            vim.g.lazygit_floating_window_scaling_factor = 0.9 -- Scaling factor for floating window (0-1)
+            vim.g.lazygit_floating_window_border_chars = {'╭','─', '╮', '│', '╯','─', '╰', '│'} -- Border style
+            vim.g.lazygit_floating_window_use_plenary = 1 -- Use plenary.nvim for floating window
+            
+            -- Use neovim remote to open files from lazygit in the same instance
+            vim.g.lazygit_use_neovim_remote = 1
+        end,
+    },
 }
