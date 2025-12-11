@@ -11,4 +11,5 @@ return {
     { import = "plugins.git" },
     { import = "plugins.terminal" },
     { import = "plugins.debug" },
+    { import = "plugins.rustacean" },
 }

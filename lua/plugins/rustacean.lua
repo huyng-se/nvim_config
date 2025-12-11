@@ -12,6 +12,11 @@ return {
             local map = vim.keymap.set
             local opts = { buffer = bufnr, silent = true }
             
+            -- Enable native inlay hints for Neovim >= 0.10
+            if vim.lsp.inlay_hint then
+              vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+            end
+            
             -- Keymaps for Rust development
             map("n", "K", function() 
               vim.cmd.RustLsp { 'hover', 'actions' } 
@@ -32,6 +37,18 @@ return {
             map("n", "<leader>f", function() 
               vim.lsp.buf.format() 
             end, vim.tbl_extend('force', opts, { desc = 'Rust: Format' }))
+            
+            -- Toggle inlay hints keymap
+            map("n", "<leader>ih", function()
+              if vim.lsp.inlay_hint then
+                local current = vim.lsp.inlay_hint.is_enabled({ bufnr = bufnr })
+                vim.lsp.inlay_hint.enable(not current, { bufnr = bufnr })
+                vim.notify(
+                  "Inlay hints " .. (current and "disabled" or "enabled"),
+                  vim.log.levels.INFO
+                )
+              end
+            end, vim.tbl_extend('force', opts, { desc = 'Rust: Toggle inlay hints' }))
           end,
           
           default_settings = {
@@ -43,16 +60,41 @@ return {
               cargo = {
                 allFeatures = true,
               },
+              -- Comprehensive inlay hints configuration
               inlayHints = {
                 bindingModeHints = { enable = true },
-                typeHints = { enable = true },
                 chainingHints = { enable = true },
+                closingBraceHints = { enable = true, minLines = 10 },
+                closureReturnTypeHints = { enable = "with_block" },
+                lifetimeElisionHints = { enable = "skip_trivial", useParameterNames = true },
                 parameterHints = { enable = true },
+                reborrowHints = { enable = "always" },
+                renderColons = true,
+                typeHints = {
+                  enable = true,
+                  hideClosureInitialization = false,
+                  hideNamedConstructor = false,
+                },
               },
             },
           },
         },
       }
+      
+      -- Create toggle command for inlay hints
+      vim.api.nvim_create_user_command('RustInlayToggle', function()
+        local bufnr = vim.api.nvim_get_current_buf()
+        if vim.lsp.inlay_hint then
+          local current = vim.lsp.inlay_hint.is_enabled({ bufnr = bufnr })
+          vim.lsp.inlay_hint.enable(not current, { bufnr = bufnr })
+          vim.notify(
+            "Inlay hints " .. (current and "disabled" or "enabled"),
+            vim.log.levels.INFO
+          )
+        else
+          vim.notify("Inlay hints not supported in this Neovim version", vim.log.levels.WARN)
+        end
+      end, { desc = 'Toggle Rust inlay hints' })
     end,
   },
   
