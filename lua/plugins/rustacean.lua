@@ -6,11 +6,22 @@ return {
     lazy = false,
     ft = { 'rust' },
     config = function()
+      -- Helper function to toggle inlay hints
+      local function toggle_inlay_hints(bufnr)
+        bufnr = bufnr or vim.api.nvim_get_current_buf()
+        vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = bufnr }), { bufnr = bufnr })
+      end
+      
       vim.g.rustaceanvim = {
         server = {
           on_attach = function(client, bufnr)
             local map = vim.keymap.set
             local opts = { buffer = bufnr, silent = true }
+            
+            -- Enable inlay hints automatically for Rust files
+            if client.server_capabilities.inlayHintProvider then
+              vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+            end
             
             -- Keymaps for Rust development
             map("n", "K", function() 
@@ -32,6 +43,11 @@ return {
             map("n", "<leader>f", function() 
               vim.lsp.buf.format() 
             end, vim.tbl_extend('force', opts, { desc = 'Rust: Format' }))
+            
+            -- Toggle inlay hints
+            map("n", "<leader>ih", function()
+              toggle_inlay_hints(bufnr)
+            end, vim.tbl_extend('force', opts, { desc = 'Rust: Toggle inlay hints' }))
           end,
           
           default_settings = {
@@ -45,14 +61,28 @@ return {
               },
               inlayHints = {
                 bindingModeHints = { enable = true },
-                typeHints = { enable = true },
                 chainingHints = { enable = true },
+                closingBraceHints = { enable = true, minLines = 10 },
+                closureReturnTypeHints = { enable = "always" },
+                lifetimeElisionHints = { enable = "always", useParameterNames = true },
+                maxLength = 25, -- Maximum length of inlay hint text before truncation
                 parameterHints = { enable = true },
+                reborrowHints = { enable = "always" },
+                renderColons = true,
+                typeHints = { enable = true, hideClosureInitialization = false, hideNamedConstructor = false },
               },
             },
           },
         },
       }
+      
+      -- Create user command for toggling inlay hints
+      vim.api.nvim_create_user_command('RustInlayHintsToggle', function()
+        local bufnr = vim.api.nvim_get_current_buf()
+        toggle_inlay_hints(bufnr)
+        local status = vim.lsp.inlay_hint.is_enabled({ bufnr = bufnr }) and "enabled" or "disabled"
+        print("Rust inlay hints " .. status)
+      end, { desc = 'Toggle Rust inlay hints' })
     end,
   },
   
