@@ -28,30 +28,6 @@ return {
             'neovim/nvim-lspconfig',
         },
         config = function()
-            require('mason-lspconfig').setup({
-                -- Automatically install these language servers
-                ensure_installed = {
-                    'lua_ls',      -- Lua
-                    'clangd',      -- C/C++
-                    'cmake',       -- CMake
-                    'pyright',     -- Python
-                },
-                automatic_installation = true,
-            })
-        end,
-    },
-
-    -- LSP Configuration
-    {
-        'neovim/nvim-lspconfig',
-        event = { "BufReadPre", "BufNewFile" },
-        dependencies = {
-            'hrsh7th/cmp-nvim-lsp',
-            'williamboman/mason-lspconfig.nvim',
-        },
-        config = function()
-            local lspconfig = require('lspconfig')
-            
             -- Setup capabilities for nvim-cmp
             local capabilities = require('cmp_nvim_lsp').default_capabilities()
             
@@ -76,10 +52,9 @@ return {
                 map('n', ']g', vim.diagnostic.goto_next, vim.tbl_extend('force', opts, { desc = 'Next diagnostic' }))
             end
             
+            -- Define LSP server configurations using vim.lsp.config (Neovim 0.11+)
             -- C/C++ (clangd replaces ccls)
-            lspconfig.clangd.setup({
-                capabilities = capabilities,
-                on_attach = on_attach,
+            vim.lsp.config.clangd = {
                 cmd = {
                     "clangd",
                     "--background-index",
@@ -88,24 +63,33 @@ return {
                     "--completion-style=detailed",
                     "--function-arg-placeholders",
                 },
-            })
+                filetypes = { 'c', 'cpp', 'objc', 'objcpp', 'cuda' },
+                root_dir = vim.fs.root(0, { '.clangd', '.clang-tidy', '.clang-format', 'compile_commands.json', 'compile_flags.txt', 'configure.ac', '.git' }),
+                capabilities = capabilities,
+            }
             
             -- CMake
-            lspconfig.cmake.setup({
+            vim.lsp.config.cmake = {
+                cmd = { 'cmake-language-server' },
+                filetypes = { 'cmake' },
+                root_dir = vim.fs.root(0, { 'CMakePresets.json', 'CTestConfig.cmake', '.git', 'build', 'cmake' }),
                 capabilities = capabilities,
-                on_attach = on_attach,
-            })
+            }
             
             -- Python (pyright)
-            lspconfig.pyright.setup({
+            vim.lsp.config.pyright = {
+                cmd = { 'pyright-langserver', '--stdio' },
+                filetypes = { 'python' },
+                root_dir = vim.fs.root(0, { 'pyproject.toml', 'setup.py', 'setup.cfg', 'requirements.txt', 'Pipfile', 'pyrightconfig.json', '.git' }),
                 capabilities = capabilities,
-                on_attach = on_attach,
-            })
+            }
             
             -- Lua (for Neovim configuration)
-            lspconfig.lua_ls.setup({
+            vim.lsp.config.lua_ls = {
+                cmd = { 'lua-language-server' },
+                filetypes = { 'lua' },
+                root_dir = vim.fs.root(0, { '.luarc.json', '.luarc.jsonc', '.luacheckrc', '.stylua.toml', 'stylua.toml', 'selene.toml', 'selene.yml', '.git' }),
                 capabilities = capabilities,
-                on_attach = on_attach,
                 settings = {
                     Lua = {
                         diagnostics = {
@@ -118,6 +102,40 @@ return {
                         telemetry = { enable = false },
                     },
                 },
+            }
+            
+            -- Mason-lspconfig setup with automatic handlers
+            require('mason-lspconfig').setup({
+                -- Automatically install these language servers
+                ensure_installed = {
+                    'lua_ls',      -- Lua
+                    'clangd',      -- C/C++
+                    'cmake',       -- CMake
+                    'pyright',     -- Python
+                },
+                automatic_installation = true,
+                -- Automatic handlers using vim.lsp.enable
+                handlers = {
+                    -- Default handler for all servers
+                    function(server_name)
+                        vim.lsp.enable(server_name)
+                    end,
+                    -- Custom handlers can be added here if needed
+                    -- For example:
+                    -- ['lua_ls'] = function()
+                    --     vim.lsp.enable('lua_ls')
+                    -- end,
+                },
+            })
+            
+            -- Set up on_attach for all LSP clients
+            vim.api.nvim_create_autocmd('LspAttach', {
+                callback = function(args)
+                    local client = vim.lsp.get_client_by_id(args.data.client_id)
+                    if client then
+                        on_attach(client, args.buf)
+                    end
+                end,
             })
             
             -- Diagnostic configuration
@@ -140,6 +158,16 @@ return {
                 vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
             end
         end,
+    },
+
+    -- LSP Configuration (keep dependency for compatibility)
+    {
+        'neovim/nvim-lspconfig',
+        event = { "BufReadPre", "BufNewFile" },
+        dependencies = {
+            'hrsh7th/cmp-nvim-lsp',
+            'williamboman/mason-lspconfig.nvim',
+        },
     },
 
     -- Completion engine
