@@ -231,6 +231,7 @@ return {
                     end, { 'i', 's' }),
                 }),
                 sources = cmp.config.sources({
+                    { name = 'copilot' },  -- GitHub Copilot suggestions
                     { name = 'nvim_lsp' },
                     { name = 'luasnip' },
                     { name = 'crates' },
@@ -270,6 +271,7 @@ return {
                         }
                         vim_item.kind = string.format('%s %s', icons[vim_item.kind] or "", vim_item.kind)
                         vim_item.menu = ({
+                            copilot = "[Copilot]",
                             nvim_lsp = "[LSP]",
                             luasnip = "[Snippet]",
                             buffer = "[Buffer]",
@@ -368,5 +370,67 @@ return {
     {
         'alvan/vim-closetag',
         ft = { 'html', 'xml', 'javascript', 'javascriptreact', 'typescript', 'typescriptreact' },
+    },
+
+    -- GitHub Copilot - AI-powered code completion
+    -- Note: Requires GitHub Copilot subscription and authentication with :Copilot auth
+    {
+        'zbirenbaum/copilot.lua',
+        cmd = 'Copilot',
+        event = 'InsertEnter',
+        config = function()
+            require('copilot').setup({
+                panel = {
+                    enabled = true,
+                    auto_refresh = false,
+                    keymap = {
+                        jump_prev = '[[',
+                        jump_next = ']]',
+                        accept = '<CR>',
+                        refresh = 'gr',
+                        open = '<M-CR>'  -- Alt+Enter to open panel
+                    },
+                    layout = {
+                        position = 'bottom', -- 'top', 'left', 'right', 'bottom'
+                        ratio = 0.4
+                    },
+                },
+                suggestion = {
+                    enabled = true,
+                    auto_trigger = true,  -- Auto-trigger suggestions
+                    debounce = 75,
+                    keymap = {
+                        accept = '<M-l>',      -- Alt+l to accept suggestion
+                        accept_word = false,
+                        accept_line = false,
+                        next = '<M-]>',        -- Alt+] for next suggestion
+                        prev = '<M-[>',        -- Alt+[ for previous suggestion
+                        dismiss = '<C-]>',     -- Ctrl+] to dismiss suggestion
+                    },
+                },
+                filetypes = {
+                    yaml = false,
+                    markdown = false,
+                    help = false,
+                    gitcommit = false,
+                    gitrebase = false,
+                    hgcommit = false,
+                    svn = false,
+                    cvs = false,
+                    ['.'] = false,
+                },
+                copilot_node_command = 'node', -- Node.js version must be > 18.x
+                server_opts_overrides = {},
+            })
+        end,
+    },
+
+    -- Copilot completion source for nvim-cmp
+    {
+        'zbirenbaum/copilot-cmp',
+        dependencies = { 'zbirenbaum/copilot.lua' },
+        config = function()
+            require('copilot_cmp').setup()
+        end,
     },
 }

@@ -17,6 +17,8 @@
 - **williamboman/mason-lspconfig.nvim** - Mason and lspconfig integration
 - **neovim/nvim-lspconfig** - Native LSP configuration
 - **hrsh7th/nvim-cmp** - Completion engine
+- **zbirenbaum/copilot.lua** - GitHub Copilot AI assistant
+- **zbirenbaum/copilot-cmp** - Copilot source for nvim-cmp
 - **L3MON4D3/LuaSnip** - Snippet engine
 - **windwp/nvim-autopairs** - Auto close pairs
 - **numToStr/Comment.nvim** - Commenting
@@ -29,6 +31,7 @@
 ### Git
 - **lewis6991/gitsigns.nvim** - Git signs in sign column
 - **tpope/vim-fugitive** - Git commands
+- **kdheepak/lazygit.nvim** - Lazygit terminal UI integration
 - **samoshkin/vim-mergetool** - Merge conflict resolution
 
 ### Terminal & Debug
@@ -39,8 +42,10 @@
 
 - **Neovim >= 0.11.0**
 - **Git**
-- **Node.js** (tùy chọn)
+- **Node.js >= 18.x** (bắt buộc cho GitHub Copilot)
 - **Nerd Font** (khuyến nghị: JetBrainsMono)
+- **Lazygit** (tùy chọn, cài đặt để dùng LazyGit integration)
+- **GitHub Copilot subscription** (tùy chọn, để dùng AI assistant)
 
 ## 🚀 Cài đặt
 
@@ -57,6 +62,43 @@ nvim
 ```
 
 Lazy.nvim sẽ tự động cài đặt tất cả plugins và LSP servers (qua Mason) khi khởi động lần đầu.
+
+### Cài đặt Lazygit (Tùy chọn)
+
+**macOS:**
+```bash
+brew install lazygit
+```
+
+**Linux:**
+```bash
+# Ubuntu/Debian
+sudo add-apt-repository ppa:lazygit-team/release
+sudo apt update
+sudo apt install lazygit
+
+# Arch Linux
+sudo pacman -S lazygit
+
+# Hoặc tải binary từ: https://github.com/jesseduffield/lazygit/releases
+```
+
+**Windows:**
+```bash
+# Với Chocolatey
+choco install lazygit
+
+# Với Scoop
+scoop install lazygit
+```
+
+### Thiết lập GitHub Copilot (Tùy chọn)
+
+1. Đảm bảo có GitHub Copilot subscription
+2. Khởi động Neovim
+3. Chạy lệnh: `:Copilot auth`
+4. Làm theo hướng dẫn để xác thực với GitHub
+5. Sau khi xác thực thành công, Copilot sẽ tự động bật
 
 ## ⌨️ Cheat Sheet - Phím tắt
 
@@ -117,6 +159,28 @@ Lazy.nvim sẽ tự động cài đặt tất cả plugins và LSP servers (qua 
 | `Ctrl+F` | Insert | Cuộn xuống docs |
 | `Ctrl+B` | Insert | Cuộn lên docs |
 
+### 🤖 GitHub Copilot
+
+**Yêu cầu:** GitHub Copilot subscription và xác thực lần đầu với `:Copilot auth`
+
+| Phím | Chế độ | Mô tả |
+|------|--------|-------|
+| `Alt+L` | Insert | Chấp nhận suggestion của Copilot |
+| `Alt+]` | Insert | Suggestion tiếp theo |
+| `Alt+[` | Insert | Suggestion trước |
+| `Ctrl+]` | Insert | Dismiss suggestion (bỏ qua) |
+| `Alt+Enter` | Insert | Mở Copilot panel |
+| `]]` | Panel | Jump đến suggestion tiếp theo |
+| `[[` | Panel | Jump đến suggestion trước |
+| `Enter` | Panel | Chấp nhận suggestion trong panel |
+| `gr` | Panel | Refresh suggestions |
+
+**Lệnh:**
+- `:Copilot auth` - Xác thực GitHub Copilot lần đầu
+- `:Copilot enable` - Bật Copilot
+- `:Copilot disable` - Tắt Copilot
+- `:Copilot status` - Kiểm tra trạng thái Copilot
+
 ### 🐙 Git Integration
 
 | Phím | Chế độ | Mô tả |
@@ -126,6 +190,8 @@ Lazy.nvim sẽ tự động cài đặt tất cả plugins và LSP servers (qua 
 | `<leader>gp` | Normal | Preview git hunk |
 | `<leader>gb` | Normal | Git blame (xem ai sửa dòng) |
 | `<leader>gs` | Normal | Git status (fugitive) |
+| `<leader>gg` | Normal | Mở LazyGit (terminal UI) |
+| `<leader>lg` | Normal | Mở LazyGit (terminal UI) |
 | `<leader>mt` | Normal | Bật/tắt Git Mergetool |
 | `<leader>gl` | Normal | Git log trong terminal |
 
