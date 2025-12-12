@@ -200,7 +200,7 @@ Download từ [nodejs.org](https://nodejs.org/)
 
 ### 4. Nerd Font (Khuyến nghị)
 
-Cần Nerd Font để hiện icons đẹp trong NERDTree, bufferline, etc.
+Cần Nerd Font để hiện icons đẹp trong NvimTree, Telescope, bufferline, etc.
 
 #### Cài đặt Font
 
@@ -268,9 +268,9 @@ font_size 14.0
 
 ---
 
-### 5. Ripgrep (Cho FZF)
+### 5. ripgrep (Bắt buộc cho Telescope)
 
-Cần ripgrep để dùng `:Rg` command trong FZF.
+Cần ripgrep để dùng Telescope live_grep (tìm kiếm trong nội dung file).
 
 ```bash
 # macOS
@@ -288,13 +288,42 @@ sudo dnf install ripgrep
 # Windows (Chocolatey)
 choco install ripgrep
 
+# Windows (Scoop)
+scoop install ripgrep
+
 # Verify
 rg --version
 ```
 
 ---
 
-### 6. LazyGit (Optional)
+### 6. make (Bắt buộc cho Telescope)
+
+Cần `make` để build Telescope fzf-native extension.
+
+```bash
+# macOS (thường đã có trong Xcode Command Line Tools)
+xcode-select --install
+
+# Ubuntu/Debian
+sudo apt install build-essential
+
+# Arch Linux
+sudo pacman -S base-devel
+
+# Fedora
+sudo dnf groupinstall "Development Tools"
+
+# Windows (Chocolatey)
+choco install make
+
+# Verify
+make --version
+```
+
+---
+
+### 7. LazyGit (Optional)
 
 Tùy chọn, để dùng LazyGit integration.
 
@@ -322,7 +351,7 @@ lazygit --version
 
 ---
 
-### 7. GitHub Copilot Subscription (Optional)
+### 8. GitHub Copilot Subscription (Optional)
 
 Tùy chọn, để dùng GitHub Copilot.
 
@@ -516,7 +545,7 @@ Tạo file mới và test:
 function fib
 ```
 
-Copilot sẽ suggest code (màu xám). Nhấn `Alt+L` để accept.
+Copilot sẽ suggest code trong nvim-cmp menu. Dùng `Tab` để navigate và `Enter` để accept.
 
 **Xem hướng dẫn đầy đủ:** [COPILOT.md](COPILOT.md)
 
@@ -529,10 +558,11 @@ Copilot sẽ suggest code (màu xám). Nhấn `Alt+L` để accept.
 **Test icons:**
 ```bash
 nvim
-:NERDTreeToggle
 ```
 
-Nên thấy icons đẹp trong NERDTree. Nếu thấy boxes/squares, font chưa được config đúng.
+Press `F5` hoặc `:NvimTreeToggle` để mở NvimTree.
+
+Nên thấy icons đẹp trong NvimTree. Nếu thấy boxes/squares, font chưa được config đúng.
 
 **Fix:**
 1. Cài Nerd Font (xem Prerequisites)
