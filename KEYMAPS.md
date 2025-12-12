@@ -9,11 +9,12 @@ Tài liệu đầy đủ về tất cả phím tắt trong cấu hình Neovim n�
 - [🎯 Chung (General)](#-chung-general)
 - [📦 Quản lý Buffer](#-quản-lý-buffer)
 - [🪟 Quản lý Window](#-quản-lý-window)
-- [📁 File Explorer (NERDTree)](#-file-explorer-nerdtree)
-- [🔍 Fuzzy Finder (FZF)](#-fuzzy-finder-fzf)
+- [📁 File Explorer (NvimTree)](#-file-explorer-nvimtree)
+- [🔍 Fuzzy Finder (Telescope)](#-fuzzy-finder-telescope)
 - [🔧 LSP - Code Navigation](#-lsp---code-navigation)
 - [💡 Completion (nvim-cmp)](#-completion-nvim-cmp)
 - [🤖 GitHub Copilot](#-github-copilot)
+- [📝 Todo Comments](#-todo-comments)
 - [🐙 Git Integration](#-git-integration)
 - [💻 Terminal (Floaterm)](#-terminal-floaterm)
 - [🐛 Debug (Vimspector)](#-debug-vimspector)
@@ -65,66 +66,86 @@ Tài liệu đầy đủ về tất cả phím tắt trong cấu hình Neovim n�
 
 ---
 
-## 📁 File Explorer (NERDTree)
+## 📁 File Explorer (NvimTree)
 
-### Mở/Đóng NERDTree
+### Mở/Đóng NvimTree
 
 | Phím | Chế độ | Mô tả |
 |------|--------|-------|
-| `F5` | Normal | Bật/tắt NERDTree |
+| `F5` | Normal | Toggle NvimTree |
+| `<leader>e` | Normal | Toggle NvimTree |
+| `<leader>o` | Normal | Focus NvimTree |
 
-### Trong NERDTree
+### Trong NvimTree
 
 | Phím | Mô tả |
 |------|-------|
-| `o` | Mở file hoặc toggle directory |
-| `i` | Mở file trong horizontal split |
-| `s` | Mở file trong vertical split |
-| `t` | Mở file trong tab mới |
-| `m` | Hiện menu (tạo, xóa, đổi tên file/folder) |
+| `o` / `Enter` | Open file/folder |
+| `<C-v>` | Open file in vertical split |
+| `<C-x>` | Open file in horizontal split |
+| `<C-t>` | Open file in new tab |
+| `a` | Create new file/folder (thêm `/` ở cuối cho folder) |
+| `d` | Delete file/folder |
+| `r` | Rename file/folder |
+| `x` | Cut file/folder |
+| `c` | Copy file/folder |
+| `p` | Paste file/folder |
 | `R` | Refresh tree |
-| `C` | Đặt root tree tại node hiện tại |
-| `u` | Di chuyển root lên một cấp |
-| `?` | Hiện help |
+| `H` | Toggle dotfiles (hidden files) |
+| `E` | Expand all folders |
+| `W` | Collapse all folders |
+| `s` | Open with system default application |
+| `?` | Show help |
 
 **Git Status Icons:**
-- `✹` - Modified
-- `✚` - Staged
-- `✭` - Untracked
+- `✓` - Staged
+- `✗` - Unstaged/Modified
+- `★` - Untracked
 - `➜` - Renamed
-- `═` - Unmerged
-- `✖` - Deleted
-- `✗` - Dirty
-- `☒` - Ignored
-- `✔︎` - Clean
+- `` - Unmerged
+- `` - Deleted
+- `◌` - Ignored
 
 ---
 
-## 🔍 Fuzzy Finder (FZF)
+## 🔍 Fuzzy Finder (Telescope)
 
-### Mở FZF
+### Telescope Pickers
 
 | Phím | Chế độ | Mô tả |
 |------|--------|-------|
-| `F6` | Normal | FZF Files - Tìm file trong project |
-| `F7` | Normal | FZF Ripgrep - Tìm trong nội dung file |
+| `F6` | Normal | Find files |
+| `<leader>ff` | Normal | Find files |
+| `<leader>fg` | Normal | Live grep (tìm trong content) |
+| `<leader>fb` | Normal | Find buffers |
+| `<leader>fh` | Normal | Help tags |
+| `<leader>fo` | Normal | Recent files (oldfiles) |
+| `<leader>fk` | Normal | Keymaps |
+| `<leader>fc` | Normal | Commands |
 
-### Trong FZF
+### Trong Telescope
 
 | Phím | Mô tả |
 |------|-------|
-| `Ctrl+T` | Mở file trong tab mới |
+| `Ctrl+J/K` hoặc `↓/↑` | Di chuyển lên/xuống trong results |
+| `Ctrl+N/P` | Lịch sử tìm kiếm |
+| `Enter` | Mở file trong buffer hiện tại |
 | `Ctrl+X` | Mở file trong horizontal split |
 | `Ctrl+V` | Mở file trong vertical split |
-| `Ctrl+/` | Toggle preview window |
-| `Enter` | Mở file trong buffer hiện tại |
+| `Ctrl+T` | Mở file trong tab mới |
+| `Ctrl+U/D` | Scroll preview lên/xuống |
+| `Ctrl+Q` | Send to quickfix list |
+| `Tab` | Toggle selection |
+| `Esc` | Close Telescope |
 
-**Lệnh FZF:**
-- `:Files` - Tìm file
-- `:Rg` - Ripgrep tìm trong nội dung
-- `:Buffers` - Liệt kê buffers
-- `:BLines` - Tìm trong buffer hiện tại
-- `:Lines` - Tìm trong tất cả buffers mở
+**Lệnh Telescope:**
+- `:Telescope find_files` - Tìm files
+- `:Telescope live_grep` - Tìm trong content (dùng ripgrep)
+- `:Telescope buffers` - Liệt kê buffers
+- `:Telescope help_tags` - Tìm help
+- `:Telescope oldfiles` - Recent files
+- `:Telescope keymaps` - Tất cả keymaps
+- `:Telescope commands` - Tất cả commands
 
 ---
 
@@ -145,16 +166,15 @@ Tài liệu đầy đủ về tất cả phím tắt trong cấu hình Neovim n�
 | Phím | Chế độ | Mô tả |
 |------|--------|-------|
 | `<leader>rn` | Normal | Rename symbol (đổi tên biến/hàm) |
-| `<leader>f` | Normal | Format code (định dạng code) |
-| `<leader>a` | Normal/Visual | Code action (sửa lỗi, refactor) |
+| `<leader>cf` | Normal | Format code (định dạng code) |
+| `<leader>ca` | Normal/Visual | Code action (sửa lỗi, refactor) |
 
 ### Diagnostics
 
 | Phím | Chế độ | Mô tả |
 |------|--------|-------|
-| `[g` | Normal | Diagnostic trước |
-| `]g` | Normal | Diagnostic sau |
-| `Ctrl+S` | Insert | Hiện diagnostic details tại con trỏ |
+| `[d` | Normal | Previous diagnostic |
+| `]d` | Normal | Next diagnostic |
 
 **Lệnh LSP:**
 - `:LspInfo` - Xem trạng thái LSP
@@ -182,13 +202,14 @@ Tài liệu đầy đủ về tất cả phím tắt trong cấu hình Neovim n�
 | `Ctrl+B` | Cuộn lên documentation window |
 | `Ctrl+E` | Abort completion |
 
-**Completion Sources:**
-1. LSP (ngôn ngữ cụ thể)
-2. Copilot (AI suggestions)
-3. Snippets
-4. Crates (cho Cargo.toml)
-5. Buffer (từ file hiện tại)
-6. Path (đường dẫn file)
+**Completion Sources (Priority Order):**
+1. Copilot (1000) - AI suggestions 
+2. LSP (900) - Language-specific completions
+3. LuaSnip (750) - Snippets
+4. Buffer - Words from current file
+5. Path - File paths
+
+**Lưu ý:** Copilot suggestions xuất hiện tự động trong completion menu với icon ``.
 
 ---
 
@@ -200,25 +221,19 @@ Tài liệu đầy đủ về tất cả phím tắt trong cấu hình Neovim n�
 >
 > **Xem hướng dẫn đầy đủ:** [COPILOT.md](COPILOT.md)
 
-### Suggestions Mode
+### Copilot trong nvim-cmp
 
-| Phím | Chế độ | Mô tả |
-|------|--------|-------|
-| `Alt+L` | Insert | Chấp nhận suggestion của Copilot |
-| `Alt+]` | Insert | Suggestion tiếp theo |
-| `Alt+[` | Insert | Suggestion trước |
-| `Ctrl+]` | Insert | Dismiss suggestion (bỏ qua) |
-| `Alt+P` | Insert | Mở Copilot panel |
+Copilot hoạt động như một **completion source** trong nvim-cmp. Suggestions xuất hiện tự động trong completion menu.
 
-### Copilot Panel
+**Không cần phím tắt riêng!** Sử dụng keymaps của nvim-cmp:
+- `Tab` - Chọn suggestion kế tiếp
+- `Shift+Tab` - Chọn suggestion trước
+- `Enter` - Chấp nhận suggestion
+- `Ctrl+Space` - Trigger completion menu
 
-| Phím | Chế độ | Mô tả |
-|------|--------|-------|
-| `Alt+P` | Insert | Mở Copilot panel (multiple suggestions) |
-| `]]` | Panel | Jump đến suggestion tiếp theo |
-| `[[` | Panel | Jump đến suggestion trước |
-| `Enter` | Panel | Chấp nhận suggestion trong panel |
-| `gr` | Panel | Refresh suggestions |
+**Copilot Icon:** Suggestions từ Copilot hiện với icon `` trong completion menu.
+
+**Priority:** Copilot suggestions xuất hiện đầu tiên (priority 1000).
 
 ### Lệnh Copilot
 
@@ -229,7 +244,34 @@ Tài liệu đầy đủ về tất cả phím tắt trong cấu hình Neovim n�
 | `:Copilot disable` | Tắt Copilot |
 | `:Copilot status` | Kiểm tra trạng thái Copilot |
 
-**Tip:** Viết comment mô tả chức năng, Copilot sẽ suggest code phù hợp.
+**Tip:** Viết comment mô tả chức năng, Copilot sẽ suggest code phù hợp trong completion menu.
+
+---
+
+## 📝 Todo Comments
+
+Plugin tự động highlight TODO, FIXME, NOTE, HACK, WARNING, PERF trong comments.
+
+| Phím | Chế độ | Mô tả |
+|------|--------|-------|
+| `]t` | Normal | Next TODO comment |
+| `[t` | Normal | Previous TODO comment |
+| `<leader>ft` | Normal | Find todos (Telescope) |
+
+**Supported Keywords:**
+- `TODO:` - Things to do
+- `FIXME:` - Things to fix
+- `HACK:` - Temporary solutions
+- `WARN:` / `WARNING:` - Warnings
+- `PERF:` / `OPTIM:` - Performance optimizations
+- `NOTE:` - Important notes
+
+**Example:**
+```lua
+-- TODO: Implement this feature
+-- FIXME: Bug in this function
+-- NOTE: This is important
+```
 
 ---
 
@@ -497,9 +539,9 @@ Tài liệu đầy đủ về tất cả phím tắt trong cấu hình Neovim n�
 
 - **`gd` → `gr` → `<leader>rn`**: Jump to definition → See all references → Rename
 - **`<leader>gg` → stage → commit → push**: Quick Git workflow
-- **`F7` → select result → `Enter`**: Tìm và jump nhanh trong project
-- **Visual mode → `<leader>a`**: Refactor code block
-- **`[g` → `<leader>a` → fix**: Jump to diagnostic và fix ngay
+- **`<leader>fg` → select result → `Enter`**: Tìm và jump nhanh trong project
+- **Visual mode → `<leader>ca`**: Refactor code block
+- **`[d` → `<leader>ca` → fix**: Jump to diagnostic và fix ngay
 
 ---
 
@@ -515,4 +557,4 @@ Tài liệu đầy đủ về tất cả phím tắt trong cấu hình Neovim n�
 
 **Ghi chú:**
 - Tất cả phím tắt được lấy từ config thực tế trong `lua/config/keymaps.lua` và các plugin configs
-- Update: December 2024
+- Update: January 2025

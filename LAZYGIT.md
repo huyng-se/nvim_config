@@ -832,4 +832,4 @@ Hoặc override trong `~/.config/lazygit/config.yml`
 
 **Note:** Tài liệu này được viết cho LazyGit version >= 0.40.0. Một số features có thể khác ở versions cũ hơn.
 
-**Update:** December 2024
+**Update:** January 2025

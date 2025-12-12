@@ -131,41 +131,35 @@ Copilot: Ready
 
 ## ⌨️ Phím tắt
 
-### Suggestion Mode (Inline Suggestions)
+### Copilot trong nvim-cmp
 
-Khi code, Copilot sẽ tự động suggest code màu xám (ghost text).
+**Config hiện tại:** Copilot hoạt động như một **completion source** trong nvim-cmp, không có inline suggestions hay panel riêng.
+
+Copilot suggestions xuất hiện tự động trong **completion menu** của nvim-cmp với icon ``.
+
+**Sử dụng keymaps của nvim-cmp:**
 
 | Phím | Chế độ | Mô tả |
 |------|--------|-------|
-| `Alt+L` | Insert | **Accept** suggestion (chấp nhận) |
-| `Alt+]` | Insert | **Next** suggestion (suggestion tiếp theo) |
-| `Alt+[` | Insert | **Previous** suggestion (suggestion trước) |
-| `Ctrl+]` | Insert | **Dismiss** suggestion (bỏ qua/ẩn) |
-| `Alt+P` | Insert | **Mở Copilot Panel** (xem nhiều suggestions) |
+| `Tab` | Insert | Chọn suggestion kế tiếp trong menu |
+| `Shift+Tab` | Insert | Chọn suggestion trước trong menu |
+| `Enter` | Insert | Chấp nhận suggestion đang chọn |
+| `Ctrl+Space` | Insert | Trigger completion menu |
+| `Ctrl+E` | Insert | Đóng completion menu |
+| `Ctrl+F` | Insert | Scroll documentation xuống |
+| `Ctrl+B` | Insert | Scroll documentation lên |
+
+**Completion Sources (Priority Order):**
+1. **Copilot** (priority 1000) - AI suggestions với icon ``
+2. **LSP** (priority 900) - Language server completions
+3. **LuaSnip** (priority 750) - Snippets
+4. **Buffer** - Words from current file
+5. **Path** - File paths
 
 **Tips:**
-- Suggestions xuất hiện tự động khi bạn dừng gõ
-- Ghost text màu xám là suggestion
-- Nếu không thích suggestion, tiếp tục gõ hoặc `Ctrl+]` để dismiss
-
-### Copilot Panel (Multiple Suggestions)
-
-Nhấn `Alt+P` trong Insert mode để mở panel với nhiều suggestions.
-
-| Phím | Mô tả |
-|------|-------|
-| `Alt+P` | Mở Copilot panel từ Insert mode |
-| `]]` | Jump đến suggestion tiếp theo |
-| `[[` | Jump đến suggestion trước |
-| `Enter` | Accept suggestion đang chọn |
-| `gr` | Refresh suggestions (tạo suggestions mới) |
-| `q` hoặc `Esc` | Đóng panel |
-
-**Panel Layout:**
-- Panel mở ở bottom (40% màn hình)
-- Hiện 10 suggestions khác nhau
-- Navigate với `]]` và `[[`
-- Accept với `Enter`
+- Copilot suggestions xuất hiện đầu tiên trong menu (priority cao nhất)
+- Ghost text không được dùng - tất cả suggestions trong completion menu
+- Không có panel mode - tất cả suggestions trong cùng một menu
 
 ---
 
@@ -176,13 +170,15 @@ Nhấn `Alt+P` trong Insert mode để mở panel với nhiều suggestions.
 **Scenario:** Bạn muốn viết một function.
 
 ```python
-# Bước 1: Viết function signature
+# Bước 1: Viết function signature hoặc comment
 def calculate_fibonacci(n):
 
-# Bước 2: Copilot suggest implementation
-# Suggestion sẽ xuất hiện màu xám
+# Bước 2: Nhấn Ctrl+Space để trigger completion
+# Hoặc chờ auto-completion xuất hiện
 
-# Bước 3: Alt+L để accept
+# Bước 3: Copilot suggestions xuất hiện trong menu với icon 
+# Bước 4: Dùng Tab/Shift+Tab để navigate
+# Bước 5: Enter để accept
 ```
 
 **Kết quả:**
@@ -198,45 +194,23 @@ def calculate_fibonacci(n):
 // Viết comment mô tả
 // Function to validate email address
 
-// Copilot suggests:
+// Copilot suggests trong completion menu:
 function validateEmail(email) {
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return re.test(email);
 }
 ```
 
-### 2. Multiple Suggestions
+### 2. Comment-Driven Development
 
-**Scenario:** Bạn muốn xem nhiều cách implement khác nhau.
-
-```rust
-// Bước 1: Viết comment
-// Sort vector of integers in descending order
-
-// Bước 2: Alt+P để mở panel
-// Bước 3: Xem 10 suggestions khác nhau:
-// - Option 1: Using sort_by
-// - Option 2: Using sort_unstable_by
-// - Option 3: Using reverse after sort
-// etc.
-
-// Bước 4: ]] để navigate, Enter để accept
-```
-
-**Tips:** Sử dụng panel khi:
-- Muốn so sánh nhiều approaches
-- Suggestion đầu tiên không ưng ý
-- Học cách implement mới
-
-### 3. Comment-Driven Development
-
-**Technique:** Viết comment mô tả logic, Copilot generate code.
+**Technique:** Viết comment mô tả logic, Copilot generate code trong completion menu.
 
 **Example 1: Algorithm**
 ```python
 # Function to find the longest common subsequence of two strings
 # using dynamic programming approach
 def lcs(s1, s2):
+    # Trigger completion (Ctrl+Space)
     # Copilot suggests complete DP implementation
 ```
 
@@ -245,6 +219,7 @@ def lcs(s1, s2):
 // Fetch user data from API and handle errors
 // Use async/await with try-catch
 async function getUserData(userId) {
+    // Trigger completion
     // Copilot suggests:
     try {
         const response = await fetch(`/api/users/${userId}`);
@@ -543,6 +518,7 @@ Copilot suggestions cũng xuất hiện trong nvim-cmp completion menu.
 
 ### Config trong lua/plugins/coding.lua
 
+**Copilot Plugin:**
 ```lua
 {
     'zbirenbaum/copilot.lua',
@@ -550,104 +526,99 @@ Copilot suggestions cũng xuất hiện trong nvim-cmp completion menu.
     event = 'InsertEnter',
     config = function()
         require('copilot').setup({
-            panel = {
-                enabled = true,
-                auto_refresh = false,
-                keymap = {
-                    jump_prev = '[[',
-                    jump_next = ']]',
-                    accept = '<CR>',
-                    refresh = 'gr',
-                    open = '<M-p>'  -- Alt+P (P for Panel)
-                },
-                layout = {
-                    position = 'bottom', -- 'top' | 'left' | 'right' | 'bottom'
-                    ratio = 0.4          -- 40% screen height
-                },
-            },
-            suggestion = {
-                enabled = true,
-                auto_trigger = true,  -- Auto show suggestions
-                debounce = 75,        -- Delay before showing (ms)
-                keymap = {
-                    accept = '<M-l>',      -- Alt+l
-                    accept_word = false,   -- Disabled
-                    accept_line = false,   -- Disabled
-                    next = '<M-]>',        -- Alt+]
-                    prev = '<M-[>',        -- Alt+[
-                    dismiss = '<C-]>',     -- Ctrl+]
-                },
-            },
-            filetypes = {
-                -- Disable Copilot for these filetypes
-                yaml = false,
-                markdown = false,
-                help = false,
-                gitcommit = false,
-                gitrebase = false,
-                hgcommit = false,
-                svn = false,
-                cvs = false,
-                ['.'] = false,
-            },
-            copilot_node_command = 'node', -- Node.js >= 18.x required
-            server_opts_overrides = {},
+            suggestion = { enabled = false }, -- Tắt inline suggestions
+            panel = { enabled = false },      -- Tắt panel
+            -- Copilot chỉ hoạt động qua nvim-cmp
         })
     end,
 }
 ```
 
-### nvim-cmp Integration
-
+**Copilot-cmp Integration:**
 ```lua
 {
     'zbirenbaum/copilot-cmp',
-    dependencies = { 'zbirenbaum/copilot.lua' },
+    config = true  -- Dùng default config
+}
+```
+
+### nvim-cmp Integration
+
+**Trong nvim-cmp setup:**
+```lua
+{
+    'hrsh7th/nvim-cmp',
+    dependencies = {
+        -- ...other dependencies
+        'zbirenbaum/copilot-cmp', -- Copilot source
+    },
     config = function()
-        require('copilot_cmp').setup()
+        local cmp = require('cmp')
+        
+        cmp.setup({
+            sources = cmp.config.sources({
+                { name = 'copilot', priority = 1000 },  -- Copilot đầu tiên
+                { name = 'nvim_lsp', priority = 900 },  -- LSP thứ hai
+                { name = 'luasnip', priority = 750 },   -- Snippets thứ ba
+                { name = 'path' },
+            }, {
+                { name = 'buffer' },
+            }),
+            -- ...other config
+        })
     end,
 }
-
--- In nvim-cmp setup:
-sources = cmp.config.sources({
-    { name = 'nvim_lsp' },     -- LSP first
-    { name = 'copilot' },      -- Copilot second
-    { name = 'luasnip' },
-    { name = 'crates' },
-}, {
-    { name = 'buffer' },
-    { name = 'path' },
-}),
 ```
+
+### Tại sao config này?
+
+**Lý do tắt suggestion và panel:**
+1. **Tích hợp tốt hơn với nvim-cmp:** Tất cả completions (LSP, Copilot, Snippets) trong cùng một menu
+2. **Consistent UX:** Một interface thống nhất thay vì nhiều modes khác nhau
+3. **Priority control:** Dễ dàng kiểm soát thứ tự suggestions
+4. **Không conflict:** Không bị conflict giữa inline suggestions và completion menu
 
 ### Customization Options
 
-**Thay đổi keymaps:**
+**Thay đổi priority:**
 
 ```lua
--- Trong suggestion keymap
-keymap = {
-    accept = '<C-y>',      -- Thay Alt+l bằng Ctrl+y
-    next = '<C-n>',        -- Thay Alt+] bằng Ctrl+n
-    prev = '<C-p>',        -- Thay Alt+[ bằng Ctrl+p
-    dismiss = '<C-e>',     -- Thay Ctrl+] bằng Ctrl+e
+sources = cmp.config.sources({
+    { name = 'nvim_lsp', priority = 1000 },  -- LSP đầu tiên
+    { name = 'copilot', priority = 900 },    -- Copilot thứ hai
+    -- ...
+})
+```
+
+**Tắt Copilot cho một số filetypes:**
+
+```lua
+-- Trong copilot.lua setup
+filetypes = {
+    yaml = false,
+    markdown = false,
+    help = false,
+    gitcommit = false,
+    ["."] = false,
 }
 ```
 
-**Thay đổi panel position:**
+**Enable lại inline suggestions (không khuyến nghị):**
 
 ```lua
-layout = {
-    position = 'right',    -- Panel ở bên phải
-    ratio = 0.3            -- 30% screen width
-}
+require('copilot').setup({
+    suggestion = { 
+        enabled = true,
+        auto_trigger = true,
+        keymap = {
+            accept = '<M-l>',
+            next = '<M-]>',
+            prev = '<M-[>',
+        }
+    },
+    panel = { enabled = false },
+})
 ```
-
-**Disable auto trigger:**
-
-```lua
-suggestion = {
-    auto_trigger = false,  -- Không tự động show
     -- Trigger manually với Ctrl+Space
 }
 ```
@@ -868,4 +839,4 @@ node --version
 - Suggestions quality phụ thuộc vào context và comments
 - Always review code trước khi accept
 
-**Update:** December 2024
+**Update:** January 2025
