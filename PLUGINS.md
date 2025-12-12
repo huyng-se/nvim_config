@@ -20,24 +20,57 @@ Tài liệu đầy đủ về tất cả plugins trong cấu hình Neovim này.
 
 ## 🎨 UI & Theme
 
-### doums/darcula
+### navarasu/onedark.nvim
 
-**Link:** [https://github.com/doums/darcula](https://github.com/doums/darcula)
+**Link:** [https://github.com/navarasu/onedark.nvim](https://github.com/navarasu/onedark.nvim)
 
-**Mô tả:** Dark color scheme inspired by JetBrains IDEs (IntelliJ IDEA, PyCharm, WebStorm).
+**Mô tả:** OneDark color scheme - Modern dark theme với multiple style variations.
 
 **Features:**
-- ✨ Dark theme with high contrast
-- 🎨 Syntax highlighting tối ưu cho nhiều ngôn ngữ
-- 👁️ Dễ nhìn cho coding lâu dài
-- 🔗 Integration tốt với Treesitter
+- 🎨 OneDark dark theme (style: dark)
+- ✨ Clean và easy-on-eyes color palette
+- 🔗 Treesitter support
+- 🎯 LSP semantic highlighting
+- 📊 Lualine integration
+- 🎨 Multiple styles: dark, darker, cool, deep, warm, warmer
 
 **Config:** `lua/plugins/ui.lua`
 
 **Lệnh:**
 ```vim
-:colorscheme darcula
+# Theme được tự động load khi khởi động
 ```
+
+**Highlights:**
+- Better contrast cho dialogs và popups
+- Improved line numbers và cursor line
+- Better fold colors
+- Terminal với better contrast
+
+---
+
+### nvim-lualine/lualine.nvim
+
+**Link:** [https://github.com/nvim-lualine/lualine.nvim](https://github.com/nvim-lualine/lualine.nvim)
+
+**Mô tả:** Modern statusline viết bằng Lua - thay thế vim-airline.
+
+**Features:**
+- ⚡ Blazing fast và lightweight
+- 🎨 OneDark theme integration
+- 📊 Git branch, diff, diagnostics
+- 🔌 Plugin extensions (nvim-tree, lazy)
+- 🌍 Global statusline
+- 📝 File info, mode, progress
+
+**Sections:**
+- **Left:** Mode, filename, branch
+- **Center:** Diagnostics, diff
+- **Right:** Lazy updates, encoding, fileformat, filetype, progress, location
+
+**Config:** `lua/plugins/ui.lua`
+
+**Dependencies:** `nvim-tree/nvim-web-devicons`
 
 ---
 
@@ -50,13 +83,16 @@ Tài liệu đầy đủ về tất cả plugins trong cấu hình Neovim này.
 **Features:**
 - 📑 Tab-like interface cho buffers
 - 🔍 LSP diagnostics integration (hiện errors/warnings trên tab)
-- 🎨 Customizable styling
+- 🎨 Slant separator style
 - 🖱️ Mouse support (click để switch buffer)
+- 📁 NvimTree offset integration
+- 🔧 Buffer close với Bdelete plugin
 
 **Phím tắt:**
 - `Shift+L` - Buffer tiếp theo
 - `Shift+H` - Buffer trước
-- `<leader>bd` - Đóng buffer
+- `<leader>bd` - Delete buffer (keep window)
+- `<leader>bw` - Wipeout buffer
 
 **Config:** `lua/plugins/ui.lua`
 
@@ -64,22 +100,101 @@ Tài liệu đầy đủ về tất cả plugins trong cấu hình Neovim này.
 
 ---
 
-### vim-airline/vim-airline
+### goolord/alpha-nvim
 
-**Link:** [https://github.com/vim-airline/vim-airline](https://github.com/vim-airline/vim-airline)
+**Link:** [https://github.com/goolord/alpha-nvim](https://github.com/goolord/alpha-nvim)
 
-**Mô tả:** Status line đẹp và information-rich ở bottom.
+**Mô tả:** Dashboard (greeter) khi mở Neovim không có file.
 
 **Features:**
-- ✈️ Lightweight và fast
-- 📊 Hiện mode, file path, file type, encoding
-- 🔌 Git branch integration
-- 🎨 Theme support (sử dụng 'deus' theme)
-- ⚡ Plugin extensions (Fugitive, etc.)
+- 🎨 Beautiful ASCII art header
+- 🔘 Quick action buttons
+- ⚡ Auto-show khi no file opened
+- 🎯 Telescope integration
+
+**Quick Actions:**
+- Find file (Telescope)
+- New file
+- Recent files
+- Find text (Live grep)
+- Config
+- Lazy
+- Quit
 
 **Config:** `lua/plugins/ui.lua`
 
-**Dependencies:** `vim-airline/vim-airline-themes`
+---
+
+### lukas-reineke/indent-blankline.nvim
+
+**Link:** [https://github.com/lukas-reineke/indent-blankline.nvim](https://github.com/lukas-reineke/indent-blankline.nvim)
+
+**Mô tả:** Indent guides với scope highlighting.
+
+**Features:**
+- 📏 Visual indent guides
+- 🎯 Scope highlighting (hiện block hiện tại)
+- 🎨 Clean vertical lines
+- 🚫 Smart exclude cho special filetypes
+
+**Config:** `lua/plugins/ui.lua`
+
+**Excluded Filetypes:** help, dashboard, NvimTree, Trouble, alpha
+
+---
+
+### rcarriga/nvim-notify
+
+**Link:** [https://github.com/rcarriga/nvim-notify](https://github.com/rcarriga/nvim-notify)
+
+**Mô tả:** Better notifications với animations.
+
+**Features:**
+- 🔔 Beautiful notification popups
+- ⏱️ Auto-dismiss timeout
+- 🎨 Icons cho từng level (DEBUG, ERROR, INFO, WARN)
+- 🎬 Fade in/slide out animations
+- 🔗 Integration với Noice
+
+**Config:** `lua/plugins/ux.lua` + `lua/plugins/ui.lua` (qua Noice)
+
+---
+
+### folke/noice.nvim
+
+**Link:** [https://github.com/folke/noice.nvim](https://github.com/folke/noice.nvim)
+
+**Mô tả:** Enhanced UI cho messages, cmdline, và popups.
+
+**Features:**
+- 💬 Better command palette (center position)
+- 🔍 Bottom search interface
+- 📝 Long messages in split
+- 🎨 Markdown rendering cho LSP docs
+- 🔗 nvim-notify integration
+
+**Config:** `lua/plugins/ui.lua`
+
+**Dependencies:** `MunifTanjim/nui.nvim`, `rcarriga/nvim-notify`
+
+---
+
+### famiu/bufdelete.nvim
+
+**Link:** [https://github.com/famiu/bufdelete.nvim](https://github.com/famiu/bufdelete.nvim)
+
+**Mô tả:** Delete buffers without closing windows.
+
+**Features:**
+- 🗑️ Delete buffer mà không đóng window/split
+- 🔧 Giữ window layout intact
+- ⚡ Bdelete và Bwipeout commands
+
+**Phím tắt:**
+- `<leader>bd` - Delete buffer (keep window)
+- `<leader>bw` - Wipeout buffer (keep window)
+
+**Config:** `lua/plugins/ui.lua`
 
 ---
 
@@ -92,95 +207,158 @@ Tài liệu đầy đủ về tất cả plugins trong cấu hình Neovim này.
 **Features:**
 - 🎨 Colored icons cho mỗi file type
 - ⚡ Fast và lightweight
-- 🔗 Used by bufferline, FZF, và plugins khác
+- 🔗 Used by bufferline, Telescope, NvimTree, và plugins khác
 
 **Config:** `lua/plugins/ui.lua` (lazy loaded)
 
----
-
-### ryanoasis/vim-devicons
-
-**Link:** [https://github.com/ryanoasis/vim-devicons](https://github.com/ryanoasis/vim-devicons)
-
-**Mô tả:** Legacy icons cho NERDTree compatibility.
-
-**Features:**
-- 🌳 Icons trong NERDTree
-- 📁 File type glyphs
-- **Yêu cầu:** Nerd Font
-
-**Config:** `lua/plugins/ui.lua`
+**Yêu cầu:** Nerd Font (e.g., JetBrainsMono Nerd Font)
 
 ---
 
 ## 📝 Editor
 
-### preservim/nerdtree
+### nvim-tree/nvim-tree.lua
 
-**Link:** [https://github.com/preservim/nerdtree](https://github.com/preservim/nerdtree)
+**Link:** [https://github.com/nvim-tree/nvim-tree.lua](https://github.com/nvim-tree/nvim-tree.lua)
 
-**Mô tả:** File explorer tree view.
+**Mô tả:** Modern file explorer tree view viết bằng Lua - thay thế NERDTree.
 
 **Features:**
 - 🌳 Tree-based file explorer
-- 📁 Bookmark support
-- 🔍 File search trong tree
-- 🎨 Git status icons (qua plugin)
+- 🎨 Git status integration
+- 📊 LSP diagnostics on files
+- 🖱️ Mouse support
 - ⌨️ Keyboard navigation
+- 🔄 Auto-reload on file changes
+- 📁 Sync with current directory
+- 🎯 Indent markers
 
 **Phím tắt:**
-- `F5` - Toggle NERDTree
-- Trong NERDTree:
-  - `o` - Open file/toggle directory
-  - `i` - Horizontal split
-  - `s` - Vertical split
-  - `t` - New tab
-  - `m` - Menu (create, delete, rename)
-  - `R` - Refresh
-  - `?` - Help
+- `F5` hoặc `<leader>e` - Toggle NvimTree
+- `<leader>o` - Focus NvimTree
+
+**Trong NvimTree:**
+- `o` - Open file/toggle directory
+- `<CR>` - Open file
+- `<C-v>` - Vertical split
+- `<C-x>` - Horizontal split
+- `<C-t>` - New tab
+- `a` - Create new file/folder
+- `d` - Delete
+- `r` - Rename
+- `x` - Cut
+- `c` - Copy
+- `p` - Paste
+- `y` - Copy name
+- `Y` - Copy relative path
+- `gy` - Copy absolute path
+- `R` - Refresh
+- `H` - Toggle hidden files
+- `?` - Help
+
+**Git Status Icons:**
+- `✓` - Staged
+- `✗` - Unstaged
+- `★` - Untracked
+- `➜` - Renamed
+- `═` - Unmerged
+- `✖` - Deleted
+- `◌` - Ignored
 
 **Config:** `lua/plugins/editor.lua`
 
 **Dependencies:**
-- `Xuyuanp/nerdtree-git-plugin` - Git status
-- `ryanoasis/vim-devicons` - Icons
-- `unkiwii/vim-nerdtree-sync` - Sync với buffer
-- `jcharum/vim-nerdtree-syntax-highlight` - Syntax colors
+- `nvim-tree/nvim-web-devicons` - Icons
 
 ---
 
-### junegunn/fzf & junegunn/fzf.vim
+### nvim-telescope/telescope.nvim
 
-**Link:** [https://github.com/junegunn/fzf](https://github.com/junegunn/fzf) | [fzf.vim](https://github.com/junegunn/fzf.vim)
+**Link:** [https://github.com/nvim-telescope/telescope.nvim](https://github.com/nvim-telescope/telescope.nvim)
 
-**Mô tả:** Fuzzy finder - tìm files và content cực nhanh.
+**Mô tả:** Fuzzy finder - tìm files và content cực nhanh - thay thế FZF.
 
 **Features:**
 - ⚡ Blazing fast fuzzy search
-- 🔍 Search files, buffers, lines
-- 📝 Ripgrep integration
-- 🎨 Preview window
+- 🔍 Search files, buffers, text, help tags, keymaps
+- 📝 Ripgrep integration (live_grep)
+- 🎨 Beautiful UI với preview
 - ⌨️ Keyboard driven
+- 🔌 Extensible với nhiều extensions
+- 🎯 vim.ui.select integration
 
 **Phím tắt:**
-- `F6` - `:Files` - Tìm files
-- `F7` - `:Rg` - Ripgrep tìm trong content
-- Trong FZF:
-  - `Ctrl+T` - Open in tab
-  - `Ctrl+X` - Horizontal split
-  - `Ctrl+V` - Vertical split
-  - `Ctrl+/` - Toggle preview
+- `F6` hoặc `<leader>ff` - Find files
+- `<leader>fg` - Live grep (search in files)
+- `<leader>fb` - Find buffers
+- `<leader>fh` - Help tags
+- `<leader>fo` - Recent files (oldfiles)
+- `<leader>fk` - Keymaps
+- `<leader>fc` - Commands
+
+**Trong Telescope:**
+- `Ctrl+J/K` hoặc `Up/Down` - Navigate items
+- `Enter` - Select
+- `Ctrl+X` - Horizontal split
+- `Ctrl+V` - Vertical split
+- `Ctrl+T` - New tab
+- `Ctrl+U/D` - Scroll preview
+- `Ctrl+Q` - Send to quickfix
+- `Tab` - Toggle selection
+- `Ctrl+C` hoặc `Esc` - Close
 
 **Lệnh:**
-- `:Files [path]` - Tìm files
-- `:Rg [pattern]` - Ripgrep search
-- `:Buffers` - List buffers
-- `:BLines` - Search trong buffer hiện tại
-- `:Lines` - Search trong tất cả buffers
+- `:Telescope find_files` - Tìm files
+- `:Telescope live_grep` - Ripgrep search
+- `:Telescope buffers` - List buffers
+- `:Telescope oldfiles` - Recent files
+- `:Telescope help_tags` - Help tags
+- `:Telescope keymaps` - Show keymaps
+- `:Telescope commands` - Show commands
 
 **Config:** `lua/plugins/editor.lua`
 
-**Yêu cầu:** `ripgrep` để dùng `:Rg`
+**Yêu cầu:**
+- `ripgrep` để dùng live_grep
+- `make` để build fzf-native extension
+
+**Dependencies:**
+- `nvim-lua/plenary.nvim`
+- `nvim-tree/nvim-web-devicons`
+- `nvim-telescope/telescope-fzf-native.nvim`
+- `nvim-telescope/telescope-ui-select.nvim`
+
+---
+
+### nvim-telescope/telescope-fzf-native.nvim
+
+**Link:** [https://github.com/nvim-telescope/telescope-fzf-native.nvim](https://github.com/nvim-telescope/telescope-fzf-native.nvim)
+
+**Mô tả:** FZF sorter for Telescope (native C implementation).
+
+**Features:**
+- ⚡ Faster fuzzy matching
+- 🎯 Better sorting algorithm
+- 🔧 Compiled binary (requires `make`)
+
+**Config:** `lua/plugins/editor.lua` (loaded as Telescope extension)
+
+**Build:** `make` (automatic during plugin installation)
+
+---
+
+### nvim-telescope/telescope-ui-select.nvim
+
+**Link:** [https://github.com/nvim-telescope/telescope-ui-select.nvim](https://github.com/nvim-telescope/telescope-ui-select.nvim)
+
+**Mô tả:** Replace vim.ui.select với Telescope picker.
+
+**Features:**
+- 🎨 Beautiful UI cho selections
+- 🔧 Code actions qua Telescope
+- ⌨️ Consistent interface
+
+**Config:** `lua/plugins/editor.lua` (loaded as Telescope extension)
 
 ---
 
@@ -248,10 +426,9 @@ Tài liệu đầy đủ về tất cả plugins trong cấu hình Neovim này.
 - `gr` - Show references
 - `K` - Hover documentation
 - `<leader>rn` - Rename
-- `<leader>f` - Format
-- `<leader>a` - Code action
-- `[g` / `]g` - Previous/Next diagnostic
-- `Ctrl+S` (Insert) - Show diagnostic
+- `<leader>cf` - Format code
+- `<leader>ca` - Code action
+- `[d` / `]d` - Previous/Next diagnostic
 
 **Configured servers:**
 - **clangd** - C/C++
@@ -277,14 +454,12 @@ Tài liệu đầy đủ về tất cả plugins trong cấu hình Neovim này.
 - 📝 Snippet integration
 - 🤖 Copilot integration
 
-**Completion Sources:**
-1. `nvim_lsp` - LSP completions
-2. `copilot` - AI suggestions
-3. `luasnip` - Snippets
-4. `crates` - Cargo.toml crates
+**Completion Sources (Priority Order):**
+1. `copilot` - AI suggestions (priority 1000)
+2. `nvim_lsp` - LSP completions (priority 900)
+3. `luasnip` - Snippets (priority 750)
+4. `path` - File paths
 5. `buffer` - Current buffer
-6. `path` - File paths
-7. `cmdline` - Command line
 
 **Phím tắt:**
 - `Tab` - Next item / Expand snippet
@@ -358,12 +533,50 @@ Tài liệu đầy đủ về tất cả plugins trong cấu hình Neovim này.
 - 📝 Multi-language support
 
 **Phím tắt:**
-- `<leader>cc` - Toggle line comment
-- `<leader>bc` - Toggle block comment
-- `<leader>c` - Comment operator (với motions)
-- `<leader>b` - Block comment operator
+- `gcc` - Toggle line comment (current line)
+- `gbc` - Toggle block comment (current block)
+- `gc` + motion - Comment linewise (e.g., `gcap` comment paragraph)
+- `gb` + motion - Comment blockwise
+- Visual mode: `gc` - Toggle linewise, `gb` - Toggle blockwise
 
-**Config:** `lua/plugins/coding.lua`
+**Extra mappings:**
+- `gcO` - Comment line above
+- `gco` - Comment line below
+- `gcA` - Comment end of line
+
+**Config:** `lua/plugins/ux.lua`
+
+---
+
+### folke/todo-comments.nvim
+
+**Link:** [https://github.com/folke/todo-comments.nvim](https://github.com/folke/todo-comments.nvim)
+
+**Mô tả:** Highlight và search TODO comments.
+
+**Features:**
+- 🎨 Highlight TODO, FIXME, NOTE, etc.
+- 🔍 Telescope integration
+- ⚡ Jump to next/prev todo
+- 📝 Customizable keywords
+
+**Phím tắt:**
+- `]t` - Next todo comment
+- `[t` - Previous todo comment
+- `<leader>ft` - Find todos (Telescope)
+
+**Keywords Highlighted:**
+- `TODO` - Things to do
+- `FIXME` - Things to fix
+- `HACK` - Hacky solutions
+- `WARN` - Warnings
+- `PERF` - Performance issues
+- `NOTE` - Notes
+- `TEST` - Test related
+
+**Config:** `lua/plugins/ux.lua`
+
+**Dependencies:** `nvim-lua/plenary.nvim`
 
 ---
 
@@ -380,11 +593,16 @@ Tài liệu đầy đủ về tất cả plugins trong cấu hình Neovim này.
 - 🔌 nvim-cmp integration
 
 **Phím tắt:**
-- `Alt+L` - Accept suggestion
-- `Alt+]` / `Alt+[` - Next/Prev suggestion
-- `Ctrl+]` - Dismiss
-- `Alt+Enter` - Open panel
+- Suggestions hiện trong nvim-cmp menu (không còn inline suggestions)
+- `Tab` / `Shift+Tab` - Navigate cmp items (bao gồm Copilot suggestions)
+- `Enter` - Accept selected item
+- `Alt+P` - Open Copilot panel (xem multiple suggestions)
 - Panel: `]]` / `[[` - Navigate, `Enter` - Accept, `gr` - Refresh
+
+**Configuration:**
+- `suggestion = { enabled = false }` - Suggestions qua nvim-cmp only
+- `panel = { enabled = false }` - Panel có thể mở thủ công
+- Priority: 1000 (cao nhất trong nvim-cmp sources)
 
 **Lệnh:**
 - `:Copilot auth` - Authenticate
@@ -678,22 +896,25 @@ Tài liệu đầy đủ về tất cả plugins trong cấu hình Neovim này.
 
 **Link:** [https://github.com/mrcjkb/rustaceanvim](https://github.com/mrcjkb/rustaceanvim)
 
-**Mô tả:** Advanced Rust development plugin.
+**Mô tả:** Advanced Rust development plugin (v6+).
 
 **Features:**
 - 🦀 rust-analyzer integration
-- 💡 Inlay hints (auto-enabled)
+- 💡 Inlay hints (auto-enabled on attach)
 - 🔧 Code actions
 - 📊 Clippy linting
 - 🎯 Hover actions
+- 🐛 DAP debugging integration (codelldb)
 
-**Inlay Hints Types:**
-- Type hints
+**Inlay Hints Types (All Enabled):**
+- Type hints với renderColons
 - Parameter hints
 - Chaining hints
 - Lifetime elision hints
 - Closure return type hints
 - Reborrow hints
+- Binding mode hints
+- Closing brace hints
 
 **Phím tắt (Rust files):**
 - `<leader>ih` - Toggle inlay hints
@@ -703,9 +924,16 @@ Tài liệu đầy đủ về tất cả plugins trong cấu hình Neovim này.
 - `<leader>rn` - Rename
 - `<leader>f` - Format
 
+**Debugging (Rustaceanvim):**
+- `<leader>db` - Show debuggables (Rust)
+- `<leader>dr` - Run Rust program
+- `<leader>dt` - Run Rust tests
+- **Note:** `<leader>dt` có conflict với Vimspector toggle breakpoint
+
 **Lệnh:**
-- `:RustInlayHintsToggle` - Toggle hints
 - `:RustLsp` - Rust LSP commands
+- `:RustLsp hover actions` - Hover actions
+- `:RustLsp codeAction` - Code actions
 
 **Config:** `lua/plugins/rustacean.lua`
 
@@ -713,6 +941,7 @@ Tài liệu đầy đủ về tất cả plugins trong cấu hình Neovim này.
 - Clippy: Enabled
 - All features: Enabled
 - Comprehensive inlay hints
+- Auto-enabled on file open
 
 ---
 
@@ -792,14 +1021,15 @@ Tài liệu đầy đủ về tất cả plugins trong cấu hình Neovim này.
 ```
 lua/plugins/
 ├── init.lua        # Lazy.nvim bootstrap
-├── ui.lua          # UI plugins
-├── editor.lua      # Editor plugins
-├── coding.lua      # LSP & completion
+├── ui.lua          # UI plugins (theme, lualine, bufferline, dashboard, noice, notify)
+├── editor.lua      # Editor plugins (nvim-tree, telescope)
+├── coding.lua      # LSP & completion (mason, lsp, cmp, copilot)
 ├── treesitter.lua  # Syntax highlighting
-├── git.lua         # Git plugins
-├── terminal.lua    # Terminal
-├── debug.lua       # Debugging
-└── rustacean.lua   # Rust development
+├── git.lua         # Git plugins (gitsigns, fugitive, lazygit, mergetool)
+├── terminal.lua    # Terminal (floaterm)
+├── debug.lua       # Debugging (vimspector)
+├── rustacean.lua   # Rust development (rustaceanvim, crates)
+└── ux.lua          # UX plugins (autopairs, comment, todo-comments, notify)
 ```
 
 **Cách add plugin mới:**
