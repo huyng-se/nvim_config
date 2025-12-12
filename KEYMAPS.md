@@ -9,8 +9,8 @@ Tài liệu đầy đủ về tất cả phím tắt trong cấu hình Neovim n�
 - [🎯 Chung (General)](#-chung-general)
 - [📦 Quản lý Buffer](#-quản-lý-buffer)
 - [🪟 Quản lý Window](#-quản-lý-window)
-- [📁 File Explorer (NERDTree)](#-file-explorer-nerdtree)
-- [🔍 Fuzzy Finder (FZF)](#-fuzzy-finder-fzf)
+- [📁 File Explorer (NvimTree)](#-file-explorer-nvimtree)
+- [🔍 Fuzzy Finder (Telescope)](#-fuzzy-finder-telescope)
 - [🔧 LSP - Code Navigation](#-lsp---code-navigation)
 - [💡 Completion (nvim-cmp)](#-completion-nvim-cmp)
 - [🤖 GitHub Copilot](#-github-copilot)
@@ -19,6 +19,7 @@ Tài liệu đầy đủ về tất cả phím tắt trong cấu hình Neovim n�
 - [🐛 Debug (Vimspector)](#-debug-vimspector)
 - [🦀 Rust Specific](#-rust-specific)
 - [💬 Comments](#-comments)
+- [📝 TODO Comments](#-todo-comments)
 - [💡 Tips & Tricks](#-tips--tricks)
 
 ---
@@ -44,9 +45,13 @@ Tài liệu đầy đủ về tất cả phím tắt trong cấu hình Neovim n�
 |------|--------|-------|
 | `Shift+L` | Normal | Buffer tiếp theo |
 | `Shift+H` | Normal | Buffer trước |
-| `<leader>bd` | Normal | Đóng buffer hiện tại (không đóng window) |
+| `<leader>bb` | Normal | Telescope buffers (list và chọn buffer) |
+| `<leader>bd` | Normal | Delete buffer (keep window) - Bdelete |
+| `<leader>bw` | Normal | Wipeout buffer (keep window) - Bwipeout |
 
-**Tip:** Sử dụng `Shift+L` và `Shift+H` để di chuyển nhanh giữa các file đang mở.
+**Tip:** 
+- Sử dụng `Shift+L` và `Shift+H` để di chuyển nhanh giữa các file đang mở.
+- `<leader>bd` xóa buffer nhưng giữ nguyên window layout (không đóng split).
 
 ---
 
@@ -65,66 +70,105 @@ Tài liệu đầy đủ về tất cả phím tắt trong cấu hình Neovim n�
 
 ---
 
-## 📁 File Explorer (NERDTree)
+## 📁 File Explorer (NvimTree)
 
-### Mở/Đóng NERDTree
+### Mở/Đóng NvimTree
 
 | Phím | Chế độ | Mô tả |
 |------|--------|-------|
-| `F5` | Normal | Bật/tắt NERDTree |
+| `F5` | Normal | Toggle NvimTree |
+| `<leader>e` | Normal | Toggle NvimTree |
+| `<leader>o` | Normal | Focus NvimTree |
 
-### Trong NERDTree
+### Trong NvimTree
 
 | Phím | Mô tả |
 |------|-------|
-| `o` | Mở file hoặc toggle directory |
-| `i` | Mở file trong horizontal split |
-| `s` | Mở file trong vertical split |
-| `t` | Mở file trong tab mới |
-| `m` | Hiện menu (tạo, xóa, đổi tên file/folder) |
+| `o` hoặc `<CR>` | Mở file hoặc toggle directory |
+| `<C-v>` | Mở file trong vertical split |
+| `<C-x>` | Mở file trong horizontal split |
+| `<C-t>` | Mở file trong tab mới |
+| `a` | Tạo file/folder mới (thêm `/` ở cuối để tạo folder) |
+| `d` | Xóa file/folder |
+| `r` | Rename file/folder |
+| `x` | Cut (cắt) |
+| `c` | Copy (sao chép) |
+| `p` | Paste (dán) |
+| `y` | Copy tên file |
+| `Y` | Copy relative path |
+| `gy` | Copy absolute path |
 | `R` | Refresh tree |
-| `C` | Đặt root tree tại node hiện tại |
-| `u` | Di chuyển root lên một cấp |
+| `H` | Toggle hidden files |
 | `?` | Hiện help |
 
 **Git Status Icons:**
-- `✹` - Modified
-- `✚` - Staged
-- `✭` - Untracked
+- `✓` - Staged
+- `✗` - Unstaged
+- `★` - Untracked
 - `➜` - Renamed
 - `═` - Unmerged
 - `✖` - Deleted
-- `✗` - Dirty
-- `☒` - Ignored
-- `✔︎` - Clean
+- `◌` - Ignored
+
+**Tip:** Press `?` trong NvimTree để xem tất cả keymaps.
 
 ---
 
-## 🔍 Fuzzy Finder (FZF)
+## 🔍 Fuzzy Finder (Telescope)
 
-### Mở FZF
+### Mở Telescope
 
 | Phím | Chế độ | Mô tả |
 |------|--------|-------|
-| `F6` | Normal | FZF Files - Tìm file trong project |
-| `F7` | Normal | FZF Ripgrep - Tìm trong nội dung file |
+| `F6` hoặc `<leader>ff` | Normal | Find files - Tìm file trong project |
+| `<leader>fg` | Normal | Live grep - Tìm trong nội dung file (ripgrep) |
+| `<leader>fb` | Normal | Find buffers - Liệt kê buffers |
+| `<leader>fh` | Normal | Help tags - Tìm help documentation |
+| `<leader>fo` | Normal | Recent files (oldfiles) |
+| `<leader>fk` | Normal | Keymaps - Tìm keymaps |
+| `<leader>fc` | Normal | Commands - Tìm commands |
+| `<leader>ft` | Normal | Find todos - Tìm TODO comments |
 
-### Trong FZF
+### Trong Telescope
 
+**Navigation:**
 | Phím | Mô tả |
 |------|-------|
-| `Ctrl+T` | Mở file trong tab mới |
-| `Ctrl+X` | Mở file trong horizontal split |
-| `Ctrl+V` | Mở file trong vertical split |
-| `Ctrl+/` | Toggle preview window |
-| `Enter` | Mở file trong buffer hiện tại |
+| `Ctrl+J` hoặc `Down` | Item tiếp theo |
+| `Ctrl+K` hoặc `Up` | Item trước |
+| `Ctrl+N` | History next |
+| `Ctrl+P` | History previous |
 
-**Lệnh FZF:**
-- `:Files` - Tìm file
-- `:Rg` - Ripgrep tìm trong nội dung
-- `:Buffers` - Liệt kê buffers
-- `:BLines` - Tìm trong buffer hiện tại
-- `:Lines` - Tìm trong tất cả buffers mở
+**Actions:**
+| Phím | Mô tả |
+|------|-------|
+| `Enter` | Select item (mở file) |
+| `Ctrl+X` | Horizontal split |
+| `Ctrl+V` | Vertical split |
+| `Ctrl+T` | New tab |
+| `Ctrl+C` hoặc `Esc` | Close Telescope |
+
+**Preview:**
+| Phím | Mô tả |
+|------|-------|
+| `Ctrl+U` | Scroll up preview |
+| `Ctrl+D` | Scroll down preview |
+
+**Selection:**
+| Phím | Mô tả |
+|------|-------|
+| `Tab` | Toggle selection + move down |
+| `Shift+Tab` | Toggle selection + move up |
+| `Ctrl+Q` | Send to quickfix list |
+
+**Lệnh Telescope:**
+- `:Telescope find_files` - Tìm files
+- `:Telescope live_grep` - Live grep search
+- `:Telescope buffers` - List buffers
+- `:Telescope help_tags` - Help tags
+- `:Telescope oldfiles` - Recent files
+- `:Telescope keymaps` - Show keymaps
+- `:Telescope commands` - Show commands
 
 ---
 
@@ -145,16 +189,15 @@ Tài liệu đầy đủ về tất cả phím tắt trong cấu hình Neovim n�
 | Phím | Chế độ | Mô tả |
 |------|--------|-------|
 | `<leader>rn` | Normal | Rename symbol (đổi tên biến/hàm) |
-| `<leader>f` | Normal | Format code (định dạng code) |
-| `<leader>a` | Normal/Visual | Code action (sửa lỗi, refactor) |
+| `<leader>cf` | Normal | Format code (định dạng code) |
+| `<leader>ca` | Normal/Visual | Code action (sửa lỗi, refactor) |
 
 ### Diagnostics
 
 | Phím | Chế độ | Mô tả |
 |------|--------|-------|
-| `[g` | Normal | Diagnostic trước |
-| `]g` | Normal | Diagnostic sau |
-| `Ctrl+S` | Insert | Hiện diagnostic details tại con trỏ |
+| `[d` | Normal | Diagnostic trước |
+| `]d` | Normal | Diagnostic sau |
 
 **Lệnh LSP:**
 - `:LspInfo` - Xem trạng thái LSP
@@ -182,13 +225,12 @@ Tài liệu đầy đủ về tất cả phím tắt trong cấu hình Neovim n�
 | `Ctrl+B` | Cuộn lên documentation window |
 | `Ctrl+E` | Abort completion |
 
-**Completion Sources:**
-1. LSP (ngôn ngữ cụ thể)
-2. Copilot (AI suggestions)
-3. Snippets
-4. Crates (cho Cargo.toml)
-5. Buffer (từ file hiện tại)
-6. Path (đường dẫn file)
+**Completion Sources (Priority Order):**
+1. Copilot (AI suggestions - Priority 1000)
+2. LSP (ngôn ngữ cụ thể - Priority 900)
+3. Snippets (Priority 750)
+4. Buffer (từ file hiện tại)
+5. Path (đường dẫn file)
 
 ---
 
@@ -200,21 +242,24 @@ Tài liệu đầy đủ về tất cả phím tắt trong cấu hình Neovim n�
 >
 > **Xem hướng dẫn đầy đủ:** [COPILOT.md](COPILOT.md)
 
-### Suggestions Mode
+### nvim-cmp Integration
+
+**Copilot suggestions xuất hiện trong nvim-cmp menu:**
 
 | Phím | Chế độ | Mô tả |
 |------|--------|-------|
-| `Alt+L` | Insert | Chấp nhận suggestion của Copilot |
-| `Alt+]` | Insert | Suggestion tiếp theo |
-| `Alt+[` | Insert | Suggestion trước |
-| `Ctrl+]` | Insert | Dismiss suggestion (bỏ qua) |
-| `Alt+P` | Insert | Mở Copilot panel |
+| `Tab` | Insert | Navigate đến item tiếp theo (bao gồm Copilot) |
+| `Shift+Tab` | Insert | Navigate đến item trước |
+| `Enter` | Insert | Accept selected completion |
+| `Ctrl+Space` | Insert | Trigger completion menu |
+
+**Note:** Copilot inline suggestions (`Alt+L`, `Alt+]`, `Alt+[`) đã disabled. Tất cả suggestions hiện qua nvim-cmp với priority cao nhất (1000).
 
 ### Copilot Panel
 
 | Phím | Chế độ | Mô tả |
 |------|--------|-------|
-| `Alt+P` | Insert | Mở Copilot panel (multiple suggestions) |
+| `Alt+P` | Insert/Normal | Mở Copilot panel (multiple suggestions) |
 | `]]` | Panel | Jump đến suggestion tiếp theo |
 | `[[` | Panel | Jump đến suggestion trước |
 | `Enter` | Panel | Chấp nhận suggestion trong panel |
@@ -229,7 +274,7 @@ Tài liệu đầy đủ về tất cả phím tắt trong cấu hình Neovim n�
 | `:Copilot disable` | Tắt Copilot |
 | `:Copilot status` | Kiểm tra trạng thái Copilot |
 
-**Tip:** Viết comment mô tả chức năng, Copilot sẽ suggest code phù hợp.
+**Tip:** Viết comment mô tả chức năng, Copilot sẽ suggest code phù hợp trong nvim-cmp menu.
 
 ---
 
@@ -360,22 +405,34 @@ Tài liệu đầy đủ về tất cả phím tắt trong cấu hình Neovim n�
 | `<leader>rn` | Normal | Rename |
 | `<leader>f` | Normal | Format code |
 
-**Lệnh Rust:**
-- `:RustInlayHintsToggle` - Bật/tắt inlay hints
-- `:RustLsp` - Rust LSP commands
+### Debugging (Rustaceanvim)
 
-**Inlay Hints (tự động bật):**
-- Type hints (kiểu dữ liệu)
-- Parameter hints (tên tham số)
-- Chaining hints (chuỗi method)
+| Phím | Chế độ | Mô tả |
+|------|--------|-------|
+| `<leader>db` | Normal | Show Rust debuggables |
+| `<leader>dr` | Normal | Run Rust program |
+| `<leader>dt` | Normal | Run Rust tests (⚠️ conflicts với Vimspector breakpoint) |
+
+**Lệnh Rust:**
+- `:RustLsp` - Rust LSP commands
+- `:RustLsp hover actions` - Hover actions
+- `:RustLsp codeAction` - Code actions
+
+**Inlay Hints (Auto-enabled v6+):**
+- Type hints với renderColons
+- Parameter hints
+- Chaining hints
 - Lifetime elision hints
 - Closure return type hints
 - Reborrow hints
+- Binding mode hints
+- Closing brace hints
 
 **Rust Analyzer Features:**
 - Clippy integration (linting)
 - Cargo features support
 - Auto format on save (rustfmt)
+- DAP debugging với codelldb
 
 ### File Cargo.toml
 
@@ -398,12 +455,57 @@ Tài liệu đầy đủ về tất cả phím tắt trong cấu hình Neovim n�
 
 ## 💬 Comments
 
-### Toggle Comments
+### Toggle Comments (Comment.nvim)
 
 | Phím | Chế độ | Mô tả |
 |------|--------|-------|
-| `<leader>cc` | Normal | Toggle line comment |
-| `<leader>bc` | Normal | Toggle block comment |
+| `gcc` | Normal | Toggle line comment (current line) |
+| `gbc` | Normal | Toggle block comment (current block) |
+| `gc` + motion | Normal | Comment linewise với motion (e.g., `gcap` = comment paragraph) |
+| `gb` + motion | Normal | Comment blockwise với motion |
+| `gc` | Visual | Toggle linewise comment |
+| `gb` | Visual | Toggle blockwise comment |
+
+### Extra Comment Mappings
+
+| Phím | Chế độ | Mô tả |
+|------|--------|-------|
+| `gcO` | Normal | Comment line above |
+| `gco` | Normal | Comment line below |
+| `gcA` | Normal | Comment end of line |
+
+**Examples:**
+- `gcap` - Comment paragraph
+- `gc3j` - Comment current + 3 lines below
+- `gciw` - Comment inner word (nếu applicable)
+- Visual select + `gc` - Comment selected lines
+
+---
+
+## 📝 TODO Comments
+
+### Navigation
+
+| Phím | Chế độ | Mô tả |
+|------|--------|-------|
+| `]t` | Normal | Jump to next todo comment |
+| `[t` | Normal | Jump to previous todo comment |
+| `<leader>ft` | Normal | Find all todos (Telescope) |
+
+**Highlighted Keywords:**
+- `TODO:` - Things to do
+- `FIXME:` - Things to fix
+- `HACK:` - Hacky solutions
+- `WARN:` - Warnings
+- `PERF:` - Performance issues
+- `NOTE:` - Notes
+- `TEST:` - Test related
+
+**Lệnh:**
+- `:TodoTelescope` - Open todos in Telescope
+- `:TodoQuickFix` - Open todos in quickfix list
+
+---
 | `<leader>c` | Normal/Visual | Comment operator (motions) |
 | `<leader>b` | Normal/Visual | Block comment operator |
 
