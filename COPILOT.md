@@ -131,35 +131,38 @@ Copilot: Ready
 
 ## ⌨️ Phím tắt
 
-### Suggestion Mode (Inline Suggestions)
+### nvim-cmp Integration (Primary Method)
 
-Khi code, Copilot sẽ tự động suggest code màu xám (ghost text).
+**Copilot suggestions hiện trong nvim-cmp completion menu** (không còn inline ghost text).
 
 | Phím | Chế độ | Mô tả |
 |------|--------|-------|
-| `Alt+L` | Insert | **Accept** suggestion (chấp nhận) |
-| `Alt+]` | Insert | **Next** suggestion (suggestion tiếp theo) |
-| `Alt+[` | Insert | **Previous** suggestion (suggestion trước) |
-| `Ctrl+]` | Insert | **Dismiss** suggestion (bỏ qua/ẩn) |
-| `Alt+P` | Insert | **Mở Copilot Panel** (xem nhiều suggestions) |
+| `Tab` | Insert | Navigate đến item tiếp theo trong nvim-cmp menu |
+| `Shift+Tab` | Insert | Navigate đến item trước |
+| `Enter` | Insert | **Accept** selected completion (bao gồm Copilot) |
+| `Ctrl+Space` | Insert | Trigger completion menu thủ công |
+| `Ctrl+E` | Insert | Dismiss completion menu |
 
-**Tips:**
-- Suggestions xuất hiện tự động khi bạn dừng gõ
-- Ghost text màu xám là suggestion
-- Nếu không thích suggestion, tiếp tục gõ hoặc `Ctrl+]` để dismiss
+**Priority:** Copilot suggestions có priority cao nhất (1000) trong nvim-cmp sources, vì vậy thường xuất hiện đầu tiên.
 
-### Copilot Panel (Multiple Suggestions)
+**Lưu ý:**
+- Inline suggestions (`Alt+L`, `Alt+]`, `Alt+[`) đã **disabled**
+- Tất cả Copilot suggestions hiện qua nvim-cmp menu
+- Suggestions tự động trigger khi gõ
+- Icon `` hiện trong cmp menu cho Copilot suggestions
 
-Nhấn `Alt+P` trong Insert mode để mở panel với nhiều suggestions.
+### Copilot Panel (Alternative Method)
 
-| Phím | Mô tả |
-|------|-------|
-| `Alt+P` | Mở Copilot panel từ Insert mode |
-| `]]` | Jump đến suggestion tiếp theo |
-| `[[` | Jump đến suggestion trước |
-| `Enter` | Accept suggestion đang chọn |
-| `gr` | Refresh suggestions (tạo suggestions mới) |
-| `q` hoặc `Esc` | Đóng panel |
+Nhấn `Alt+P` để mở panel với nhiều suggestions (dùng khi muốn xem nhiều options).
+
+| Phím | Chế độ | Mô tả |
+|------|--------|-------|
+| `Alt+P` | Insert/Normal | Mở Copilot panel (multiple suggestions) |
+| `]]` | Panel | Jump đến suggestion tiếp theo |
+| `[[` | Panel | Jump đến suggestion trước |
+| `Enter` | Panel | Accept suggestion đang chọn |
+| `gr` | Panel | Refresh suggestions (tạo suggestions mới) |
+| `q` hoặc `Esc` | Panel | Đóng panel |
 
 **Panel Layout:**
 - Panel mở ở bottom (40% màn hình)
@@ -179,10 +182,8 @@ Nhấn `Alt+P` trong Insert mode để mở panel với nhiều suggestions.
 # Bước 1: Viết function signature
 def calculate_fibonacci(n):
 
-# Bước 2: Copilot suggest implementation
-# Suggestion sẽ xuất hiện màu xám
-
-# Bước 3: Alt+L để accept
+# Bước 2: Copilot suggestion xuất hiện trong nvim-cmp menu
+# Bước 3: Tab để navigate, Enter để accept
 ```
 
 **Kết quả:**
@@ -198,14 +199,15 @@ def calculate_fibonacci(n):
 // Viết comment mô tả
 // Function to validate email address
 
-// Copilot suggests:
+// Start typing và nhấn Ctrl+Space (nếu menu chưa hiện)
+// Copilot suggests trong nvim-cmp menu:
 function validateEmail(email) {
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return re.test(email);
 }
 ```
 
-### 2. Multiple Suggestions
+### 2. Multiple Suggestions (Copilot Panel)
 
 **Scenario:** Bạn muốn xem nhiều cách implement khác nhau.
 
@@ -213,7 +215,7 @@ function validateEmail(email) {
 // Bước 1: Viết comment
 // Sort vector of integers in descending order
 
-// Bước 2: Alt+P để mở panel
+// Bước 2: Alt+P để mở Copilot panel
 // Bước 3: Xem 10 suggestions khác nhau:
 // - Option 1: Using sort_by
 // - Option 2: Using sort_unstable_by
@@ -225,8 +227,9 @@ function validateEmail(email) {
 
 **Tips:** Sử dụng panel khi:
 - Muốn so sánh nhiều approaches
-- Suggestion đầu tiên không ưng ý
+- Suggestion trong cmp menu không ưng ý
 - Học cách implement mới
+- Cần xem alternative implementations
 
 ### 3. Comment-Driven Development
 
@@ -421,24 +424,47 @@ async fn delete_user(id: Path<i32>) -> Result<StatusCode, Error> {
 
 ### 8. Working with nvim-cmp Integration
 
-Copilot suggestions cũng xuất hiện trong nvim-cmp completion menu.
+**Config này integrate Copilot trực tiếp vào nvim-cmp completion menu.**
 
 **Features:**
-- Copilot items có label `[Copilot]`
-- Sử dụng `Tab`/`Shift+Tab` để navigate
-- `Enter` để accept
-- Copilot có priority cao trong completion sources
+- Copilot suggestions hiện trong cmp menu với icon ``
+- Priority: 1000 (cao nhất, nên suggestions xuất hiện đầu tiên)
+- Inline suggestions (ghost text) đã disabled
+- Panel vẫn available qua `Alt+P`
 
 **Example flow:**
 ```
 1. Bắt đầu gõ: "func"
-2. Completion menu xuất hiện với:
-   - [LSP] function (from language server)
-   - [Copilot] function getUserById() { ... }
-   - [Snippet] function template
-   - [Buffer] function (từ file khác)
-3. Tab để chọn Copilot suggestion
-4. Enter để accept
+2. Completion menu tự động xuất hiện với:
+    [Copilot] function getUserById() { ... }  (priority 1000)
+    [LSP] function (from language server)     (priority 900)
+    [LuaSnip] function template               (priority 750)
+    [Buffer] function (từ file khác)
+3. Tab/Shift+Tab để navigate
+4. Enter để accept Copilot suggestion
+```
+
+**Configuration:**
+```lua
+-- lua/plugins/coding.lua
+{
+    'zbirenbaum/copilot.lua',
+    config = function()
+        require('copilot').setup({
+            suggestion = { enabled = false },  -- Disable inline suggestions
+            panel = { enabled = false },       -- Panel chỉ mở qua Alt+P
+        })
+    end,
+}
+
+-- nvim-cmp sources với priority
+sources = {
+    { name = 'copilot',  priority = 1000 },  -- Cao nhất
+    { name = 'nvim_lsp', priority = 900 },
+    { name = 'luasnip',  priority = 750 },
+    { name = 'buffer' },
+    { name = 'path' },
+}
 ```
 
 ---
