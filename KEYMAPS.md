@@ -98,6 +98,7 @@ Tài liệu đầy đủ về tất cả phím tắt trong cấu hình Neovim n�
 | `?` | Show help |
 
 **Git Status Icons:**
+
 - `✓` - Staged
 - `✗` - Unstaged/Modified
 - `★` - Untracked
@@ -139,6 +140,7 @@ Tài liệu đầy đủ về tất cả phím tắt trong cấu hình Neovim n�
 | `Esc` | Close Telescope |
 
 **Lệnh Telescope:**
+
 - `:Telescope find_files` - Tìm files
 - `:Telescope live_grep` - Tìm trong content (dùng ripgrep)
 - `:Telescope buffers` - Liệt kê buffers
@@ -177,10 +179,12 @@ Tài liệu đầy đủ về tất cả phím tắt trong cấu hình Neovim n�
 | `]d` | Normal | Next diagnostic |
 
 **Lệnh LSP:**
+
 - `:LspInfo` - Xem trạng thái LSP
 - `:Mason` - Mở Mason LSP installer UI
 
 **Diagnostic Signs:**
+
 - `✖` - Error
 - `⚠` - Warning
 - `➤` - Hint
@@ -203,7 +207,8 @@ Tài liệu đầy đủ về tất cả phím tắt trong cấu hình Neovim n�
 | `Ctrl+E` | Abort completion |
 
 **Completion Sources (Priority Order):**
-1. Copilot (1000) - AI suggestions 
+
+1. Copilot (1000) - AI suggestions
 2. LSP (900) - Language-specific completions
 3. LuaSnip (750) - Snippets
 4. Buffer - Words from current file
@@ -226,6 +231,7 @@ Tài liệu đầy đủ về tất cả phím tắt trong cấu hình Neovim n�
 Copilot hoạt động như một **completion source** trong nvim-cmp. Suggestions xuất hiện tự động trong completion menu.
 
 **Không cần phím tắt riêng!** Sử dụng keymaps của nvim-cmp:
+
 - `Tab` - Chọn suggestion kế tiếp
 - `Shift+Tab` - Chọn suggestion trước
 - `Enter` - Chấp nhận suggestion
@@ -259,6 +265,7 @@ Plugin tự động highlight TODO, FIXME, NOTE, HACK, WARNING, PERF trong comme
 | `<leader>ft` | Normal | Find todos (Telescope) |
 
 **Supported Keywords:**
+
 - `TODO:` - Things to do
 - `FIXME:` - Things to fix
 - `HACK:` - Temporary solutions
@@ -267,6 +274,7 @@ Plugin tự động highlight TODO, FIXME, NOTE, HACK, WARNING, PERF trong comme
 - `NOTE:` - Important notes
 
 **Example:**
+
 ```lua
 -- TODO: Implement this feature
 -- FIXME: Bug in this function
@@ -289,6 +297,7 @@ Plugin tự động highlight TODO, FIXME, NOTE, HACK, WARNING, PERF trong comme
 | `<leader>gb` | Normal | Git blame (xem ai sửa dòng này) |
 
 **Git Signs:**
+
 - `✚` - Added line
 - `✹` - Changed line
 - `✖` - Deleted line
@@ -303,6 +312,7 @@ Plugin tự động highlight TODO, FIXME, NOTE, HACK, WARNING, PERF trong comme
 | `<leader>gs` | Normal | Git status (mở Fugitive) |
 
 **Lệnh Fugitive:**
+
 - `:Git` hoặc `:G` - Git status
 - `:Git add %` - Stage file hiện tại
 - `:Git commit` - Commit
@@ -320,6 +330,7 @@ Plugin tự động highlight TODO, FIXME, NOTE, HACK, WARNING, PERF trong comme
 | `<leader>gl` | Normal | Git log trong terminal |
 
 **LazyGit Commands:**
+
 - `:LazyGit` - Mở LazyGit
 - `:LazyGitCurrentFile` - LazyGit cho file hiện tại
 - `:LazyGitFilter` - LazyGit filter view
@@ -333,6 +344,7 @@ Plugin tự động highlight TODO, FIXME, NOTE, HACK, WARNING, PERF trong comme
 | `<leader>mt` | Normal | Bật/tắt Git Mergetool |
 
 **Trong Mergetool:**
+
 - Xem 3 panels: LOCAL, BASE, REMOTE
 - Merge result ở bên phải
 - Sử dụng `:diffget LOCAL` hoặc `:diffget REMOTE` để chọn version
@@ -354,11 +366,13 @@ Plugin tự động highlight TODO, FIXME, NOTE, HACK, WARNING, PERF trong comme
 | `<leader>gl` | Normal | Git log trong terminal |
 
 **Lệnh Floaterm:**
+
 - `:FloatermNew` - Terminal mới
 - `:FloatermToggle` - Bật/tắt
 - `:FloatermKill` - Kill terminal
 
 **Cấu hình mặc định:**
+
 - Vị trí: Top-right
 - Kích thước: 60% width, 80% height
 - Floating window với border
@@ -371,17 +385,15 @@ Plugin tự động highlight TODO, FIXME, NOTE, HACK, WARNING, PERF trong comme
 
 | Phím | Chế độ | Mô tả |
 |------|--------|-------|
-| `<leader>dl` | Normal | Launch debugger |
-| `<leader>ds` | Normal | Stop/Reset debugger |
 | `<leader>dc` | Normal | Continue (tiếp tục chạy) |
-| `<leader>dt` | Normal | Toggle breakpoint (đặt/bỏ điểm dừng) |
-| `<leader>dT` | Normal | Clear all breakpoints |
-| `<leader>di` | Normal | Step into (bước vào hàm) |
-| `<leader>do` | Normal | Step over (bước qua) |
-| `<leader>de` | Normal | Step out (bước ra khỏi hàm) |
-| `<leader>dr` | Normal | Restart debugger |
+| `<leader>db` | Normal | Toggle breakpoint (đặt/bỏ điểm dừng) |
+| `<leader>dB` | Normal | Conditional breakpoint |
+| `<leader>dl` | Normal | Run last |
+| `<leader>dr` | Normal | Open REPL |
+| `<leader>dt` | Normal | Terminate |
 
 **Lệnh Vimspector:**
+
 - `:VimspectorInstall` - Cài debug adapter
 - `:VimspectorUpdate` - Cập nhật adapters
 
@@ -403,10 +415,12 @@ Plugin tự động highlight TODO, FIXME, NOTE, HACK, WARNING, PERF trong comme
 | `<leader>f` | Normal | Format code |
 
 **Lệnh Rust:**
+
 - `:RustInlayHintsToggle` - Bật/tắt inlay hints
 - `:RustLsp` - Rust LSP commands
 
 **Inlay Hints (tự động bật):**
+
 - Type hints (kiểu dữ liệu)
 - Parameter hints (tên tham số)
 - Chaining hints (chuỗi method)
@@ -415,6 +429,7 @@ Plugin tự động highlight TODO, FIXME, NOTE, HACK, WARNING, PERF trong comme
 - Reborrow hints
 
 **Rust Analyzer Features:**
+
 - Clippy integration (linting)
 - Cargo features support
 - Auto format on save (rustfmt)
@@ -431,6 +446,7 @@ Plugin tự động highlight TODO, FIXME, NOTE, HACK, WARNING, PERF trong comme
 | `K` | Normal | Hiện crate documentation popup |
 
 **Features crates.nvim:**
+
 - Inline version info
 - Upgrade suggestions
 - Feature management
@@ -450,6 +466,7 @@ Plugin tự động highlight TODO, FIXME, NOTE, HACK, WARNING, PERF trong comme
 | `<leader>b` | Normal/Visual | Block comment operator |
 
 **Ví dụ:**
+
 - `<leader>cc` - Comment/uncomment dòng hiện tại
 - `<leader>c2j` - Comment 3 dòng (hiện tại + 2 dòng xuống)
 - Visual select + `<leader>c` - Comment các dòng đã chọn
@@ -461,6 +478,7 @@ Plugin tự động highlight TODO, FIXME, NOTE, HACK, WARNING, PERF trong comme
 ### 🚀 Workflows Thực Tế
 
 #### 1. Code Navigation Workflow
+
 ```
 1. `F6` để tìm file
 2. `gd` để jump to definition
@@ -470,6 +488,7 @@ Plugin tự động highlight TODO, FIXME, NOTE, HACK, WARNING, PERF trong comme
 ```
 
 #### 2. Git Workflow với LazyGit
+
 ```
 1. `<leader>gg` để mở LazyGit
 2. Stage files với `space` trong LazyGit
@@ -479,6 +498,7 @@ Plugin tự động highlight TODO, FIXME, NOTE, HACK, WARNING, PERF trong comme
 ```
 
 #### 3. Debugging Workflow
+
 ```
 1. `<leader>dt` để set breakpoint
 2. `<leader>dl` để start debug
@@ -488,6 +508,7 @@ Plugin tự động highlight TODO, FIXME, NOTE, HACK, WARNING, PERF trong comme
 ```
 
 #### 4. Copilot-Driven Development
+
 ```
 1. Viết comment mô tả chức năng: "// Function to calculate fibonacci"
 2. Copilot suggest code
@@ -496,6 +517,7 @@ Plugin tự động highlight TODO, FIXME, NOTE, HACK, WARNING, PERF trong comme
 ```
 
 #### 5. Refactoring với LSP
+
 ```
 1. Visual select code block
 2. `<leader>a` để mở code actions
@@ -556,5 +578,6 @@ Plugin tự động highlight TODO, FIXME, NOTE, HACK, WARNING, PERF trong comme
 ---
 
 **Ghi chú:**
+
 - Tất cả phím tắt được lấy từ config thực tế trong `lua/config/keymaps.lua` và các plugin configs
 - Update: January 2025
