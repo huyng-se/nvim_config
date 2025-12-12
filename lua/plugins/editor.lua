@@ -1,5 +1,3 @@
--- Editor plugins: file explorer, fuzzy finder
-
 return {
     {
         'nvim-tree/nvim-tree.lua',
@@ -15,7 +13,7 @@ return {
                 auto_reload_on_write = true,
                 disable_netrw = false,
                 hijack_cursor = false,
-                hijack_netrw = false, -- Disable hijacking to prevent auto-opening file dialogs
+                hijack_netrw = false,
                 hijack_unnamed_buffer_when_opening = false,
                 sort = {
                     sorter = 'name',
@@ -251,7 +249,6 @@ return {
         end,
     },
 
-    -- Fuzzy finder - Telescope (modern replacement for FZF)
     {
         'nvim-telescope/telescope.nvim',
         cmd = 'Telescope',
@@ -272,7 +269,7 @@ return {
                 'nvim-telescope/telescope-fzf-native.nvim',
                 build = 'make',
             },
-            "nvim-telescope/telescope-ui-select.nvim", -- THÊM DÒNG NÀY
+            "nvim-telescope/telescope-ui-select.nvim",
         },
         config = function()
             local telescope = require('telescope')
@@ -388,7 +385,6 @@ return {
                     },
                     ["ui-select"] = {
                         require("telescope.themes").get_dropdown {
-                            -- Tùy chỉnh theme cho menu select
                         }
                     }
                 },
@@ -396,7 +392,7 @@ return {
 
             -- Load extensions
             telescope.load_extension('fzf')
-            telescope.load_extension('ui-select') -- THÊM DÒNG NÀY
+            telescope.load_extension('ui-select')
         end,
     },
 }

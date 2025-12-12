@@ -1,4 +1,3 @@
--- lua/plugins/coding.lua
 return {
     -- Mason: LSP installer
     {
@@ -113,7 +112,6 @@ return {
         end,
     },
 
-    -- Completion engine (Giữ nguyên cấu hình tốt của bạn)
     {
         'hrsh7th/nvim-cmp',
         event = "InsertEnter",
@@ -169,11 +167,10 @@ return {
         end,
     },
 
-    -- Các plugin phụ trợ khác (Autopairs, Comment, Copilot...) giữ nguyên
     {
         'windwp/nvim-autopairs',
         event = "InsertEnter",
-        config = true -- Simple setup
+        config = true
     },
     {
         'numToStr/Comment.nvim',
@@ -186,7 +183,7 @@ return {
         event = 'InsertEnter',
         config = function()
             require('copilot').setup({
-                suggestion = { enabled = false }, -- Disable internal suggestion to use cmp
+                suggestion = { enabled = false },
                 panel = { enabled = false },
             })
         end,

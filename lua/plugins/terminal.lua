@@ -1,5 +1,3 @@
--- Terminal integration plugins
-
 return {
     {
         'voldikss/vim-floaterm',

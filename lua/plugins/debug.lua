@@ -1,5 +1,3 @@
--- Debugging plugins
-
 return {
     {
         'puremourning/vimspector',

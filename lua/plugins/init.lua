@@ -1,6 +1,3 @@
--- Plugin management with lazy.nvim
--- This file sets up lazy.nvim and loads all plugin modules
-
 return {
     -- Load all plugin modules
     -- Each module returns a table of plugin specs
@@ -12,4 +9,5 @@ return {
     { import = "plugins.debug" },
     { import = "plugins.rustacean" },
     { import = "plugins.ux" },
+    { import = "plugins.database" },
 }

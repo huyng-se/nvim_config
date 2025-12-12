@@ -1,5 +1,3 @@
--- UI plugins: theme, bufferline, statusline, icons
-
 return {
     -- Color scheme - OneDark (Dark theme)
     {
@@ -292,7 +290,7 @@ return {
         event = "VeryLazy",
         dependencies = {
             "MunifTanjim/nui.nvim",
-            "rcarriga/nvim-notify", -- Plugin tạo thông báo đẹp
+            "rcarriga/nvim-notify",
         },
         opts = {
             lsp = {
@@ -313,7 +311,6 @@ return {
         },
         config = function(_, opts)
             require("noice").setup(opts)
-            -- Tắt intro message khi vào neovim để tránh conflict với Alpha dashboard
             vim.opt.shortmess:append("I") 
         end
     },

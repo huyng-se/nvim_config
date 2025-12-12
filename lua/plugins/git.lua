@@ -1,7 +1,4 @@
--- Git integration plugins
-
 return {
-    -- Gitsigns (modern replacement for vim-gitgutter)
     {
         'lewis6991/gitsigns.nvim',
         event = { "BufReadPre", "BufNewFile" },
@@ -34,10 +31,9 @@ return {
                 },
                 sign_priority = 6,
                 update_debounce = 100,
-                status_formatter = nil, -- Use default
+                status_formatter = nil,
                 max_file_length = 40000,
                 preview_config = {
-                    -- Options passed to nvim_open_win
                     border = 'rounded',
                     style = 'minimal',
                     relative = 'cursor',
