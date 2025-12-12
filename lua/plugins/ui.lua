@@ -16,7 +16,7 @@ return {
                 toggle_style_key = nil,
                 toggle_style_list = {'dark', 'darker', 'cool', 'deep', 'warm', 'warmer'},
                 code_style = {
-                    comments = 'bold',
+                    comments = 'none',
                     keywords = 'none',
                     functions = 'none',
                     strings = 'none',
@@ -28,22 +28,22 @@ return {
                 colors = {},
                 highlights = {
                     -- Better contrast for dialogs and popups
-                    Pmenu = { fg = '$fg', bg = '$bg1' },
-                    PmenuSel = { fg = '$bg', bg = '$blue' },
-                    PmenuSbar = { bg = '$bg2' },
-                    PmenuThumb = { bg = '$blue' },
+                    Pmenu = { fg = '#abb2bf', bg = '#21252b' },
+                    PmenuSel = { fg = '#282c34', bg = '#61afef' },
+                    PmenuSbar = { bg = '#181a1f' },
+                    PmenuThumb = { bg = '#61afef' },
 
                     -- Terminal with better contrast
-                    Terminal = { fg = '$fg', bg = '$bg0' },
+                    Terminal = { fg = '#abb2bf', bg = '#282c34' },
 
                     -- Improve line numbers and cursor line
-                    CursorLine = { bg = '$bg1' },
-                    LineNr = { fg = '$grey' },
-                    CursorLineNr = { fg = '$blue', style = 'bold' },
+                    CursorLine = { bg = '#21252b' },
+                    LineNr = { fg = '#5c6370' },
+                    CursorLineNr = { fg = '#61afef', style = 'bold' },
 
                     -- Better fold colors
-                    Folded = { fg = '$grey', bg = '$bg1' },
-                    FoldColumn = { fg = '$grey', bg = '$bg0' },
+                    Folded = { fg = '#5c6370', bg = '#21252b' },
+                    FoldColumn = { fg = '#5c6370', bg = '#282c34' },
                 },
                 diagnostics = {
                     darker = true,
@@ -157,7 +157,7 @@ return {
                         {
                             require('lazy.status').updates,
                             cond = require('lazy.status').has_updates,
-                            color = { fg = colors.green },
+                            color = { fg = "#98c379" },
                         },
                         'encoding',
                         'fileformat',
@@ -186,12 +186,6 @@ return {
     {
         'nvim-tree/nvim-web-devicons',
         lazy = true,
-    },
-
-    -- Legacy vim-devicons for NERDTree compatibility (can be removed later)
-    {
-        'ryanoasis/vim-devicons',
-        event = "VeryLazy",
     },
 
     -- Indentation guides
