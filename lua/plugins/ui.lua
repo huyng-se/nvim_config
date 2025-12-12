@@ -1,61 +1,57 @@
 -- UI plugins: theme, bufferline, statusline, icons
 
 return {
-    -- Color scheme - Catppuccin Latte (Light theme for eye comfort)
+    -- Color scheme - OneDark (Dark theme)
     {
-        'catppuccin/nvim',
-        name = 'catppuccin',
+        'navarasu/onedark.nvim',
         lazy = false,
         priority = 1000,
         config = function()
-            require('catppuccin').setup({
-                flavour = 'latte', -- Light theme for better eye comfort
-                transparent_background = false,
+            require('onedark').setup({
+                style = 'dark', -- dark, darker, cool, deep, warm, warmer
+                transparent = false,
                 term_colors = true,
-                integrations = {
-                    cmp = true,
-                    gitsigns = true,
-                    nvimtree = true,
-                    telescope = true,
-                    treesitter = true,
-                    notify = true,
-                    mini = false,
-                    which_key = false, -- Disabled since we removed which-key
+                ending_tildes = false,
+                cmp_itemkind_reverse = false,
+                toggle_style_key = nil,
+                toggle_style_list = {'dark', 'darker', 'cool', 'deep', 'warm', 'warmer'},
+                code_style = {
+                    comments = 'bold',
+                    keywords = 'none',
+                    functions = 'none',
+                    strings = 'none',
+                    variables = 'none'
                 },
-                custom_highlights = function(colors)
-                    -- Improve visibility and comfort for light theme
-                    return {
-                        -- Better contrast for dialogs and popups
-                        Pmenu = { fg = colors.text, bg = colors.surface0 },
-                        PmenuSel = { fg = colors.base, bg = colors.blue },
-                        PmenuSbar = { bg = colors.surface1 },
-                        PmenuThumb = { bg = colors.blue },
+                lualine = {
+                    transparent = false,
+                },
+                colors = {},
+                highlights = {
+                    -- Better contrast for dialogs and popups
+                    Pmenu = { fg = '$fg', bg = '$bg1' },
+                    PmenuSel = { fg = '$bg', bg = '$blue' },
+                    PmenuSbar = { bg = '$bg2' },
+                    PmenuThumb = { bg = '$blue' },
 
-                        -- Which-key (though disabled, keeping for consistency)
-                        WhichKey = { fg = colors.blue, bg = colors.mantle },
-                        WhichKeyGroup = { fg = colors.pink, bg = colors.mantle },
-                        WhichKeyDesc = { fg = colors.flamingo, bg = colors.mantle },
-                        WhichKeySeparator = { fg = colors.overlay0, bg = colors.mantle },
-                        WhichKeyBorder = { fg = colors.blue, bg = colors.mantle },
+                    -- Terminal with better contrast
+                    Terminal = { fg = '$fg', bg = '$bg0' },
 
-                        -- Terminal with better contrast
-                        Terminal = { fg = colors.text, bg = colors.mantle },
+                    -- Improve line numbers and cursor line
+                    CursorLine = { bg = '$bg1' },
+                    LineNr = { fg = '$grey' },
+                    CursorLineNr = { fg = '$blue', style = 'bold' },
 
-                        -- Notification background
-                        NotifyBackground = { bg = colors.base },
-
-                        -- Improve line numbers and cursor line
-                        CursorLine = { bg = colors.surface0 },
-                        LineNr = { fg = colors.overlay0 },
-                        CursorLineNr = { fg = colors.blue, style = { "bold" } },
-
-                        -- Better fold colors
-                        Folded = { fg = colors.overlay1, bg = colors.surface0 },
-                        FoldColumn = { fg = colors.overlay0, bg = colors.base },
-                    }
-                end,
+                    -- Better fold colors
+                    Folded = { fg = '$grey', bg = '$bg1' },
+                    FoldColumn = { fg = '$grey', bg = '$bg0' },
+                },
+                diagnostics = {
+                    darker = true,
+                    undercurl = true,
+                    background = true,
+                },
             })
-            vim.cmd.colorscheme('catppuccin')
+            require('onedark').load()
         end,
     },
 
@@ -133,10 +129,9 @@ return {
         event = "VeryLazy",
         dependencies = { 'nvim-tree/nvim-web-devicons' },
         config = function()
-            local colors = require('catppuccin.palettes').get_palette('latte')
             require('lualine').setup({
                 options = {
-                    theme = 'catppuccin',
+                    theme = 'onedark',
                     component_separators = '|',
                     section_separators = { left = '', right = '' },
                     globalstatus = true,
@@ -210,7 +205,11 @@ return {
                     char = '│',
                     tab_char = '│',
                 },
-                scope = { enabled = false },
+                scope = {
+                    enabled = true, -- BẬT LÊN
+                    show_start = true,
+                    show_end = false,
+                },
                 exclude = {
                     filetypes = {
                         'help',
@@ -291,5 +290,37 @@ return {
                 end,
             })
         end,
+    },
+
+    -- Noice for better UI notifications and command line
+    {
+        "folke/noice.nvim",
+        event = "VeryLazy",
+        dependencies = {
+            "MunifTanjim/nui.nvim",
+            "rcarriga/nvim-notify", -- Plugin tạo thông báo đẹp
+        },
+        opts = {
+            lsp = {
+                -- Ghi đè markdown rendering của LSP để dùng treesitter
+                override = {
+                    ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+                    ["vim.lsp.util.stylize_markdown"] = true,
+                    ["cmp.entry.get_documentation"] = true,
+                },
+            },
+            presets = {
+                bottom_search = true, -- Dùng command line ở dưới cho search (/), command (:) ở giữa
+                command_palette = true, -- Đặt command palette ở vị trí trung tâm
+                long_message_to_split = true, -- Tin nhắn dài gửi vào split window
+                inc_rename = false, -- Cho phép rename trực quan
+                lsp_doc_border = false, -- Thêm border cho docs
+            },
+        },
+        config = function(_, opts)
+            require("noice").setup(opts)
+            -- Tắt intro message khi vào neovim để tránh conflict với Alpha dashboard
+            vim.opt.shortmess:append("I") 
+        end
     },
 }

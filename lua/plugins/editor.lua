@@ -272,6 +272,7 @@ return {
                 'nvim-telescope/telescope-fzf-native.nvim',
                 build = 'make',
             },
+            "nvim-telescope/telescope-ui-select.nvim", -- THÊM DÒNG NÀY
         },
         config = function()
             local telescope = require('telescope')
@@ -385,11 +386,17 @@ return {
                         override_file_sorter = true,
                         case_mode = 'smart_case',
                     },
+                    ["ui-select"] = {
+                        require("telescope.themes").get_dropdown {
+                            -- Tùy chỉnh theme cho menu select
+                        }
+                    }
                 },
             })
 
             -- Load extensions
             telescope.load_extension('fzf')
+            telescope.load_extension('ui-select') -- THÊM DÒNG NÀY
         end,
     },
 }

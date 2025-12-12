@@ -39,7 +39,7 @@ opt.sidescrolloff = 8                 -- Keep 8 columns left/right
 opt.wrap = false                      -- Don't wrap lines
 opt.showmode = false                  -- Don't show mode (lualine does this)
 opt.showcmd = false                   -- Don't show command in status line
-opt.cmdheight = 1                     -- Height of command line
+opt.cmdheight = 0                     -- Height of command line (set to 0 after installing Noice)
 opt.laststatus = 3                    -- Global status line
 opt.pumheight = 10                    -- Max height of popup menu
 
