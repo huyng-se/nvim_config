@@ -15,7 +15,7 @@ return {
                 auto_reload_on_write = true,
                 disable_netrw = false,
                 hijack_cursor = false,
-                hijack_netrw = true,
+                hijack_netrw = false, -- Disable hijacking to prevent auto-opening file dialogs
                 hijack_unnamed_buffer_when_opening = false,
                 sort = {
                     sorter = 'name',
@@ -303,7 +303,7 @@ return {
                     file_ignore_patterns = { 'node_modules' },
                     generic_sorter = require('telescope.sorters').get_generic_fuzzy_sorter,
                     path_display = { 'truncate' },
-                    winblend = 0,
+                    winblend = 5, -- Lighter transparency for light theme
                     border = {},
                     borderchars = { '─', '│', '─', '│', '╭', '╮', '╯', '╰' },
                     color_devicons = true,

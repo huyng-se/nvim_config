@@ -1,7 +1,7 @@
 -- UI plugins: theme, bufferline, statusline, icons
 
 return {
-    -- Color scheme - Catppuccin
+    -- Color scheme - Catppuccin Latte (Light theme for eye comfort)
     {
         'catppuccin/nvim',
         name = 'catppuccin',
@@ -9,7 +9,7 @@ return {
         priority = 1000,
         config = function()
             require('catppuccin').setup({
-                flavour = 'mocha',
+                flavour = 'latte', -- Light theme for better eye comfort
                 transparent_background = false,
                 term_colors = true,
                 integrations = {
@@ -17,10 +17,43 @@ return {
                     gitsigns = true,
                     nvimtree = true,
                     telescope = true,
-                    treesitter = false, -- since we removed treesitter
-                    notify = false,
+                    treesitter = true,
+                    notify = true,
                     mini = false,
+                    which_key = false, -- Disabled since we removed which-key
                 },
+                custom_highlights = function(colors)
+                    -- Improve visibility and comfort for light theme
+                    return {
+                        -- Better contrast for dialogs and popups
+                        Pmenu = { fg = colors.text, bg = colors.surface0 },
+                        PmenuSel = { fg = colors.base, bg = colors.blue },
+                        PmenuSbar = { bg = colors.surface1 },
+                        PmenuThumb = { bg = colors.blue },
+
+                        -- Which-key (though disabled, keeping for consistency)
+                        WhichKey = { fg = colors.blue, bg = colors.mantle },
+                        WhichKeyGroup = { fg = colors.pink, bg = colors.mantle },
+                        WhichKeyDesc = { fg = colors.flamingo, bg = colors.mantle },
+                        WhichKeySeparator = { fg = colors.overlay0, bg = colors.mantle },
+                        WhichKeyBorder = { fg = colors.blue, bg = colors.mantle },
+
+                        -- Terminal with better contrast
+                        Terminal = { fg = colors.text, bg = colors.mantle },
+
+                        -- Notification background
+                        NotifyBackground = { bg = colors.base },
+
+                        -- Improve line numbers and cursor line
+                        CursorLine = { bg = colors.surface0 },
+                        LineNr = { fg = colors.overlay0 },
+                        CursorLineNr = { fg = colors.blue, style = { "bold" } },
+
+                        -- Better fold colors
+                        Folded = { fg = colors.overlay1, bg = colors.surface0 },
+                        FoldColumn = { fg = colors.overlay0, bg = colors.base },
+                    }
+                end,
             })
             vim.cmd.colorscheme('catppuccin')
         end,
@@ -100,7 +133,7 @@ return {
         event = "VeryLazy",
         dependencies = { 'nvim-tree/nvim-web-devicons' },
         config = function()
-            local colors = require('catppuccin.palettes').get_palette('mocha')
+            local colors = require('catppuccin.palettes').get_palette('latte')
             require('lualine').setup({
                 options = {
                     theme = 'catppuccin',
@@ -233,6 +266,30 @@ return {
 
             dashboard.opts.opts.noautocmd = true
             alpha.setup(dashboard.opts)
+
+            -- Auto-show dashboard only when no file is opened
+            vim.api.nvim_create_autocmd("VimEnter", {
+                callback = function()
+                    -- Only show dashboard if no file is opened (no args or directory)
+                    local should_show = vim.fn.argc() == 0 or 
+                                       (vim.fn.argc() == 1 and vim.fn.isdirectory(vim.fn.argv(0)) == 1)
+                    
+                    -- Don't show if we have a readable file buffer
+                    local has_file = false
+                    for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+                        if vim.api.nvim_buf_is_loaded(buf) and 
+                           vim.api.nvim_buf_get_option(buf, 'buftype') == '' and
+                           vim.fn.filereadable(vim.api.nvim_buf_get_name(buf)) == 1 then
+                            has_file = true
+                            break
+                        end
+                    end
+                    
+                    if should_show and not has_file then
+                        alpha.start(false)
+                    end
+                end,
+            })
         end,
     },
 }

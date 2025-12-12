@@ -61,95 +61,12 @@ return {
         end,
     },
 
-    -- Which-key for keybinding hints
-    {
-        'folke/which-key.nvim',
-        event = "VeryLazy",
-        config = function()
-            local wk = require('which-key')
-            wk.setup({
-                plugins = {
-                    marks = true,
-                    registers = true,
-                    spelling = {
-                        enabled = true,
-                        suggestions = 20,
-                    },
-                    presets = {
-                        operators = false,
-                        motions = false,
-                        text_objects = false,
-                        windows = false,
-                        nav = false,
-                        z = false,
-                        g = false,
-                    },
-                },
-                operators = { gc = "Comments" },
-                key_labels = {},
-                icons = {
-                    breadcrumb = "»",
-                    separator = "➜",
-                    group = "+",
-                },
-                popup_mappings = {
-                    scroll_down = "<c-d>",
-                    scroll_up = "<c-u>",
-                },
-                window = {
-                    border = "rounded",
-                    position = "bottom",
-                    margin = { 1, 0, 1, 0 },
-                    padding = { 2, 2, 2, 2 },
-                    winblend = 0,
-                },
-                layout = {
-                    height = { min = 4, max = 25 },
-                    width = { min = 20, max = 50 },
-                    spacing = 3,
-                    align = "left",
-                },
-                ignore_missing = true,
-                hidden = { "<silent>", "<cmd>", "<Cmd>", "<CR>", "call", "lua", "^:", "^ " },
-                show_help = true,
-                show_keys = true,
-                triggers = "auto",
-                triggers_blacklist = {
-                    i = { "j", "k" },
-                    v = { "j", "k" },
-                },
-            })
-
-            -- Register keymaps
-            wk.register({
-                ["<leader>"] = {
-                    b = { name = "+buffer" },
-                    c = { name = "+code" },
-                    d = { name = "+debug" },
-                    f = { name = "+file/find" },
-                    g = { name = "+git" },
-                    h = { name = "+help" },
-                    l = { name = "+lsp" },
-                    n = { name = "+notes" },
-                    p = { name = "+project" },
-                    q = { name = "+quit/session" },
-                    r = { name = "+run" },
-                    s = { name = "+search" },
-                    t = { name = "+terminal" },
-                    u = { name = "+ui" },
-                    w = { name = "+window" },
-                    x = { name = "+diagnostics/quickfix" },
-                },
-            })
-        end,
-    },
-
     -- Better notifications
     {
         'rcarriga/nvim-notify',
         config = function()
             require('notify').setup({
-                background_colour = '#000000',
+                background_colour = '#eff1f5', -- Match catppuccin latte background
                 fps = 30,
                 icons = {
                     DEBUG = '',
@@ -162,7 +79,7 @@ return {
                 minimum_width = 50,
                 render = 'default',
                 stages = 'fade_in_slide_out',
-                timeout = 5000,
+                timeout = 2000,
                 top_down = true,
                 -- Disable animations to avoid conflicts
                 on_open = nil,

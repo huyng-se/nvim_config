@@ -58,6 +58,9 @@ map('v', '<A-k>', ":m '<-2<CR>gv=gv", { desc = 'Move selection up' })
 
 -- Save file
 map('n', '<C-s>', ':w<CR>', { desc = 'Save file' })
+
+-- Dashboard
+map('n', '<leader>D', ':Alpha<CR>', { desc = 'Open dashboard' })
 map('i', '<C-s>', '<Esc>:w<CR>a', { desc = 'Save file' })
 
 -- Quit

@@ -30,7 +30,7 @@ opt.incsearch = true                  -- Incremental search
 
 -- UI
 opt.termguicolors = true              -- True color support
-opt.guifont = "JetBrainsMono Nerd Font Light:h12" -- Font for GUI
+opt.guifont = "JetBrainsMono Nerd Font" -- Font for GUI
 opt.signcolumn = "yes"                -- Always show sign column
 opt.cursorline = true                 -- Highlight current line
 opt.cursorlineopt = "number"          -- Only highlight line number
