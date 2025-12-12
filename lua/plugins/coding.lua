@@ -21,6 +21,24 @@ return {
         end,
     },
 
+    -- Mason tool installer for DAP adapters
+    {
+        'WhoIsSethDaniel/mason-tool-installer.nvim',
+        dependencies = {
+            'williamboman/mason.nvim',
+        },
+        config = function()
+            require('mason-tool-installer').setup({
+                -- DAP adapters
+                ensure_installed = {
+                    'codelldb',     -- Rust debugger
+                },
+                auto_update = false,
+                run_on_start = true,
+            })
+        end,
+    },
+
     -- Mason LSP config bridge
     {
         'williamboman/mason-lspconfig.nvim',
@@ -205,12 +223,22 @@ return {
                         luasnip.lsp_expand(args.body)
                     end,
                 },
+                window = {
+                    completion = cmp.config.window.bordered({
+                        border = 'rounded',
+                        winhighlight = 'Normal:Pmenu,FloatBorder:Pmenu,CursorLine:PmenuSel,Search:None',
+                    }),
+                    documentation = cmp.config.window.bordered({
+                        border = 'rounded',
+                        winhighlight = 'Normal:Pmenu,FloatBorder:Pmenu,CursorLine:PmenuSel,Search:None',
+                    }),
+                },
                 mapping = cmp.mapping.preset.insert({
                     ['<C-b>'] = cmp.mapping.scroll_docs(-4),
                     ['<C-f>'] = cmp.mapping.scroll_docs(4),
                     ['<C-Space>'] = cmp.mapping.complete(),
                     ['<C-e>'] = cmp.mapping.abort(),
-                    ['<CR>'] = cmp.mapping.confirm({ select = true }),
+                    ['<CR>'] = cmp.mapping.confirm({ select = false }),
                     ['<Tab>'] = cmp.mapping(function(fallback)
                         if cmp.visible() then
                             cmp.select_next_item()
@@ -231,45 +259,46 @@ return {
                     end, { 'i', 's' }),
                 }),
                 sources = cmp.config.sources({
-                    { name = 'nvim_lsp' },
-                    { name = 'copilot' },  -- GitHub Copilot suggestions (after LSP)
-                    { name = 'luasnip' },
-                    { name = 'crates' },
+                    { name = 'nvim_lsp', priority = 1000 },
+                    { name = 'copilot', priority = 900 },
+                    { name = 'luasnip', priority = 750 },
+                    { name = 'crates', priority = 500 },
                 }, {
-                    { name = 'buffer' },
-                    { name = 'path' },
+                    { name = 'buffer', priority = 500 },
+                    { name = 'path', priority = 250 },
                 }),
                 formatting = {
+                    fields = { 'kind', 'abbr', 'menu' },
                     format = function(entry, vim_item)
-                        -- Icons for completion items (similar to COC icons)
+                        -- Better icons for completion items
                         local icons = {
-                            Text = "📝",
-                            Method = "m",
-                            Function = "ƒ",
-                            Constructor = "",
-                            Field = "",
-                            Variable = "",
-                            Class = "",
-                            Interface = "",
-                            Module = "",
-                            Property = "",
-                            Unit = "",
-                            Value = "",
-                            Enum = "",
-                            Keyword = "",
-                            Snippet = "",
-                            Color = "",
-                            File = "",
-                            Reference = "",
-                            Folder = "",
-                            EnumMember = "",
-                            Constant = "",
-                            Struct = "",
-                            Event = "",
-                            Operator = "Ψ",
+                            Text = "󰉿",
+                            Method = "󰆧",
+                            Function = "󰊕",
+                            Constructor = "",
+                            Field = "󰜢",
+                            Variable = "󰀫",
+                            Class = "󰠱",
+                            Interface = "",
+                            Module = "",
+                            Property = "󰜢",
+                            Unit = "󰑭",
+                            Value = "󰎠",
+                            Enum = "",
+                            Keyword = "󰌋",
+                            Snippet = "",
+                            Color = "󰏘",
+                            File = "󰈙",
+                            Reference = "󰈇",
+                            Folder = "󰉋",
+                            EnumMember = "",
+                            Constant = "󰏿",
+                            Struct = "󰙅",
+                            Event = "",
+                            Operator = "󰆕",
                             TypeParameter = "",
                         }
-                        vim_item.kind = string.format('%s %s', icons[vim_item.kind] or "", vim_item.kind)
+                        vim_item.kind = string.format('%s', icons[vim_item.kind] or "")
                         vim_item.menu = ({
                             copilot = "[Copilot]",
                             nvim_lsp = "[LSP]",
@@ -280,6 +309,16 @@ return {
                         })[entry.source.name]
                         return vim_item
                     end
+                },
+                experimental = {
+                    ghost_text = {
+                        hl_group = 'Comment',
+                    },
+                },
+                performance = {
+                    debounce = 60,
+                    throttle = 30,
+                    fetching_timeout = 500,
                 },
             })
             
@@ -322,7 +361,7 @@ return {
         config = function()
             local npairs = require('nvim-autopairs')
             npairs.setup({
-                check_ts = true,  -- Use treesitter
+                check_ts = false,  -- Disabled since treesitter is removed
                 ts_config = {
                     lua = { 'string' },
                     javascript = { 'template_string' },
@@ -424,7 +463,11 @@ return {
             })
         end,
     },
-
+    -- Syntax highlighting replacement for treesitter
+    {
+        'sheerun/vim-polyglot',
+        event = { 'BufReadPost', 'BufNewFile' },
+    },
     -- Copilot completion source for nvim-cmp
     {
         'zbirenbaum/copilot-cmp',

@@ -7,9 +7,9 @@ return {
     { import = "plugins.ui" },
     { import = "plugins.editor" },
     { import = "plugins.coding" },
-    { import = "plugins.treesitter" },
     { import = "plugins.git" },
     { import = "plugins.terminal" },
     { import = "plugins.debug" },
     { import = "plugins.rustacean" },
+    { import = "plugins.ux" },
 }
