@@ -121,3 +121,16 @@ if crates_available then
     map('n', '<leader>ch', crates.open_homepage, { desc = 'Crates: Open homepage' })
     map('n', '<leader>cH', crates.open_repository, { desc = 'Crates: Open repository' })
 end
+
+
+-- Tạo file trắng ngay tại cửa sổ hiện tại
+map("n", "<leader>fn", "<cmd>enew<cr>", { desc = "New File" }) 
+-- Tạo file mới trong cửa sổ chia đôi (Split New)
+map("n", "<leader>wn", "<cmd>vnew<cr>", { desc = "Window New (Vertical)" }) -- Chia dọc + file mới
+map("n", "<leader>wm", "<cmd>new<cr>",  { desc = "Window New (Horizontal)" }) -- Chia ngang + file mới
+
+-- Đóng tất cả các cửa sổ khác, chỉ giữ lại cửa sổ đang làm việc
+map("n", "<leader>wo", "<cmd>only<cr>", { desc = "Close Other Windows" })
+
+-- Đóng tất cả các buffer khác trừ cái đang mở
+map("n", "<leader>bo", ":%bd|e#|bd#<cr>", { desc = "Close Other Buffers" })

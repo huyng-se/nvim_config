@@ -46,6 +46,8 @@ Tài liệu đầy đủ về tất cả phím tắt trong cấu hình Neovim n�
 | `Shift+L` | Normal | Buffer tiếp theo |
 | `Shift+H` | Normal | Buffer trước |
 | `<leader>bd` | Normal | Đóng buffer hiện tại (không đóng window) |
+| `<leader>fn` | Normal | Tạo file mới |
+| `<leader>bo` | Normal | Đóng các buffer khác |
 
 **Tip:** Sử dụng `Shift+L` và `Shift+H` để di chuyển nhanh giữa các file đang mở.
 
@@ -61,6 +63,14 @@ Tài liệu đầy đủ về tất cả phím tắt trong cấu hình Neovim n�
 | `Alt+Left` | Normal | Thu nhỏ split dọc (giảm 2 đơn vị) |
 | `Alt+Down` | Normal | Mở rộng split ngang (tăng 2 đơn vị) |
 | `Alt+Up` | Normal | Thu nhỏ split ngang (giảm 2 đơn vị) |
+
+### Window Management
+
+| Phím | Chế độ | Mô tả |
+|------|--------|-------|
+| `<leader>wn` | Normal | Tạo window mới (chia dọc) |
+| `<leader>wm` | Normal | Tạo window mới (chia ngang) |
+| `<leader>wo` | Normal | Đóng các window khác |
 
 **Tip:** Resize step được tăng từ 1 lên 2 để resize nhanh hơn.
 
