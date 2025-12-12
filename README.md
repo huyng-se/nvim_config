@@ -12,9 +12,9 @@ Cấu hình Neovim hiện đại với LSP, Completion, GitHub Copilot, và Lazy
 
 ## ✨ Features
 
-- 🎨 **Modern UI** - Darcula theme, bufferline, airline
-- 📁 **File Explorer** - NERDTree với Git integration
-- 🔍 **Fuzzy Finder** - FZF với ripgrep support
+- 🎨 **Modern UI** - OneDark theme, bufferline, lualine, dashboard
+- 📁 **File Explorer** - NvimTree với Git integration
+- 🔍 **Fuzzy Finder** - Telescope với native fzf sorter
 - 🔧 **Native LSP** - Mason, nvim-lspconfig với Neovim 0.11+ APIs
 - 💡 **Smart Completion** - nvim-cmp với multiple sources
 - 🤖 **GitHub Copilot** - AI pair programming
@@ -23,18 +23,24 @@ Cấu hình Neovim hiện đại với LSP, Completion, GitHub Copilot, và Lazy
 - 🐛 **Debugging** - Vimspector DAP
 - 🦀 **Rust Support** - Rustaceanvim với inlay hints
 - 🌈 **Treesitter** - Advanced syntax highlighting
+- ✨ **UX Enhancements** - Better notifications, todo comments, indent guides
 
 ## ✨ Plugins chính
 
 ### UI & Theme
-- **doums/darcula** - Dark color scheme
+- **navarasu/onedark.nvim** - OneDark theme với 6 variants
 - **akinsho/bufferline.nvim** - Buffer line with tabs
-- **vim-airline/vim-airline** - Status line
+- **nvim-lualine/lualine.nvim** - Modern status line
 - **nvim-tree/nvim-web-devicons** - File icons
+- **famiu/bufdelete.nvim** - Delete buffers without closing windows
+- **lukas-reineke/indent-blankline.nvim** - Indent guides
+- **goolord/alpha-nvim** - Dashboard
 
 ### Editor
-- **preservim/nerdtree** - File explorer
-- **junegunn/fzf.vim** - Fuzzy finder
+- **nvim-tree/nvim-tree.lua** - Modern file explorer
+- **nvim-telescope/telescope.nvim** - Fuzzy finder & picker
+- **nvim-telescope/telescope-fzf-native.nvim** - Native FZF sorter
+- **nvim-telescope/telescope-ui-select.nvim** - UI select replacement
 
 ### Coding & LSP
 - **williamboman/mason.nvim** - LSP/DAP/Linter installer
@@ -47,7 +53,11 @@ Cấu hình Neovim hiện đại với LSP, Completion, GitHub Copilot, và Lazy
 - **windwp/nvim-autopairs** - Auto close pairs
 - **numToStr/Comment.nvim** - Commenting
 - **mrcjkb/rustaceanvim** - Rust development
-- **saecki/crates.nvim** - Cargo.toml management
+
+### UX Enhancements
+- **rcarriga/nvim-notify** - Beautiful notifications
+- **folke/todo-comments.nvim** - TODO/FIXME/NOTE highlighting
+- **folke/noice.nvim** - Better UI for messages, cmdline and popups
 
 ### Syntax Highlighting
 - **nvim-treesitter/nvim-treesitter** - Advanced syntax highlighting
@@ -134,28 +144,31 @@ scoop install lazygit
 
 | Category | Phím tắt | Mô tả |
 |----------|----------|-------|
-| **File Explorer** | `F5` | NERDTree |
-| | `F6` | FZF Files |
-| | `F7` | FZF Ripgrep |
+| **File Explorer** | `F5` / `<leader>e` | Toggle NvimTree |
+| | `<leader>o` | Focus NvimTree |
+| **Fuzzy Finder** | `F6` / `<leader>ff` | Find files (Telescope) |
+| | `<leader>fg` | Live grep (Telescope) |
+| | `<leader>fb` | Find buffers |
+| | `<leader>fo` | Recent files |
 | **Buffer** | `Shift+L` / `Shift+H` | Next/Previous buffer |
-| | `<leader>bd` | Close buffer |
+| | `<leader>bd` | Delete buffer (keep window) |
 | **LSP** | `gd` | Go to definition |
 | | `K` | Hover documentation |
 | | `<leader>rn` | Rename |
-| | `<leader>f` | Format code |
-| | `<leader>a` | Code action |
-| | `[g` / `]g` | Previous/Next diagnostic |
+| | `<leader>cf` | Format code |
+| | `<leader>ca` | Code action |
+| | `[d` / `]d` | Previous/Next diagnostic |
 | **Completion** | `Tab` / `Shift+Tab` | Navigate items |
 | | `Enter` | Confirm |
 | | `Ctrl+Space` | Trigger completion |
-| **Copilot** | `Alt+L` | Accept suggestion |
-| | `Alt+]` / `Alt+[` | Next/Prev suggestion |
-| | `Alt+P` | Open panel |
-| **Git** | `<leader>gg` | LazyGit |
+| **Copilot** | In completion menu | Copilot suggestions (priority 1) |
+| **Git** | `<leader>gg` / `<leader>lg` | LazyGit |
 | | `<leader>gs` | Git status (Fugitive) |
 | | `<leader>gp` | Preview hunk |
 | | `<leader>gb` | Git blame |
 | | `]c` / `[c` | Next/Prev hunk |
+| **Todo** | `]t` / `[t` | Next/Prev TODO comment |
+| | `<leader>ft` | Find todos (Telescope) |
 | **Terminal** | `<leader>tt` | Toggle terminal |
 | | `<leader>to` | New terminal |
 | **Debug** | `<leader>dl` | Launch debugger |
@@ -184,9 +197,10 @@ nvim_config/
     │   └── autocmds.lua   # Autocommands
     └── plugins/
         ├── init.lua       # Lazy.nvim setup
-        ├── ui.lua         # Theme, bufferline, airline
-        ├── editor.lua     # File explorer, fuzzy finder
-        ├── coding.lua     # LSP, completion, snippets
+        ├── ui.lua         # Theme, bufferline, lualine, dashboard
+        ├── editor.lua     # NvimTree, Telescope
+        ├── ux.lua         # Autopairs, Comment, notify, todo-comments
+        ├── coding.lua     # LSP, completion, Copilot
         ├── treesitter.lua # Syntax highlighting
         ├── git.lua        # Git integration
         ├── terminal.lua   # Floaterm

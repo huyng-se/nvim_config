@@ -200,7 +200,7 @@ Download từ [nodejs.org](https://nodejs.org/)
 
 ### 4. Nerd Font (Khuyến nghị)
 
-Cần Nerd Font để hiện icons đẹp trong NERDTree, bufferline, etc.
+Cần Nerd Font để hiện icons đẹp trong NvimTree, bufferline, Telescope, etc.
 
 #### Cài đặt Font
 
@@ -268,9 +268,9 @@ font_size 14.0
 
 ---
 
-### 5. Ripgrep (Cho FZF)
+### 5. Ripgrep (Optional - Cho Telescope Live Grep)
 
-Cần ripgrep để dùng `:Rg` command trong FZF.
+Optional, nhưng khuyến nghị để tăng tốc `live_grep` trong Telescope.
 
 ```bash
 # macOS
@@ -291,6 +291,8 @@ choco install ripgrep
 # Verify
 rg --version
 ```
+
+**Lưu ý:** Telescope hoạt động được mà không cần ripgrep, nhưng ripgrep sẽ tăng tốc tìm kiếm đáng kể.
 
 ---
 
@@ -529,10 +531,10 @@ Copilot sẽ suggest code (màu xám). Nhấn `Alt+L` để accept.
 **Test icons:**
 ```bash
 nvim
-:NERDTreeToggle
+# Press F5 to toggle NvimTree
 ```
 
-Nên thấy icons đẹp trong NERDTree. Nếu thấy boxes/squares, font chưa được config đúng.
+Nên thấy icons đẹp trong NvimTree. Nếu thấy boxes/squares, font chưa được config đúng.
 
 **Fix:**
 1. Cài Nerd Font (xem Prerequisites)
@@ -757,23 +759,30 @@ nvim
 
 ---
 
-### FZF Not Finding Files
+### Telescope Not Finding Files
 
-**Problem:** FZF không tìm thấy files
+**Problem:** Telescope không tìm thấy files
 
 **Solutions:**
 
-1. **Check ripgrep installed:**
+1. **Check in git repo:**
+   Telescope ignores files trong `.gitignore` by default.
+
+2. **Install ripgrep for faster search:**
    ```bash
-   rg --version
+   # macOS
+   brew install ripgrep
+   
+   # Linux
+   sudo apt install ripgrep  # Ubuntu/Debian
+   sudo pacman -S ripgrep    # Arch
    ```
 
-2. **Check in git repo:**
-   FZF ignores files trong `.gitignore` by default.
-
-3. **Use different command:**
+3. **Use different pickers:**
    ```vim
-   :Files!  " ! để ignore .gitignore
+   :Telescope find_files    " Tìm files
+   :Telescope live_grep     " Tìm trong content
+   :Telescope git_files     " Tìm git files
    ```
 
 ---
@@ -862,15 +871,15 @@ Sau khi cài xong, verify tất cả features:
 ☐ Git installed
 ☐ Node.js >= 18.x (nếu dùng Copilot)
 ☐ Nerd Font installed và configured
-☐ Ripgrep installed
+☐ Ripgrep installed (optional, cho Telescope)
 ☐ LazyGit installed (optional)
 ☐ All plugins installed (:Lazy)
 ☐ LSP servers installed (:Mason)
 ☐ Treesitter parsers installed (:TSInstall)
-☐ Icons hiện đúng trong NERDTree
+☐ Icons hiện đúng trong NvimTree
 ☐ LSP features work (gd, K, <leader>rn)
 ☐ Completion works (Tab, Enter)
-☐ FZF works (F6, F7)
+☐ Telescope works (F6, <leader>ff, <leader>fg)
 ☐ LazyGit opens (<leader>gg)
 ☐ Copilot works (nếu có subscription)
 ```
@@ -904,4 +913,4 @@ Sau khi cài xong:
 - Nếu gặp issues, check [Troubleshooting](#-troubleshooting) section
 - Hoặc open issue trên GitHub repo
 
-**Update:** December 2024
+**Update:** January 2025
