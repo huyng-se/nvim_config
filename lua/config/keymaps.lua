@@ -30,6 +30,8 @@ map('n', '<leader>wc', ':close<CR>', { desc = 'Close window' })
 map('n', '<leader>wo', ':only<CR>', { desc = 'Close other windows' })
 
 -- Resize panes (increased step from 1 to 2 for faster resizing)
+-- Note: On MacOS, the Option key (Alt) might need configuration in your terminal emulator
+-- to act as Meta key for these mappings to work.
 map('n', '<M-Right>', ':vertical resize +2<CR>', { silent = true, desc = 'Increase vertical split' })
 map('n', '<M-Left>', ':vertical resize -2<CR>', { silent = true, desc = 'Decrease vertical split' })
 map('n', '<M-Down>', ':resize +2<CR>', { silent = true, desc = 'Increase horizontal split' })

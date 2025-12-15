@@ -28,6 +28,7 @@ Tài liệu đầy đủ về tất cả plugins trong cấu hình Neovim này.
 **Mô tả:** OneDark color scheme với 6 variants (dark, darker, cool, deep, warm, warmer).
 
 **Features:**
+
 - 🎨 6 style variants để lựa chọn
 - ✨ High quality syntax highlighting
 - 🔗 Lualine integration
@@ -40,6 +41,7 @@ Tài liệu đầy đủ về tất cả plugins trong cấu hình Neovim này.
 **Current Style:** `dark`
 
 **Lệnh:**
+
 ```vim
 :colorscheme onedark
 ```
@@ -53,18 +55,21 @@ Tài liệu đầy đủ về tất cả plugins trong cấu hình Neovim này.
 **Mô tả:** Delete buffers mà không đóng windows/splits.
 
 **Features:**
+
 - 🗑️ Delete buffer giữ nguyên window layout
 - 🔒 Prevents closing last window
 - ⚡ Fast và lightweight
 - 🎯 Replacement cho `:bdelete` và `:bwipeout`
 
 **Phím tắt:**
+
 - `<leader>bd` - Delete buffer (keep window)
 - `<leader>bw` - Wipeout buffer (keep window)
 
 **Config:** `lua/plugins/ui.lua`
 
 **Lệnh:**
+
 ```vim
 :Bdelete   " Delete buffer
 :Bwipeout  " Wipeout buffer
@@ -79,12 +84,14 @@ Tài liệu đầy đủ về tất cả plugins trong cấu hình Neovim này.
 **Mô tả:** Buffer line với tabs đẹp, hiện danh sách buffers ở top.
 
 **Features:**
+
 - 📑 Tab-like interface cho buffers
 - 🔍 LSP diagnostics integration (hiện errors/warnings trên tab)
 - 🎨 Customizable styling
 - 🖱️ Mouse support (click để switch buffer)
 
 **Phím tắt:**
+
 - `Shift+L` - Buffer tiếp theo
 - `Shift+H` - Buffer trước
 - `<leader>bd` - Đóng buffer
@@ -102,6 +109,7 @@ Tài liệu đầy đủ về tất cả plugins trong cấu hình Neovim này.
 **Mô tả:** Modern, fast và customizable statusline written in Lua.
 
 **Features:**
+
 - ⚡ Blazing fast performance
 - 🎨 Beautiful default theme matching OneDark
 - 📊 Hiện mode, filename, branch, diagnostics, diff
@@ -115,6 +123,7 @@ Tài liệu đầy đủ về tất cả plugins trong cấu hình Neovim này.
 **Config:** `lua/plugins/ui.lua`
 
 **Sections:**
+
 - **Left:** Mode, filename, branch
 - **Center:** Diagnostics, diff stats
 - **Right:** Lazy updates, encoding, fileformat, filetype, progress, location
@@ -128,6 +137,7 @@ Tài liệu đầy đủ về tất cả plugins trong cấu hình Neovim này.
 **Mô tả:** File icons cho Neovim (Lua-based, modern).
 
 **Features:**
+
 - 🎨 Colored icons cho mỗi file type
 - ⚡ Fast và lightweight
 - 🔗 Used by bufferline, nvim-tree, telescope và plugins khác
@@ -144,6 +154,7 @@ Tài liệu đầy đủ về tất cả plugins trong cấu hình Neovim này.
 **Mô tả:** Indent guides với scope highlighting.
 
 **Features:**
+
 - 📏 Visual indent guides
 - 🎯 Current scope highlighting
 - 🎨 Customizable characters
@@ -165,6 +176,7 @@ Tài liệu đầy đủ về tất cả plugins trong cấu hình Neovim này.
 **Mô tả:** Fast và customizable dashboard/greeter.
 
 **Features:**
+
 - 🚀 Fast startup screen
 - 🎨 ASCII art header (Neovim logo)
 - 📋 Quick actions (find files, recent files, config, etc.)
@@ -172,6 +184,7 @@ Tài liệu đầy đủ về tất cả plugins trong cấu hình Neovim này.
 - 🔗 Telescope integration
 
 **Buttons:**
+
 - `f` - Find file (Telescope)
 - `n` - New file
 - `r` - Recent files
@@ -193,6 +206,7 @@ Tài liệu đầy đủ về tất cả plugins trong cấu hình Neovim này.
 **Mô tả:** Better UI for messages, cmdline và popups.
 
 **Features:**
+
 - 💬 Beautiful message popups
 - ⌨️ Modern command line UI
 - 📜 Better LSP documentation rendering
@@ -200,12 +214,14 @@ Tài liệu đầy đủ về tất cả plugins trong cấu hình Neovim này.
 - 📝 Long messages in split window
 
 **Dependencies:**
+
 - `MunifTanjim/nui.nvim`
 - `rcarriga/nvim-notify`
 
 **Config:** `lua/plugins/ui.lua`
 
 **Presets:**
+
 - Bottom search
 - Command palette
 - Long message to split
@@ -222,6 +238,7 @@ Tài liệu đầy đủ về tất cả plugins trong cấu hình Neovim này.
 **Mô tả:** Modern file explorer written in Lua, thay thế NERDTree.
 
 **Features:**
+
 - 🌳 Modern và fast file tree
 - 🎨 Git integration với status icons
 - 📁 File operations (create, delete, rename, copy, paste)
@@ -233,11 +250,13 @@ Tài liệu đầy đủ về tất cả plugins trong cấu hình Neovim này.
 - 🔗 Integration với devicons
 
 **Phím tắt:**
+
 - `F5` - Toggle NvimTree
 - `<leader>e` - Toggle NvimTree
 - `<leader>o` - Focus NvimTree
 
 **Trong NvimTree:**
+
 - `o` / `Enter` - Open file/folder
 - `<C-v>` - Vertical split
 - `<C-x>` - Horizontal split
@@ -252,6 +271,7 @@ Tài liệu đầy đủ về tất cả plugins trong cấu hình Neovim này.
 - `?` - Help
 
 **Git Icons:**
+
 - `✓` - Staged
 - `✗` - Unstaged
 - `★` - Untracked
@@ -271,6 +291,7 @@ Tài liệu đầy đủ về tất cả plugins trong cấu hình Neovim này.
 **Mô tả:** Modern fuzzy finder & picker, thay thế FZF.
 
 **Features:**
+
 - 🔍 Fuzzy find files, buffers, help tags
 - 🔎 Live grep với preview
 - ⚡ Fast native fzf sorter
@@ -281,6 +302,7 @@ Tài liệu đầy đủ về tất cả plugins trong cấu hình Neovim này.
 - 🔌 Extensible với many pickers
 
 **Phím tắt:**
+
 - `F6` / `<leader>ff` - Find files
 - `<leader>fg` - Live grep
 - `<leader>fb` - Find buffers
@@ -290,6 +312,7 @@ Tài liệu đầy đủ về tất cả plugins trong cấu hình Neovim này.
 - `<leader>fc` - Commands
 
 **Trong Telescope:**
+
 - `Ctrl+J/K` / `↓/↑` - Navigate
 - `Ctrl+N/P` - History
 - `Enter` - Open file
@@ -304,12 +327,14 @@ Tài liệu đầy đủ về tất cả plugins trong cấu hình Neovim này.
 **Config:** `lua/plugins/editor.lua`
 
 **Dependencies:**
+
 - `nvim-lua/plenary.nvim`
 - `nvim-tree/nvim-web-devicons`
 - `nvim-telescope/telescope-fzf-native.nvim` (native sorter)
 - `nvim-telescope/telescope-ui-select.nvim` (UI select replacement)
 
 **Pickers:**
+
 - `find_files` - Tìm files
 - `live_grep` - Tìm trong content (ripgrep)
 - `buffers` - List buffers
@@ -321,6 +346,7 @@ Tài liệu đầy đủ về tất cả plugins trong cấu hình Neovim này.
 **Theme:** Dropdown theme cho tất cả pickers
 
 ---
+
 ## 🔧 LSP & Completion
 
 ### williamboman/mason.nvim
@@ -330,18 +356,21 @@ Tài liệu đầy đủ về tất cả plugins trong cấu hình Neovim này.
 **Mô tả:** Package manager cho LSP servers, DAP servers, linters, formatters.
 
 **Features:**
+
 - 📦 Easy installation UI
 - 🔄 Automatic updates
 - 🌐 Cross-platform support
 - 🔌 Integration với LSP config
 
 **Lệnh:**
+
 - `:Mason` - Mở UI
 - `:MasonInstall <server>` - Cài server
 - `:MasonUninstall <server>` - Gỡ server
 - `:MasonLog` - Xem logs
 
 **Pre-installed servers:**
+
 - `lua_ls` - Lua
 - `clangd` - C/C++
 - `cmake` - CMake
@@ -358,6 +387,7 @@ Tài liệu đầy đủ về tất cả plugins trong cấu hình Neovim này.
 **Mô tả:** Bridge giữa Mason và nvim-lspconfig.
 
 **Features:**
+
 - 🔗 Auto-install LSP servers
 - ⚙️ Automatic server configuration
 - 🔄 Sync với Mason
@@ -373,12 +403,14 @@ Tài liệu đầy đủ về tất cả plugins trong cấu hình Neovim này.
 **Mô tả:** Quickstart configs cho Neovim LSP.
 
 **Features:**
+
 - 🚀 Native LSP support
 - ⚡ Fast và lightweight
 - 🔧 Extensive server configs
 - **Note:** Config này sử dụng Neovim 0.11+ `vim.lsp.config` API cho server setup và nvim-lspconfig cho utility functions
 
 **LSP Keymaps:**
+
 - `gd` - Go to definition
 - `gy` - Go to type definition
 - `gi` - Go to implementation
@@ -391,6 +423,7 @@ Tài liệu đầy đủ về tất cả plugins trong cấu hình Neovim này.
 - `Ctrl+S` (Insert) - Show diagnostic
 
 **Configured servers:**
+
 - **clangd** - C/C++
 - **cmake** - CMake
 - **pyright** - Python
@@ -408,6 +441,7 @@ Tài liệu đầy đủ về tất cả plugins trong cấu hình Neovim này.
 **Mô tả:** Completion engine cho Neovim.
 
 **Features:**
+
 - ⚡ Fast completion
 - 🎨 Customizable UI
 - 🔌 Multiple sources support
@@ -415,6 +449,7 @@ Tài liệu đầy đủ về tất cả plugins trong cấu hình Neovim này.
 - 🤖 Copilot integration
 
 **Completion Sources:**
+
 1. `nvim_lsp` - LSP completions
 2. `copilot` - AI suggestions
 3. `luasnip` - Snippets
@@ -424,6 +459,7 @@ Tài liệu đầy đủ về tất cả plugins trong cấu hình Neovim này.
 7. `cmdline` - Command line
 
 **Phím tắt:**
+
 - `Tab` - Next item / Expand snippet
 - `Shift+Tab` - Previous item
 - `Enter` - Confirm
@@ -434,6 +470,7 @@ Tài liệu đầy đủ về tất cả plugins trong cấu hình Neovim này.
 **Config:** `lua/plugins/coding.lua`
 
 **Dependencies:**
+
 - `hrsh7th/cmp-nvim-lsp`
 - `hrsh7th/cmp-buffer`
 - `hrsh7th/cmp-path`
@@ -451,12 +488,14 @@ Tài liệu đầy đủ về tất cả plugins trong cấu hình Neovim này.
 **Mô tả:** Snippet engine viết bằng Lua.
 
 **Features:**
+
 - ⚡ Fast snippet expansion
 - 📝 VSCode-style snippets support
 - 🔄 Dynamic snippets
 - ⌨️ Jump between placeholders
 
 **Phím tắt:**
+
 - `Tab` - Expand/Jump next
 - `Shift+Tab` - Jump previous
 
@@ -473,6 +512,7 @@ Tài liệu đầy đủ về tất cả plugins trong cấu hình Neovim này.
 **Mô tả:** Auto close brackets, quotes, etc.
 
 **Features:**
+
 - 🔗 Auto-close pairs: (), {}, [], '', ""
 - 🌳 Treesitter integration
 - 🔌 nvim-cmp integration
@@ -489,12 +529,14 @@ Tài liệu đầy đủ về tất cả plugins trong cấu hình Neovim này.
 **Mô tả:** Smart commenting plugin.
 
 **Features:**
+
 - 💬 Line và block comments
 - 🌳 Treesitter integration (smart context)
 - ⌨️ Motions support
 - 📝 Multi-language support
 
 **Phím tắt:**
+
 - `gcc` - Toggle line comment
 - `gbc` - Toggle block comment
 - `gc` - Comment operator (linewise)
@@ -511,6 +553,7 @@ Tài liệu đầy đủ về tất cả plugins trong cấu hình Neovim này.
 **Mô tả:** GitHub Copilot AI pair programming integration với nvim-cmp.
 
 **Features:**
+
 - 🤖 AI-powered code suggestions
 - 🔌 Seamless nvim-cmp integration
 - ⚡ Real-time completions trong completion menu
@@ -518,6 +561,7 @@ Tài liệu đầy đủ về tất cả plugins trong cấu hình Neovim này.
 - 📊 Icon `` để nhận diện Copilot suggestions
 
 **Config hiện tại:**
+
 ```lua
 -- copilot.lua: suggestion và panel disabled
 -- Copilot chỉ hoạt động qua nvim-cmp source
@@ -528,17 +572,20 @@ require('copilot').setup({
 ```
 
 **Sử dụng:**
+
 - Suggestions xuất hiện tự động trong nvim-cmp menu
 - Dùng `Tab`/`Shift+Tab` để navigate
 - `Enter` để accept
 - Icon `` trong menu
 
 **Lệnh:**
+
 - `:Copilot auth` - Authenticate
 - `:Copilot enable/disable` - Bật/tắt
 - `:Copilot status` - Check status
 
 **Yêu cầu:**
+
 - GitHub Copilot subscription
 - Node.js >= 18.x
 
@@ -557,6 +604,7 @@ require('copilot').setup({
 **Mô tả:** Beautiful notification popups, thay thế vim.notify mặc định.
 
 **Features:**
+
 - 🎨 Beautiful animated notifications
 - 📍 Position configurable (top-down)
 - ⏱️ Timeout customizable
@@ -564,6 +612,7 @@ require('copilot').setup({
 - 🔗 Used by noice.nvim
 
 **Notification Levels:**
+
 - `` ERROR
 - `` WARN  
 - `` INFO
@@ -583,12 +632,14 @@ require('copilot').setup({
 **Mô tả:** Highlight và search TODO comments.
 
 **Features:**
+
 - 🎨 Highlight TODO, FIXME, HACK, WARN, PERF, NOTE
 - 🔍 Telescope integration để search todos
 - 🎯 Jump to next/prev todo
 - 📝 Customizable keywords và colors
 
 **Supported Keywords:**
+
 - `TODO:` - Things to do (blue)
 - `FIXME:` - Things to fix (red)
 - `HACK:` - Temporary solutions (orange)
@@ -597,6 +648,7 @@ require('copilot').setup({
 - `NOTE:` - Important notes (green)
 
 **Phím tắt:**
+
 - `]t` - Next TODO comment
 - `[t` - Previous TODO comment  
 - `<leader>ft` - Find todos (Telescope)
@@ -616,12 +668,14 @@ require('copilot').setup({
 **Mô tả:** Advanced syntax highlighting và code parsing.
 
 **Features:**
+
 - 🌈 Superior syntax highlighting
 - 📊 Incremental selection
 - 🎯 Context-aware indentation
 - ⚡ Faster than regex-based highlighting
 
 **Installed Parsers:**
+
 - Lua, Rust, C/C++, Python
 - JSON, HTML, CSS
 - JavaScript, TypeScript
@@ -629,11 +683,13 @@ require('copilot').setup({
 - Markdown, Vim, Vimdoc
 
 **Lệnh:**
+
 - `:TSUpdate` - Update parsers
 - `:TSInstall <lang>` - Install parser
 - `:TSBufEnable highlight` - Enable highlighting
 
 **Incremental Selection:**
+
 - `Enter` - Init/Expand selection
 - `Tab` - Scope incremental
 - `Backspace` - Decrease
@@ -651,12 +707,14 @@ require('copilot').setup({
 **Mô tả:** Git signs in sign column (modern replacement for vim-gitgutter).
 
 **Features:**
+
 - ✨ Git diff signs in sign column
 - 🔍 Hunk preview
 - 🕐 Git blame
 - ⚡ Fast và async
 
 **Git Signs:**
+
 - `✚` - Added
 - `✹` - Changed
 - `✖` - Deleted
@@ -665,11 +723,13 @@ require('copilot').setup({
 - `┆` - Untracked
 
 **Phím tắt:**
+
 - `]c` / `[c` - Next/Previous hunk
 - `<leader>gp` - Preview hunk
 - `<leader>gb` - Git blame line
 
 **Lệnh:**
+
 - `:Gitsigns toggle_signs` - Toggle signs
 - `:Gitsigns toggle_current_line_blame` - Toggle blame
 
@@ -684,15 +744,18 @@ require('copilot').setup({
 **Mô tả:** Git commands trong Neovim.
 
 **Features:**
+
 - 🔧 Full Git integration
 - 📊 Git status buffer
 - 🔀 Merge/Rebase support
 - 🌐 GitHub integration (qua vim-rhubarb)
 
 **Phím tắt:**
+
 - `<leader>gs` - Git status
 
 **Lệnh:**
+
 - `:Git` hoặc `:G` - Git status
 - `:Git add %` - Stage current file
 - `:Git commit` - Commit
@@ -711,6 +774,7 @@ require('copilot').setup({
 **Mô tả:** GitHub integration cho Fugitive.
 
 **Features:**
+
 - 🌐 Open files trên GitHub
 - 🔗 `:GBrowse` support
 - 📝 GitHub URLs
@@ -728,11 +792,13 @@ require('copilot').setup({
 **Mô tả:** 3-way merge conflict resolution tool.
 
 **Features:**
+
 - 🔀 3-way diff view (LOCAL, BASE, REMOTE)
 - ⚡ Easy conflict resolution
 - 🎯 Visual merge result
 
 **Phím tắt:**
+
 - `<leader>mt` - Toggle Mergetool
 
 **Layout:** Merge result ở right panel
@@ -748,16 +814,19 @@ require('copilot').setup({
 **Mô tả:** LazyGit terminal UI integration.
 
 **Features:**
+
 - 🎨 Beautiful Git terminal UI
 - ⚡ Floating window trong Neovim
 - 🔧 Full Git workflow support
 - 🌳 Interactive rebase, cherry-pick, etc.
 
 **Phím tắt:**
+
 - `<leader>gg` / `<leader>lg` - Mở LazyGit
 - `<leader>gl` - Git log terminal
 
 **Lệnh:**
+
 - `:LazyGit` - Mở LazyGit
 - `:LazyGitCurrentFile` - LazyGit cho file hiện tại
 - `:LazyGitFilter` - Filter view
@@ -769,6 +838,7 @@ require('copilot').setup({
 **Config:** `lua/plugins/git.lua`
 
 **Window Settings:**
+
 - Size: 90% màn hình
 - Border: Rounded box-drawing characters
 - Uses plenary.nvim
@@ -784,12 +854,14 @@ require('copilot').setup({
 **Mô tả:** Floating terminal trong Neovim.
 
 **Features:**
+
 - 🪟 Floating terminal window
 - 🔢 Multiple terminals support
 - 🎨 Customizable position & size
 - ⚡ Fast toggle
 
 **Phím tắt:**
+
 - `<leader>to` - Open new terminal
 - `<leader>tt` - Toggle terminal
 - `<leader>tn` / `<leader>tp` - Next/Prev terminal
@@ -798,6 +870,7 @@ require('copilot').setup({
 - `<leader>gl` - Git log trong terminal
 
 **Lệnh:**
+
 - `:FloatermNew` - New terminal
 - `:FloatermToggle` - Toggle
 - `:FloatermKill` - Kill terminal
@@ -805,6 +878,7 @@ require('copilot').setup({
 **Config:** `lua/plugins/terminal.lua`
 
 **Settings:**
+
 - Position: Top-right
 - Size: 60% width, 80% height
 - Shell: PowerShell (Windows) hoặc default shell
@@ -820,12 +894,14 @@ require('copilot').setup({
 **Mô tả:** Debug Adapter Protocol (DAP) client.
 
 **Features:**
+
 - 🐛 Full debugging support
 - 🎯 Breakpoints, step in/over/out
 - 📊 Variable inspection
 - 🔧 Multiple language support
 
 **Phím tắt:**
+
 - `<leader>dl` - Launch debugger
 - `<leader>ds` - Stop debugger
 - `<leader>dc` - Continue
@@ -837,6 +913,7 @@ require('copilot').setup({
 - `<leader>dr` - Restart
 
 **Lệnh:**
+
 - `:VimspectorInstall` - Install debug adapters
 - `:VimspectorUpdate` - Update adapters
 
@@ -855,13 +932,16 @@ require('copilot').setup({
 **Mô tả:** Advanced Rust development plugin.
 
 **Features:**
+
 - 🦀 rust-analyzer integration
 - 💡 Inlay hints (auto-enabled)
 - 🔧 Code actions
 - 📊 Clippy linting
 - 🎯 Hover actions
+- 🍎 **MacOS Support:** Tự động cấu hình `liblldb.dylib` cho debug trên Mac.
 
 **Inlay Hints Types:**
+
 - Type hints
 - Parameter hints
 - Chaining hints
@@ -870,6 +950,7 @@ require('copilot').setup({
 - Reborrow hints
 
 **Phím tắt (Rust files):**
+
 - `<leader>ih` - Toggle inlay hints
 - `K` - Rust hover actions (nhiều options)
 - `<leader>a` - Rust code actions
@@ -878,12 +959,14 @@ require('copilot').setup({
 - `<leader>f` - Format
 
 **Lệnh:**
+
 - `:RustInlayHintsToggle` - Toggle hints
 - `:RustLsp` - Rust LSP commands
 
 **Config:** `lua/plugins/rustacean.lua`
 
 **rust-analyzer Settings:**
+
 - Clippy: Enabled
 - All features: Enabled
 - Comprehensive inlay hints
@@ -897,6 +980,7 @@ require('copilot').setup({
 **Mô tả:** Rust file support (syntax, etc.).
 
 **Features:**
+
 - 📝 Auto format on save (rustfmt)
 - 📖 Doc comment folding
 - ⚡ Fast và lightweight
@@ -912,12 +996,14 @@ require('copilot').setup({
 **Mô tả:** Cargo.toml dependency management.
 
 **Features:**
+
 - 📦 Inline crate version info
 - ⬆️ Upgrade suggestions
 - 🔍 Feature management
 - 🔌 nvim-cmp integration
 
 **Phím tắt (Cargo.toml):**
+
 - `<leader>ct` - Toggle crates info
 - `<leader>cr` - Reload crates
 - `<leader>cv` - Show features popup
@@ -947,12 +1033,14 @@ require('copilot').setup({
 ### Plugin Installation Flow
 
 1. **Automatic (First launch):**
+
    ```bash
    nvim
    # Lazy.nvim tự động cài tất cả plugins
    ```
 
 2. **Manual sync:**
+
    ```vim
    :Lazy sync
    ```
@@ -980,6 +1068,7 @@ lua/plugins/
 
 1. Chọn file phù hợp trong `lua/plugins/`
 2. Thêm config:
+
    ```lua
    {
        'author/plugin-name',
@@ -989,6 +1078,7 @@ lua/plugins/
        end,
    }
    ```
+
 3. Restart Neovim hoặc `:Lazy sync`
 
 ---

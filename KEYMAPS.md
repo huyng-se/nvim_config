@@ -64,6 +64,8 @@ Tài liệu đầy đủ về tất cả phím tắt trong cấu hình Neovim n�
 | `Alt+Down` | Normal | Mở rộng split ngang (tăng 2 đơn vị) |
 | `Alt+Up` | Normal | Thu nhỏ split ngang (giảm 2 đơn vị) |
 
+> **Lưu ý cho macOS:** Phím `Alt` tương ứng với phím `Option`. Bạn có thể cần cấu hình terminal (iTerm2, Alacritty, Kitty...) để phím Option hoạt động như Meta key.
+
 ### Window Management
 
 | Phím | Chế độ | Mô tả |

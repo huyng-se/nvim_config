@@ -7,8 +7,15 @@ return {
     ft = "rust",
     config = function()
       -- Get codelldb path from mason
-      local codelldb_path = vim.fn.stdpath("data") .. "/mason/packages/codelldb/extension/adapter/codelldb"
-      local liblldb_path = vim.fn.stdpath("data") .. "/mason/packages/codelldb/extension/lldb/lib/liblldb.so"
+      local codelldb_root = vim.fn.stdpath("data") .. "/mason/packages/codelldb/extension"
+      local codelldb_path = codelldb_root .. "/adapter/codelldb"
+      local liblldb_path = codelldb_root .. "/lldb/lib/liblldb.so"
+
+      -- Adjust for MacOS
+      if vim.fn.has('mac') == 1 then
+          liblldb_path = codelldb_root .. "/lldb/lib/liblldb.dylib"
+      end
+
       local cfg = require('rustaceanvim.config')
 
       vim.g.rustaceanvim = {

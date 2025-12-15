@@ -37,6 +37,7 @@ echo 'export PATH="/usr/local/nvim/bin:$PATH"' >> ~/.zshrc
 #### Linux
 
 **Ubuntu/Debian:**
+
 ```bash
 # PPA (khuyến nghị cho Ubuntu)
 sudo add-apt-repository ppa:neovim-ppa/unstable
@@ -50,11 +51,13 @@ sudo mv nvim.appimage /usr/local/bin/nvim
 ```
 
 **Arch Linux:**
+
 ```bash
 sudo pacman -S neovim
 ```
 
 **Fedora/RHEL/CentOS:**
+
 ```bash
 sudo dnf install neovim
 
@@ -64,6 +67,7 @@ sudo dnf install neovim
 ```
 
 **Build from source (tất cả distros):**
+
 ```bash
 # Install dependencies
 sudo apt install ninja-build gettext cmake unzip curl  # Ubuntu/Debian
@@ -81,21 +85,25 @@ sudo make install
 #### Windows
 
 **Chocolatey:**
+
 ```powershell
 choco install neovim
 ```
 
 **Scoop:**
+
 ```powershell
 scoop install neovim
 ```
 
 **Winget:**
+
 ```powershell
 winget install Neovim.Neovim
 ```
 
 **Binary Manual:**
+
 1. Download từ [GitHub Releases](https://github.com/neovim/neovim/releases)
 2. Extract vào `C:\Program Files\Neovim`
 3. Add `C:\Program Files\Neovim\bin` vào PATH
@@ -107,6 +115,7 @@ nvim --version
 ```
 
 Nên thấy:
+
 ```
 NVIM v0.11.0
 Build type: Release
@@ -158,22 +167,26 @@ node --version  # Should be >= v18.0.0
 #### Linux
 
 **Ubuntu/Debian:**
+
 ```bash
 curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
 sudo apt-get install -y nodejs
 ```
 
 **Arch Linux:**
+
 ```bash
 sudo pacman -S nodejs npm
 ```
 
 **Fedora:**
+
 ```bash
 sudo dnf install nodejs
 ```
 
 **Generic (nvm - Node Version Manager):**
+
 ```bash
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
 source ~/.bashrc  # hoặc ~/.zshrc
@@ -184,11 +197,13 @@ nvm use 20
 #### Windows
 
 **Chocolatey:**
+
 ```powershell
 choco install nodejs
 ```
 
 **Scoop:**
+
 ```powershell
 scoop install nodejs
 ```
@@ -198,13 +213,52 @@ Download từ [nodejs.org](https://nodejs.org/)
 
 ---
 
-### 4. Nerd Font (Khuyến nghị)
+### 4. External Tools (Required)
+
+Các công cụ này cần thiết cho Telescope (tìm kiếm nhanh) và Treesitter (highlight).
+
+#### macOS
+
+```bash
+# Ripgrep (cho Telescope live grep)
+brew install ripgrep
+
+# FD (cho Telescope find files)
+brew install fd
+
+# GCC/Clang (cho Treesitter compilation)
+xcode-select --install
+```
+
+#### Linux (Ubuntu/Debian)
+
+```bash
+sudo apt install ripgrep fd-find build-essential
+```
+
+#### Linux (Arch)
+
+```bash
+sudo pacman -S ripgrep fd base-devel
+```
+
+#### Windows
+
+```powershell
+choco install ripgrep fd
+# Cần cài đặt Visual Studio Build Tools hoặc MinGW cho GCC
+```
+
+---
+
+### 5. Nerd Font (Khuyến nghị)
 
 Cần Nerd Font để hiện icons đẹp trong NvimTree, bufferline, Telescope, etc.
 
 #### Cài đặt Font
 
 **macOS:**
+
 ```bash
 # Homebrew
 brew tap homebrew/cask-fonts
@@ -215,6 +269,7 @@ brew install --cask font-jetbrains-mono-nerd-font
 ```
 
 **Linux:**
+
 ```bash
 # Download JetBrainsMono Nerd Font
 mkdir -p ~/.local/share/fonts
@@ -227,6 +282,7 @@ fc-cache -fv
 ```
 
 **Windows:**
+
 1. Download từ [Nerd Fonts Releases](https://github.com/ryanoasis/nerd-fonts/releases)
 2. Extract file
 3. Right-click → Install font
@@ -237,15 +293,18 @@ fc-cache -fv
 Sau khi cài font, config terminal để dùng nó:
 
 **iTerm2 (macOS):**
+
 1. Preferences → Profiles → Text
 2. Font → JetBrainsMono Nerd Font
 3. Size: 14
 
 **Terminal.app (macOS):**
+
 1. Preferences → Profiles → Text
 2. Font → Change → JetBrainsMono Nerd Font
 
 **Alacritty:**
+
 ```yaml
 # ~/.config/alacritty/alacritty.yml
 font:
@@ -255,6 +314,7 @@ font:
 ```
 
 **Kitty:**
+
 ```conf
 # ~/.config/kitty/kitty.conf
 font_family JetBrainsMono Nerd Font
@@ -262,6 +322,7 @@ font_size 14.0
 ```
 
 **Windows Terminal:**
+
 1. Settings → Profiles → Defaults → Appearance
 2. Font face → JetBrainsMono Nerd Font
 3. Font size: 12
@@ -303,6 +364,7 @@ Tùy chọn, để dùng LazyGit integration.
 **Xem hướng dẫn cài đặt đầy đủ:** [LAZYGIT.md](LAZYGIT.md)
 
 **Quick install:**
+
 ```bash
 # macOS
 brew install lazygit
@@ -329,6 +391,7 @@ lazygit --version
 Tùy chọn, để dùng GitHub Copilot.
 
 **Đăng ký:**
+
 - [GitHub Copilot](https://github.com/features/copilot) - $10/tháng
 - [Students](https://education.github.com/) - Miễn phí cho students
 
@@ -354,6 +417,7 @@ mv ~/.cache/nvim ~/.cache/nvim.backup
 ```
 
 **Windows:**
+
 ```powershell
 # Config
 Move-Item $env:LOCALAPPDATA\nvim $env:LOCALAPPDATA\nvim.backup
@@ -373,6 +437,7 @@ git clone https://github.com/huyng-se/nvim_config.git ~/.config/nvim
 ```
 
 **Windows:**
+
 ```powershell
 git clone https://github.com/huyng-se/nvim_config.git $env:LOCALAPPDATA\nvim
 ```
@@ -388,6 +453,7 @@ nvim
 ```
 
 **Điều gì sẽ xảy ra:**
+
 1. **Lazy.nvim** tự động cài đặt (plugin manager)
 2. **Tất cả plugins** được download và cài tự động
 3. **Treesitter parsers** được compile
@@ -396,6 +462,7 @@ nvim
 **Quá trình này mất ~2-5 phút** tùy vào tốc độ mạng.
 
 **Nếu thấy errors:**
+
 - Đợi cho đến khi tất cả plugins cài xong
 - Restart Neovim: `:qa` rồi `nvim`
 
@@ -420,6 +487,7 @@ Sau khi khởi động lần đầu:
 ```
 
 **Nên thấy:**
+
 - ✅ Tất cả plugins installed
 - ✅ LSP servers: lua_ls, clangd, cmake, pyright
 - ✅ Treesitter parsers: lua, rust, cpp, python, etc.
@@ -437,6 +505,7 @@ Cài thêm LSP servers cho ngôn ngữ bạn dùng:
 ```
 
 **Navigate trong Mason UI:**
+
 - `j`/`k` - Di chuyển lên/xuống
 - `i` - Install server đang chọn
 - `u` - Update server
@@ -468,6 +537,7 @@ Cài thêm parsers cho ngôn ngữ khác:
 ```
 
 **Examples:**
+
 ```vim
 :TSInstall go
 :TSInstall java
@@ -478,6 +548,7 @@ Cài thêm parsers cho ngôn ngữ khác:
 ```
 
 **Xem tất cả available parsers:**
+
 ```vim
 :TSInstallInfo
 ```
@@ -495,6 +566,7 @@ Nếu có Copilot subscription:
 ```
 
 **Process:**
+
 1. URL sẽ hiện (vd: `https://github.com/login/device`)
 2. Device code sẽ hiện (vd: `1234-5678`)
 3. Mở URL trong browser
@@ -513,6 +585,7 @@ Nên thấy: `Copilot: Ready`
 #### Step 3: Test
 
 Tạo file mới và test:
+
 ```javascript
 // Function to calculate fibonacci
 function fib
@@ -529,6 +602,7 @@ Copilot sẽ suggest code (màu xám). Nhấn `Alt+L` để accept.
 Đảm bảo terminal đang dùng Nerd Font:
 
 **Test icons:**
+
 ```bash
 nvim
 # Press F5 to toggle NvimTree
@@ -537,6 +611,7 @@ nvim
 Nên thấy icons đẹp trong NvimTree. Nếu thấy boxes/squares, font chưa được config đúng.
 
 **Fix:**
+
 1. Cài Nerd Font (xem Prerequisites)
 2. Config terminal để dùng font đó
 3. Restart terminal
@@ -549,12 +624,14 @@ Nên thấy icons đẹp trong NvimTree. Nếu thấy boxes/squares, font chưa 
 Nếu đã cài LazyGit:
 
 **Test trong Neovim:**
+
 ```vim
 :LazyGit
 ```
 
 **Config floating window size** (nếu muốn):
 Edit `lua/plugins/git.lua`:
+
 ```lua
 vim.g.lazygit_floating_window_scaling_factor = 0.9  -- 0.7 - 0.95
 ```
@@ -568,24 +645,28 @@ vim.g.lazygit_floating_window_scaling_factor = 0.9  -- 0.7 - 0.95
 **Optional:** Add alias cho dễ dùng:
 
 **Bash (~/.bashrc):**
+
 ```bash
 alias vi='nvim'
 alias vim='nvim'
 ```
 
 **Zsh (~/.zshrc):**
+
 ```zsh
 alias vi='nvim'
 alias vim='nvim'
 ```
 
 **Fish (~/.config/fish/config.fish):**
+
 ```fish
 alias vi nvim
 alias vim nvim
 ```
 
 Reload shell:
+
 ```bash
 source ~/.bashrc  # hoặc ~/.zshrc
 ```
@@ -599,6 +680,7 @@ source ~/.bashrc  # hoặc ~/.zshrc
 **Problem:** Plugins không cài được
 
 **Solutions:**
+
 ```vim
 " 1. Sync lại
 :Lazy sync
@@ -624,12 +706,15 @@ nvim
 **Solutions:**
 
 1. **Check LSP attached:**
+
    ```vim
    :LspInfo
    ```
+
    Nên thấy attached clients cho file type hiện tại.
 
 2. **Install server qua Mason:**
+
    ```vim
    :Mason
    " Navigate đến server cần thiết
@@ -637,17 +722,20 @@ nvim
    ```
 
 3. **Check server running:**
+
    ```vim
    :LspInfo
    " Xem "Configured servers"
    ```
 
 4. **Restart LSP:**
+
    ```vim
    :LspRestart
    ```
 
 5. **Check logs:**
+
    ```vim
    :LspLog
    ```
@@ -661,16 +749,19 @@ nvim
 **Solutions:**
 
 1. **Update Treesitter:**
+
    ```vim
    :TSUpdate
    ```
 
 2. **Reinstall parser:**
+
    ```vim
    :TSInstall! <language>
    ```
 
 3. **Check compiler:**
+
    ```bash
    # macOS
    xcode-select --install
@@ -681,6 +772,7 @@ nvim
    ```
 
 4. **Disable nếu cần:**
+
    ```vim
    :TSBufDisable highlight
    ```
@@ -700,9 +792,11 @@ nvim
 3. **Restart terminal**
 
 4. **Test:**
+
    ```bash
    echo -e "\ue0b0 \ue0b1 \ue0b2 \ue0b3"
    ```
+
    Nên thấy arrows, không phải boxes.
 
 ---
@@ -714,22 +808,26 @@ nvim
 **Solutions:**
 
 1. **Check Node.js version:**
+
    ```bash
    node --version  # Phải >= 18.x
    ```
 
 2. **Check status:**
+
    ```vim
    :Copilot status
    ```
 
 3. **Re-authenticate:**
+
    ```vim
    :Copilot disable
    :Copilot auth
    ```
 
 4. **Check plugin installed:**
+
    ```vim
    :Lazy
    " Tìm copilot.lua và copilot-cmp
@@ -746,9 +844,11 @@ nvim
 **Solutions:**
 
 1. **Profile startup:**
+
    ```vim
    :Lazy profile
    ```
+
    Xem plugins nào slow.
 
 2. **Lazy load more plugins:**
@@ -769,6 +869,7 @@ nvim
    Telescope ignores files trong `.gitignore` by default.
 
 2. **Install ripgrep for faster search:**
+
    ```bash
    # macOS
    brew install ripgrep
@@ -779,6 +880,7 @@ nvim
    ```
 
 3. **Use different pickers:**
+
    ```vim
    :Telescope find_files    " Tìm files
    :Telescope live_grep     " Tìm trong content
@@ -794,6 +896,7 @@ nvim
 **Solutions:**
 
 1. **Check lazygit installed:**
+
    ```bash
    which lazygit
    lazygit --version
@@ -802,11 +905,13 @@ nvim
 2. **Install nếu chưa có** (xem Prerequisites)
 
 3. **Test command:**
+
    ```vim
    :LazyGit
    ```
 
 4. **Check plugin:**
+
    ```vim
    :Lazy
    " Tìm lazygit.nvim
@@ -835,6 +940,7 @@ rm -rf ~/.local/state/nvim
 ```
 
 **Windows:**
+
 ```powershell
 Remove-Item -Recurse -Force $env:LOCALAPPDATA\nvim
 Remove-Item -Recurse -Force $env:LOCALAPPDATA\nvim-data
@@ -909,6 +1015,7 @@ Sau khi cài xong:
 ---
 
 **Ghi chú:**
+
 - Installation được test trên macOS, Linux (Ubuntu, Arch), và Windows 11
 - Nếu gặp issues, check [Troubleshooting](#-troubleshooting) section
 - Hoặc open issue trên GitHub repo
