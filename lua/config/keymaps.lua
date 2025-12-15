@@ -133,4 +133,11 @@ map("n", "<leader>wm", "<cmd>new<cr>",  { desc = "Window New (Horizontal)" }) --
 map("n", "<leader>wo", "<cmd>only<cr>", { desc = "Close Other Windows" })
 
 -- Đóng tất cả các buffer khác trừ cái đang mở
-map("n", "<leader>bo", ":%bd|e#|bd#<cr>", { desc = "Close Other Buffers" })
+map("n", "<leader>bo", function()
+  local current = vim.api.nvim_get_current_buf()
+  for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+    if buf ~= current and vim.api.nvim_buf_is_loaded(buf) then
+      vim.api.nvim_buf_delete(buf, { force = true })
+    end
+  end
+end, { desc = "Close Other Buffers" })
