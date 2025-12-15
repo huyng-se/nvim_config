@@ -48,6 +48,9 @@ sudo apt install neovim
 curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
 chmod u+x nvim.appimage
 sudo mv nvim.appimage /usr/local/bin/nvim
+
+# Neovim cần xclip để giao tiếp với clipboard.
+sudo apt install xclip
 ```
 
 **Arch Linux:**
