@@ -58,7 +58,6 @@ return {
                 automatic_installation = true,
                 handlers = {
                     function(server_name)
-                        -- Sử dụng lspconfig chuẩn thay vì vim.lsp.config (vẫn an toàn hơn cho plugin mason hiện tại)
                         require('lspconfig')[server_name].setup({
                             capabilities = capabilities,
                             on_attach = on_attach,
@@ -123,7 +122,6 @@ return {
             'L3MON4D3/LuaSnip',
             'saadparwaiz1/cmp_luasnip',
             'rafamadriz/friendly-snippets',
-            'zbirenbaum/copilot-cmp', -- Moved dependency here
         },
         config = function()
             local cmp = require('cmp')
@@ -143,7 +141,7 @@ return {
                     ['<C-f>'] = cmp.mapping.scroll_docs(4),
                     ['<C-Space>'] = cmp.mapping.complete(),
                     ['<C-e>'] = cmp.mapping.abort(),
-                    ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Changed to true for easier confirmation
+                    ['<CR>'] = cmp.mapping.confirm({ select = true }),
                     ['<Tab>'] = cmp.mapping(function(fallback)
                         if cmp.visible() then cmp.select_next_item()
                         elseif luasnip.expand_or_jumpable() then luasnip.expand_or_jump()
@@ -156,13 +154,47 @@ return {
                     end, { 'i', 's' }),
                 }),
                 sources = cmp.config.sources({
-                    { name = 'copilot', priority = 1000 },
-                    { name = 'nvim_lsp', priority = 900 },
+                    { name = 'nvim_lsp', priority = 1000 },
                     { name = 'luasnip', priority = 750 },
                     { name = 'path' },
                 }, {
                     { name = 'buffer' },
                 }),
+            })
+        end,
+    },
+
+    {
+        'zbirenbaum/copilot.lua',
+        cmd = 'Copilot',
+        event = 'InsertEnter',
+        config = function()
+            require('copilot').setup({
+                suggestion = {
+                    enabled = true,
+                    auto_trigger = true,
+                    debounce = 75,
+                    keymap = {
+                        accept = "<M-l>",
+                        accept_word = false,
+                        accept_line = false,
+                        next = "<M-]>",        -- Alt + ] để xem gợi ý tiếp theo
+                        prev = "<M-[>",        -- Alt + [ để xem gợi ý trước
+                        dismiss = "<C-]>",
+                    },
+                },
+                panel = { enabled = false },
+                filetypes = {
+                    yaml = false,
+                    markdown = false,
+                    help = false,
+                    gitcommit = false,
+                    gitrebase = false,
+                    hgcommit = false,
+                    svn = false,
+                    cvs = false,
+                    ["."] = false,
+                },
             })
         end,
     },
@@ -175,21 +207,6 @@ return {
     {
         'numToStr/Comment.nvim',
         event = { "BufReadPost", "BufNewFile" },
-        config = true
-    },
-    {
-        'zbirenbaum/copilot.lua',
-        cmd = 'Copilot',
-        event = 'InsertEnter',
-        config = function()
-            require('copilot').setup({
-                suggestion = { enabled = false },
-                panel = { enabled = false },
-            })
-        end,
-    },
-    {
-        'zbirenbaum/copilot-cmp',
         config = true
     },
 }

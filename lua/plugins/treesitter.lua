@@ -3,18 +3,25 @@ return {
         "nvim-treesitter/nvim-treesitter",
         build = ":TSUpdate",
         event = { "BufReadPost", "BufNewFile" },
+        lazy = false,
         config = function()
-            -- Ensure a compiler is available (important for MacOS where gcc is often clang)
-            require('nvim-treesitter.install').compilers = { "clang", "gcc" }
-
-            require("nvim-treesitter.configs").setup({
-                ensure_installed = { "lua", "vim", "vimdoc", "c", "cpp", "python", "rust" },
-                auto_install = true,
-                highlight = {
-                    enable = true,
-                    additional_vim_regex_highlighting = false,
-                },
-                indent = { enable = true },
+            -- Install parsers
+            require('nvim-treesitter').install({ 'lua', 'vim', 'vimdoc', 'c', 'cpp', 'python', 'rust' })
+            
+            -- Enable treesitter features via autocommand
+            vim.api.nvim_create_autocmd('FileType', {
+                pattern = { 'lua', 'vim', 'c', 'cpp', 'python', 'rust' },
+                callback = function()
+                    -- Syntax highlighting (provided by Neovim)
+                    vim.treesitter.start()
+                    
+                    -- Folds (provided by Neovim)
+                    vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+                    vim.wo.foldmethod = 'expr'
+                    
+                    -- Indentation (provided by nvim-treesitter)
+                    vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+                end,
             })
         end,
     }

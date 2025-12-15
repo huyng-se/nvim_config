@@ -10,4 +10,5 @@ return {
     { import = "plugins.rustacean" },
     { import = "plugins.ux" },
     { import = "plugins.database" },
+    { import = "plugins.treesitter" },
 }
