@@ -200,6 +200,30 @@ return {
     },
 
     {
+        "CopilotC-Nvim/CopilotChat.nvim",
+        branch = "canary",
+        dependencies = {
+            { "zbirenbaum/copilot.lua" },
+            { "nvim-lua/plenary.nvim" },
+        },
+        build = "make tiktoken",
+        opts = {
+            debug = false,
+            window = {
+                layout = 'float',
+                width = 0.8,
+                height = 0.8,
+            },
+        },
+        keys = {
+            { "<leader>cc", ":CopilotChatToggle<CR>", desc = "Copilot: Toggle Chat" },
+            { "<leader>ce", ":CopilotChatExplain<CR>", desc = "Copilot: Explain Code" },
+            { "<leader>cf", ":CopilotChatFix<CR>", desc = "Copilot: Fix Code" },
+            { "<leader>ct", ":CopilotChatTests<CR>", desc = "Copilot: Generate Tests" },
+        },
+    },
+
+    {
         'windwp/nvim-autopairs',
         event = "InsertEnter",
         config = true

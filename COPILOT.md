@@ -194,6 +194,64 @@ def fibonacci(n):
 - Nhấn `Ctrl+]` để dismiss suggestion hiện tại
 - Suggestions thông minh hơn khi có comments mô tả rõ ràng trước code
 
+### CopilotChat.nvim - Chat & Advanced Features
+
+**CopilotChat** cung cấp tính năng chat tương tác để:
+
+- Giải thích code
+- Sửa lỗi tự động
+- Tạo unit tests
+- Hỏi đáp về code
+
+**Keymaps cho CopilotChat:**
+
+| Phím tắt | Mô tả |
+|----------|-------|
+| `<leader>cc` | Bật/Tắt cửa sổ chat |
+| `<leader>ce` | Giải thích code hiện tại |
+| `<leader>cf` | Sửa lỗi code |
+| `<leader>ct` | Tạo unit tests |
+
+**Cách sử dụng:**
+
+1. **Giải thích code:**
+   - Chọn code bạn muốn hiểu
+   - Nhấn `<leader>ce`
+   - CopilotChat sẽ mở cửa sổ với giải thích chi tiết
+
+2. **Sửa lỗi:**
+   - Để con trỏ ở vị trí code có lỗi
+   - Nhấn `<leader>cf`
+   - Copilot sẽ gợi ý fix trong cửa sổ chat
+   - Chấp nhận hoặc chỉnh sửa theo ý
+
+3. **Tạo tests:**
+   - Chọn function/module cần test
+   - Nhấn `<leader>ct`
+   - Copilot generate test cases
+   - Review và tuỳ chỉnh nếu cần
+
+4. **Chat tự do:**
+   - Nhấn `<leader>cc` để mở chat
+   - Gõ câu hỏi hoặc request
+   - Nhận trợ giúp về code, logic, hay best practices
+
+**Ví dụ:**
+
+```python
+# Hàm có lỗi, bạn muốn fix
+def divide(a, b):
+    return a / b  # Lỗi: không kiểm tra b == 0
+
+# Bước 1: Chọn dòng code
+# Bước 2: Nhấn <leader>cf (Fix Code)
+# Bước 3: Copilot gợi ý:
+def divide(a, b):
+    if b == 0:
+        raise ValueError("Cannot divide by zero")
+    return a / b
+```
+
 ---
 
 ## 💡 Cách sử dụng hiệu quả
