@@ -69,11 +69,9 @@ opt.completeopt = { 'menuone', 'noselect', 'noinsert' } -- Better completion
 opt.shortmess:append('c')             -- Don't show completion messages
 
 -- Clipboard
-if vim.fn.has('win32') == 1 then
-    opt.clipboard = 'unnamed'
-else
-    opt.clipboard = 'unnamedplus'
-end
+-- Disable automatic clipboard sync
+-- Use "+p to manually paste from system clipboard when needed
+opt.clipboard = ''
 
 -- Splits
 opt.splitbelow = true                 -- Horizontal splits below
